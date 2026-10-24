@@ -75,6 +75,31 @@ select.theme { font-size: 12.5px; padding: 3px 6px; border: 1px solid var(--line
 
 /* ---------- VIEW ---------- */
 .v-head { padding-block: 34px 10px; display: grid; gap: 10px }
+.vh-text { display: grid; gap: 10px; min-width: 0 }
+.pv.al-center .vh-text { justify-items: center; text-align: center }
+/* the header picture: above the title, beside it, or behind it */
+.cover { margin: 22px 0 0; display: grid; gap: 6px }
+.cover img { width: 100%; display: block; object-fit: cover; border-radius: 10px; background: var(--sheet) }
+.cover figcaption, .cover-cap { font-size: 12px; color: var(--muted) }
+.cover-above.ch-S img { height: clamp(140px, 20vw, 220px) } .cover-above.ch-M img { height: clamp(180px, 30vw, 360px) } .cover-above.ch-L img { height: clamp(220px, 42vw, 520px) }
+.v-head.has-side { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; gap: 28px }
+.cover-side { margin: 0 } .cover-side.ch-S img { aspect-ratio: 16 / 9 } .cover-side.ch-M img { aspect-ratio: 4 / 3 } .cover-side.ch-L img { aspect-ratio: 1 / 1 }
+@media (max-width: 760px) { .v-head.has-side { grid-template-columns: minmax(0, 1fr) } }
+.v-head.has-bg { position: relative; margin-top: 18px; padding: 40px 28px 22px; border-radius: 12px; overflow: hidden; color: #fff; align-content: end; isolation: isolate }
+.v-head.has-bg.ch-S { min-height: 220px } .v-head.has-bg.ch-M { min-height: 320px } .v-head.has-bg.ch-L { min-height: 460px }
+.cover-bg { position: absolute; inset: 0; z-index: -1; background: #111 }
+.cover-bg img { width: 100%; height: 100%; object-fit: cover; display: block }
+.cover-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,12,18,.15) 0%, rgba(6,12,18,.55) 55%, rgba(6,12,18,.86) 100%) }
+.v-head.has-bg .eyebrow, .v-head.has-bg .dek, .v-head.has-bg .meta, .v-head.has-bg .meta b { color: rgba(255,255,255,.88) }
+.v-head.has-bg .dek a { color: #fff }
+.v-head.has-bg .cover-cap { position: absolute; right: 12px; bottom: 8px; color: rgba(255,255,255,.75); font-size: 11px; max-width: 60%; text-align: right }
+.v-head.has-bg .vh-text { padding-bottom: 14px }
+/* sections on one long page */
+.vsec { scroll-margin-top: calc(var(--appbar-h, 46px) + 64px); padding-top: 18px }
+.vsec + .vsec { border-top: 1px solid var(--line); margin-top: 8px }
+.sec-h { font-family: var(--font-read); font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; margin: 8px 0 0; letter-spacing: -.01em }
+.pv.hf-sans .sec-h { font-family: var(--font-ui); font-weight: 700 }
+.stabs button[aria-current="true"] { background: var(--surface); border-color: var(--line); color: var(--ink) }
 .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted) }
 .v-title { font-family: var(--font-read); font-weight: 600; font-size: clamp(32px, 5vw, 50px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em }
 .dek { max-width: 70ch; color: var(--muted); font-size: 16px; margin: 0 }
@@ -84,12 +109,21 @@ select.theme { font-size: 12.5px; padding: 3px 6px; border: 1px solid var(--line
 .stabs button { border: 1px solid transparent; background: none; padding: 6px 14px; border-radius: 999px; cursor: pointer; font-weight: 500; font-size: 14px; color: var(--muted) }
 .stabs button[aria-selected="true"] { background: var(--surface); border-color: var(--line); color: var(--ink) }
 .sec-desc { color: var(--muted); font-size: 14px; margin: 14px 0 0 }
-/* panels sit in a six-part grid: a sixth, a third, half, two thirds, five sixths or the full row */
-.pgrid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; padding-block: 16px 24px; align-items: start; grid-auto-flow: row dense }
-.pgrid > .s1 { grid-column: span 1 } .pgrid > .s2 { grid-column: span 2 } .pgrid > .s3 { grid-column: span 3 } .pgrid > .s4 { grid-column: span 4 } .pgrid > .s5 { grid-column: span 5 } .pgrid > .s6, .pgrid > .lay-end { grid-column: 1 / -1 }
-.pgrid > .tall { grid-row: span 2 }
-@media (max-width: 980px) { .pgrid > .s1, .pgrid > .s2 { grid-column: span 3 } .pgrid > .s4, .pgrid > .s5 { grid-column: 1 / -1 } }
-@media (max-width: 620px) { .pgrid { grid-template-columns: minmax(0, 1fr) } .pgrid > * { grid-column: 1 / -1 !important; grid-row: auto } }
+/* panels sit in a twelve-part grid: a sixth, a quarter, a third, half, two thirds, three quarters, five sixths or the full row */
+.pgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; padding-block: 16px 24px; align-items: start; grid-auto-flow: row dense }
+.pv.flow-order .pgrid { grid-auto-flow: row }
+.pgrid > .s2 { grid-column: span 2 } .pgrid > .s3 { grid-column: span 3 } .pgrid > .s4 { grid-column: span 4 } .pgrid > .s6 { grid-column: span 6 } .pgrid > .s8 { grid-column: span 8 } .pgrid > .s9 { grid-column: span 9 } .pgrid > .s10 { grid-column: span 10 } .pgrid > .s12, .pgrid > .lay-end { grid-column: 1 / -1 }
+.pgrid > .r2 { grid-row: span 2 } .pgrid > .r3 { grid-row: span 3 }
+.pgrid > .r2, .pgrid > .r3 { align-self: stretch }
+@media (max-width: 980px) { .pgrid > .s2, .pgrid > .s3 { grid-column: span 4 } .pgrid > .s4 { grid-column: span 6 } .pgrid > .s8, .pgrid > .s9, .pgrid > .s10 { grid-column: 1 / -1 } }
+@media (max-width: 620px) { .pgrid { grid-template-columns: minmax(0, 1fr) } .pgrid > * { grid-column: 1 / -1 !important; grid-row: auto !important } }
+/* a panel's own frame, over the page's choice */
+.pgrid > .panel.fr-card { background: var(--surface); border: 1px solid var(--line); box-shadow: none; border-radius: 10px; padding: 16px }
+.pgrid > .panel.fr-shadow { background: var(--surface); border: 1px solid transparent; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.08); border-radius: 10px; padding: 16px }
+.pgrid > .panel.fr-flat { background: transparent; border: 0; border-top: 2px solid var(--line); box-shadow: none; border-radius: 0; padding: 6px 2px 10px }
+.pgrid > .panel.fr-tint { background: var(--accent-soft); border: 1px solid transparent; box-shadow: none; border-radius: 10px; padding: 16px }
+.pgrid > .panel.fr-none { background: transparent; border: 0; box-shadow: none; border-radius: 0; padding: 0 }
+.pgrid > .panel.fr-none .p-foot { border-top-color: transparent; padding-top: 2px }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; display: grid; gap: 10px; scroll-margin-top: 140px }
 .panel.flash { outline: 3px solid var(--accent) }
 .p-head { display: grid; gap: 2px }
@@ -344,7 +378,8 @@ legend { font-size: 12.5px; font-weight: 600; padding: 0 4px }
 .lay-tool .lt { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0 }
 .lay-tool .sp { flex: 1 } .lay-tool .lw { font: 11px var(--font-mono); color: var(--muted); white-space: nowrap; min-width: 54px; text-align: center }
 .lay-tool .btn.small { padding: 1px 6px }
-.lay-p.s1 .lay-tool .lt, .lay-p.s1 .lay-tool [data-lmove], .lay-p.s1 .lay-tool [data-ltall], .lay-p.s1 .lay-tool .lw { display: none }
+.lay-p.s2 .lay-tool .lt, .lay-p.s2 .lay-tool [data-lmove], .lay-p.s2 .lay-tool [data-ltall], .lay-p.s2 .lay-tool .lw, .lay-p.s3 .lay-tool .lt, .lay-p.s3 .lay-tool [data-lmove] { display: none }
+.lay-p.fr-none { padding-top: 44px !important; border: 1px dashed var(--line) !important }
 .lay-rs { position: absolute; top: 44px; bottom: 0; right: -9px; width: 14px; cursor: ew-resize; z-index: 3 }
 .lay-rs::after { content: ""; position: absolute; top: 50%; left: 5px; width: 4px; height: 38px; margin-top: -19px; border-radius: 3px; background: var(--line) }
 .lay-p:hover .lay-rs::after, .lay-p.resizing .lay-rs::after { background: var(--accent) }
@@ -354,6 +389,91 @@ legend { font-size: 12.5px; font-weight: 600; padding: 0 4px }
 .lay-end.drop-on { border-color: var(--accent); color: var(--ink) }
 .layv .panel.look-heading, .layv .panel.look-quote { border: 1px dashed var(--line) }
 .layv .pgrid > .panel.lay-p { padding-top: 44px }
+
+/* ---------- media panels ---------- */
+.media { display: grid; gap: 10px; min-width: 0 }
+.mfig { margin: 0; display: grid; gap: 6px; min-width: 0; position: relative }
+.mfig figcaption { font-size: 12.5px; color: var(--muted); line-height: 1.45; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline }
+.mfig figcaption .mcap { color: var(--ink); flex-basis: 100% } .mfig figcaption .mlead { color: var(--ink) }
+.mfig figcaption .mlead + .mcap { flex-basis: auto }
+.mmeta .cr { font-style: italic }
+.mmeta i { font-style: normal; color: var(--faint) }
+.srcn { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; font-size: 12px; text-decoration: underline dotted; text-underline-offset: 2px }
+.mopen { color: var(--accent); font-size: 12.5px; margin-left: auto }
+.mzoom { display: block; width: 100%; padding: 0; border: 0; background: var(--sheet); cursor: zoom-in; border-radius: 6px; overflow: hidden; position: relative }
+.mzoom img { display: block; width: 100%; height: auto }
+.mzoom.fixed img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover } .mzoom.fixed img.fit-contain { object-fit: contain }
+.mzoom:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+.mfig.cap-over figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 9px; background: linear-gradient(180deg, transparent, rgba(6,12,18,.82)); color: rgba(255,255,255,.85); border-radius: 0 0 6px 6px; pointer-events: none }
+.mfig.cap-over figcaption .mcap { color: #fff } .mfig.cap-over figcaption .srcn { color: #fff; pointer-events: auto }
+.panel.fr-none .mzoom, .panel.fr-none .mcmp, .panel.fr-none .mplay { border-radius: 10px }
+.r2 .k-image, .r3 .k-image { height: 100% } .r2 .k-image .mfig, .r3 .k-image .mfig { height: 100%; grid-template-rows: minmax(0, 1fr) auto } .r2 .k-image .mzoom:not(.fixed), .r3 .k-image .mzoom:not(.fixed) { height: 100% } .r2 .k-image .mzoom:not(.fixed) img, .r3 .k-image .mzoom:not(.fixed) img { height: 100%; object-fit: cover }
+.panel.r2, .panel.r3 { grid-template-rows: auto minmax(0, 1fr) } .panel.r2 > .p-body, .panel.r3 > .p-body { min-height: 0 }
+.mgrid { display: grid; grid-template-columns: repeat(var(--mcols, 3), minmax(0, 1fr)); gap: 10px }
+@media (max-width: 620px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.s2 .mgrid, .s3 .mgrid, .s4 .mgrid { grid-template-columns: minmax(0, 1fr) }
+.mstrip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 42%); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; overscroll-behavior-x: contain }
+.mstrip > .mfig { scroll-snap-align: start }
+.mstrip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.mslides { display: grid; gap: 8px }
+.mnav { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap }
+.mdots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center } .mdots button { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer } .mdots button[aria-current="true"] { background: var(--accent) }
+.mcount { font: 11.5px var(--font-mono); color: var(--muted) }
+/* before and after */
+.mcmp { position: relative; overflow: hidden; border-radius: 6px; background: var(--sheet); user-select: none; touch-action: pan-y }
+.mcmp img { display: block; width: 100%; height: auto; pointer-events: none }
+.mcmp.fixed .cmp-b, .mcmp .cmp-a img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.mcmp .fit-contain { object-fit: contain !important }
+.mcmp .cmp-a { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--x, 50%)) 0 0) }
+.cmp-line { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.25); pointer-events: none }
+.cmp-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 34px; height: 34px; border-radius: 50%; background: #fff; color: #13222C; display: grid; place-items: center; font-size: 12px; letter-spacing: -1px; box-shadow: 0 1px 4px rgba(0,0,0,.35) }
+.cmp-l { position: absolute; top: 8px; padding: 3px 8px; border-radius: 4px; background: rgba(6,12,18,.68); color: #fff; font: 600 11.5px var(--font-ui); pointer-events: none; max-width: 45% }
+.cmp-l.l { left: 8px } .cmp-l.r { right: 8px }
+.cmp-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none }
+.cmp-range:focus-visible + * , .mcmp:focus-within .cmp-knob { outline: 3px solid var(--accent); outline-offset: 2px }
+.mcaps { display: grid; gap: 4px }
+/* players */
+.mplay { position: relative; background: #0b1218; border-radius: 6px; overflow: hidden; width: 100% }
+.mplay iframe, .mplay video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #000 }
+.mplay.membed { background: var(--sheet) } .mplay.membed iframe { background: var(--surface) }
+.maudio .mplay { background: none; overflow: visible } .maudio audio { width: 100%; display: block }
+.maudio.has-art { grid-template-columns: 96px minmax(0, 1fr); column-gap: 14px; align-items: center } .maudio.has-art .art { width: 96px; height: 96px; object-fit: cover; border-radius: 8px; grid-row: span 2 } .maudio.has-art figcaption { grid-column: 2 }
+.mface { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 16px; cursor: pointer; color: #fff; background: radial-gradient(ellipse at 50% 40%, #24323c, #0b1218 75%); display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; font: inherit }
+.mface .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .72 }
+.mface .mplaybtn { position: relative; width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.94); box-shadow: 0 2px 10px rgba(0,0,0,.4) }
+.mface .mplaybtn::after { content: ""; position: absolute; left: 26px; top: 20px; border-left: 18px solid #13222C; border-top: 12px solid transparent; border-bottom: 12px solid transparent }
+.mface:hover .mplaybtn, .mface:focus-visible .mplaybtn { transform: scale(1.06); background: #fff }
+.mface:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px }
+.mface-t { position: relative; font-weight: 600; font-size: 15px; text-shadow: 0 1px 3px rgba(0,0,0,.6); max-width: 46ch }
+.mface-n { position: relative; font-size: 11.5px; opacity: .85; text-shadow: 0 1px 3px rgba(0,0,0,.6); max-width: 46ch }
+.membed .mface { color: var(--ink); background: repeating-linear-gradient(135deg, var(--sheet) 0 12px, var(--surface) 12px 24px); border: 1px dashed var(--line); border-radius: 6px }
+.membed .mface-t, .membed .mface-n { text-shadow: none } .membed .mplaybtn { background: var(--accent) } .membed .mplaybtn::after { border-left-color: var(--accent-ink) }
+.s2 .mface-n, .s3 .mface-n { display: none } .s2 .mface .mplaybtn, .s3 .mface .mplaybtn { width: 44px; height: 44px } .s2 .mface .mplaybtn::after, .s3 .mface .mplaybtn::after { left: 17px; top: 12px; border-left-width: 14px; border-top-width: 10px; border-bottom-width: 10px }
+.moments { font-size: 13px } .moments .mh { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px }
+.moments ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px }
+.moments button { border: 0; background: none; padding: 3px 0; text-align: left; cursor: pointer; color: var(--ink); font: inherit; display: flex; gap: 10px; width: 100% }
+.moments button b { font: 600 12px var(--font-mono); color: var(--accent); min-width: 46px; padding-top: 1px }
+.moments button:hover { color: var(--accent) }
+.mtx { font-size: 13px; border-top: 1px solid var(--line); padding-top: 8px } .mtx summary { cursor: pointer; color: var(--accent); font-weight: 500 } .mtx .prose { margin-top: 8px; max-height: 360px; overflow: auto; font-family: var(--font-read); font-size: 14px }
+/* the enlarged picture */
+.mlb { position: fixed; inset: 0; z-index: 60; background: rgba(4, 9, 13, .92); display: grid; place-items: center; padding: 48px 56px 24px }
+.mlb figure { margin: 0; display: grid; gap: 10px; max-width: 100%; max-height: 100%; justify-items: center }
+.mlb img { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; display: block; border-radius: 4px }
+.mlb figcaption { color: rgba(255,255,255,.82); font-size: 13.5px; max-width: 80ch; display: flex; flex-wrap: wrap; gap: 2px 10px; justify-content: center; text-align: center }
+.mlb figcaption .mcap, .mlb figcaption .mlead { color: #fff } .mlb .mmeta i { color: rgba(255,255,255,.5) } .mlb .srcn { color: #9fd0ea }
+.mlb button { position: absolute; border: 0; background: rgba(255,255,255,.12); color: #fff; width: 42px; height: 42px; border-radius: 50%; font-size: 26px; line-height: 1; cursor: pointer }
+.mlb button:hover, .mlb button:focus-visible { background: rgba(255,255,255,.26) }
+.mlb-x { top: 10px; right: 12px } .mlb-p { left: 8px; top: 50%; margin-top: -21px } .mlb-n { right: 8px; top: 50%; margin-top: -21px }
+@media (max-width: 620px) { .mlb { padding: 52px 8px 16px } .mlb-p, .mlb-n { top: auto; bottom: 10px } }
+@media print { .mface-n, .mnav, .cmp-range { display: none } .mlb { display: none } }
+/* the media editor */
+.mitems { display: grid; gap: 10px }
+.mitem { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--sheet); display: grid; gap: 8px }
+.mi-head { display: flex; gap: 6px; align-items: center; font-size: 13px } .mi-head .sp { flex: 1 }
+.mi-body { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start } .mi-body .thumb { width: 120px; max-height: 120px; object-fit: cover; margin: 0 }
+@media (max-width: 560px) { .mi-body { grid-template-columns: minmax(0, 1fr) } }
+.mlocal { color: var(--check) } .mlocal code { font-size: 11.5px }
+input.bad { border-color: var(--fix) !important; box-shadow: 0 0 0 1px var(--fix) }
 </style>
 </head>
 <body>
@@ -2486,10 +2606,14 @@ var MIL_NAMES = {"S*G*------":"Ground Track","S*G*U-----":"Unit","S*G*UC----":"C
 // OSINT Dashboard Builder: data model and number crunching, with no page code. Tests/run.js loads this block on its own.
 var DB = (function () {
   'use strict';
-  var FORMAT = 2;
+  var FORMAT = 3;
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var COL_TYPES = ['text', 'number', 'date', 'lat', 'lon', 'source', 'locator', 'quote', 'url'];
-  var PANEL_TYPES = ['stat', 'line', 'bar', 'scatter', 'pie', 'table', 'map', 'timeline', 'text'];
+  var PANEL_TYPES = ['stat', 'line', 'bar', 'scatter', 'pie', 'table', 'map', 'timeline', 'text', 'media'];
+  var MEDIA_KINDS = ['image', 'gallery', 'compare', 'video', 'audio', 'embed'];
+  var FRAMES = ['', 'card', 'shadow', 'flat', 'tint', 'none'];
+  // Widths a panel can take, in twelfths of the row: a sixth, a quarter, a third, half, two thirds, three quarters, five sixths, full.
+  var SPANS = [2, 3, 4, 6, 8, 9, 10, 12];
   var LOOKS = ['plain', 'heading', 'note', 'key', 'warn', 'quote'];
   function str(v, max) { return typeof v === 'string' ? v.slice(0, max || 20000) : (typeof v === 'number' && isFinite(v) ? String(v) : ''); }
   function clean(s) { return str(s).replace(/\s+/g, ' ').trim(); }
@@ -2779,15 +2903,87 @@ var DB = (function () {
 
   // ---- the project ----
   function blank() {
-    return { app: 'OSINT Dashboard Builder', format: FORMAT, meta: { title: 'Untitled dashboard', eyebrow: '', dek: '', byline: '', compiled: '', license: '' },
+    return { app: 'OSINT Dashboard Builder', format: FORMAT, meta: { title: 'Untitled dashboard', eyebrow: '', dek: '', byline: '', compiled: '', license: '', cover: blankCover() },
       style: blankStyle(), sources: [], datasets: [], timelines: [], maps: [], sections: [{ id: 'main', title: 'Overview', desc: '' }], panels: [], disputes: [], gaps: [] };
   }
-  function blankStyle() { return { accent: '', align: 'left', width: 'normal', cards: 'card', headFont: 'serif', stats: true, gap: 'normal' }; }
+  function blankStyle() { return { accent: '', align: 'left', width: 'normal', cards: 'card', headFont: 'serif', stats: true, gap: 'normal', flow: 'dense', sections: 'tabs' }; }
+  function blankCover() { return { img: '', alt: '', cap: '', pos: 'none', height: 'M' }; }
   function pick(v, list, d) { return list.indexOf(v) >= 0 ? v : d; }
   function hex(v) { v = clean(v); return /^#[0-9a-f]{6}$/i.test(v) ? v.toUpperCase() : /^#[0-9a-f]{3}$/i.test(v) ? ('#' + v[1] + v[1] + v[2] + v[2] + v[3] + v[3]).toUpperCase() : ''; }
-  // A panel's width in sixths of the row. Files from version 1 give width in thirds.
-  function spanOf(x) { var s = +x.span; if (s >= 1 && s <= 6 && Math.round(s) === s) return s; var w = +x.width; return [1, 2, 3].indexOf(w) >= 0 ? w * 2 : (x.type === 'stat' ? 2 : 4); }
-  function widthOf(span) { return span >= 6 ? 3 : span >= 3 ? 2 : 1; }
+  // A panel's width in twelfths of the row (format 3). Format 2 gave it in sixths, format 1 as a width in thirds.
+  function snapSpan(n) { n = +n; if (!isFinite(n)) return 6; var best = SPANS[0]; SPANS.forEach(function (k) { if (Math.abs(k - n) < Math.abs(best - n)) best = k; }); return best; }
+  function spanOf(x, format) {
+    var s = +x.span;
+    if (format >= 3) { if (s >= 1 && s <= 12 && Math.round(s) === s) return snapSpan(s); }
+    else if (s >= 1 && s <= 6 && Math.round(s) === s) return s * 2;
+    var w = +x.width; return [1, 2, 3].indexOf(w) >= 0 ? w * 4 : (x.type === 'stat' ? 3 : x.type === 'media' ? 6 : 8);
+  }
+  // width in thirds, kept so older versions can still lay the file out
+  function widthOf(span) { return span >= 12 ? 3 : span >= 6 ? 2 : 1; }
+  function rowsOf(x) { var r = +x.rows; if (r >= 1 && r <= 3 && Math.round(r) === r) return r; return x.tall ? 2 : 1; }
+
+  // ---- media ----
+  // Where a picture, video or sound may come from: a web address, a picture kept inside the dashboard, or a file next to the page.
+  function relPath(u) { return /^(?![a-z][a-z0-9+.-]*:)(?!\/\/)(?!.*(^|\/)\.\.(\/|$))[\w\-./ %()~+]+$/i.test(u) && !/^\//.test(u) && /\.[a-z0-9]{2,5}$/i.test(u); }
+  function mediaSrc(u, kind) {
+    u = typeof u === 'string' ? u.trim() : ''; if (!u) return '';
+    if (/^data:/i.test(u)) return kind !== 'av' && u.length < 16e6 && /^data:image\/(png|jpe?g|gif|webp);base64,[a-z0-9+\/=]+$/i.test(u) ? u : '';
+    if (u.length > 2000 || /\s/.test(u.replace(/ /g, ''))) return '';
+    if (/^https:\/\/[^\s"'<>]+$/i.test(u)) return u;
+    if (/^http:\/\/[^\s"'<>]+$/i.test(u)) return 'https://' + u.slice(7);
+    return relPath(u) ? u : '';
+  }
+  function isLocal(u) { return !!u && relPath(u); }
+  // times as people type them: 75, 1:15, 1:02:03, 1m15s, 1h2m
+  function parseTime(v) {
+    if (typeof v === 'number') return isFinite(v) && v >= 0 ? Math.floor(v) : null;
+    v = clean(v).toLowerCase(); if (!v) return null; var m;
+    if (/^\d+(\.\d+)?$/.test(v)) return Math.floor(+v);
+    if ((m = /^(?:(\d+):)?(\d{1,2}):(\d{1,2})$/.exec(v))) return (+(m[1] || 0)) * 3600 + +m[2] * 60 + +m[3];
+    if ((m = /^(?:(\d+)h)?\s*(?:(\d+)m)?\s*(?:(\d+)s)?$/.exec(v)) && (m[1] || m[2] || m[3])) return (+(m[1] || 0)) * 3600 + (+(m[2] || 0)) * 60 + +(m[3] || 0);
+    return null;
+  }
+  function fmtTime(t) { t = Math.max(0, Math.floor(+t || 0)); var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s2 = t % 60; return (h ? h + ':' + pad(m) : m) + ':' + pad(s2); }
+  // A video link, read as YouTube, Vimeo, the Internet Archive, or a file to play directly.
+  function videoLink(u) {
+    u = clean(u); if (!u) return null; var m, t = null, q;
+    q = /[?&#](?:t|start)=([0-9hms:]+)/i.exec(u); if (q) t = parseTime(q[1]);
+    if ((m = /^https?:\/\/(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/)|youtube-nocookie\.com\/embed\/|youtu\.be\/)([\w-]{11})/i.exec(u))) return { host: 'youtube', id: m[1], start: t, label: 'YouTube' };
+    if ((m = /^https?:\/\/(?:www\.|player\.)?vimeo\.com\/(?:video\/|channels\/[\w-]+\/|groups\/[\w-]+\/videos\/)?(\d{5,12})(?:\/([0-9a-f]{6,20}))?/i.exec(u))) { var hq = /[?&]h=([0-9a-f]{6,20})/i.exec(u); return { host: 'vimeo', id: m[1], hash: m[2] || (hq && hq[1]) || '', start: t, label: 'Vimeo' }; }
+    if ((m = /^https?:\/\/(?:www\.)?archive\.org\/(?:details|embed)\/([\w.\-]+(?:\/[\w.\-%]+)?)/i.exec(u))) return { host: 'archive', id: m[1], start: t, label: 'the Internet Archive' };
+    var f = mediaSrc(u, 'av'); if (f && /\.(mp4|m4v|webm|ogv|mov)(\?.*)?$/i.test(f)) return { host: 'file', url: f, start: t, label: isLocal(f) ? 'a file next to this page' : 'a video file' };
+    return null;
+  }
+  function audioLink(u) { var f = mediaSrc(u, 'av'); return f && /\.(mp3|m4a|aac|ogg|oga|opus|wav|flac|weba)(\?.*)?$/i.test(f) ? { host: 'file', url: f, label: isLocal(f) ? 'a file next to this page' : 'a sound file' } : null; }
+  // The address that goes in the frame, for pages that offer an embed. Share links from a few common services are turned into their embed addresses.
+  function embedLink(u) {
+    u = clean(u); if (!/^https:\/\/[^\s"'<>]+$/i.test(u)) return null; var m, host = u.replace(/^https:\/\/(www\.)?/i, '').split(/[\/?#]/)[0].toLowerCase();
+    var v = videoLink(u); if (v && v.host !== 'file') return { url: '', video: v, host: host, label: v.label };
+    if ((m = /^https:\/\/open\.spotify\.com\/(?:embed\/)?(episode|show|track|album|playlist)\/(\w+)/i.exec(u))) return { url: 'https://open.spotify.com/embed/' + m[1] + '/' + m[2], host: host, label: 'Spotify', h: m[1] === 'track' || m[1] === 'episode' ? 232 : 352 };
+    if ((m = /^https:\/\/(?:public\.)?flourish\.studio\/(visualisation|story)\/(\d+)/i.exec(u))) return { url: 'https://flo.uri.sh/' + m[1] + '/' + m[2] + '/embed', host: host, label: 'Flourish' };
+    if ((m = /^https:\/\/(?:www\.)?datawrapper\.de\/_\/(\w+)/i.exec(u))) return { url: 'https://datawrapper.dwcdn.net/' + m[1] + '/', host: host, label: 'Datawrapper' };
+    if (/^datawrapper\.dwcdn\.net$/.test(host)) return { url: u, host: host, label: 'Datawrapper' };
+    if ((m = /^https:\/\/soundcloud\.com\/[\w-]+\/[\w-]+/i.exec(u))) return { url: 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(m[0]) + '&visual=false', host: host, label: 'SoundCloud', h: 166 };
+    if ((m = /^https:\/\/(?:www\.)?google\.[a-z.]+\/maps\/embed/i.exec(u))) return { url: u, host: host, label: 'Google Maps' };
+    if ((m = /^https:\/\/docs\.google\.com\/(spreadsheets|presentation|document)\/d\/e\/([\w-]+)\/pub/i.exec(u))) return { url: u.replace(/\/pub(?:html)?(\?.*)?$/, m[1] === 'presentation' ? '/embed' : '/pubhtml?widget=true&headers=false'), host: host, label: 'Google ' + { spreadsheets: 'Sheets', presentation: 'Slides', document: 'Docs' }[m[1]] };
+    return { url: u, host: host, label: host };
+  }
+  var RATIOS = ['auto', '16:9', '4:3', '3:2', '1:1', '4:5', '9:16', '21:9'];
+  function mediaItem(it, kind) {
+    it = it && typeof it === 'object' ? it : {};
+    var c = it.cite && typeof it.cite === 'object' ? it.cite : {};
+    return { src: mediaSrc(it.src, kind === 'video' || kind === 'audio' ? 'av' : '') || (kind === 'embed' ? str(it.src, 2000).trim() : ''), alt: str(it.alt, 1000), cap: str(it.cap, 2000), credit: str(it.credit, 400), date: str(it.date, 60), place: str(it.place, 300), label: str(it.label, 120),
+      poster: mediaSrc(it.poster, ''), cite: { src: clean(c.src), loc: str(c.loc, 400) } };
+  }
+  function mediaCfg(c) {
+    var kind = pick(c.kind, MEDIA_KINDS, 'image'), items = (Array.isArray(c.items) ? c.items : []).slice(0, 60).map(function (it) { return mediaItem(it, kind); });
+    if (!items.length) items = [mediaItem({}, kind)];
+    if (kind === 'compare') while (items.length < 2) items.push(mediaItem({}, kind));
+    var moments = (Array.isArray(c.moments) ? c.moments : []).slice(0, 80).map(function (m) { m = m || {}; var t = parseTime(m.t); return t == null ? null : { t: t, label: str(m.label, 300) }; }).filter(Boolean).sort(function (a, b) { return a.t - b.t; });
+    var h = +c.height;
+    return { kind: kind, items: items, ratio: pick(c.ratio, RATIOS, kind === 'video' || kind === 'embed' ? '16:9' : 'auto'), fit: pick(c.fit, ['contain', 'cover'], 'cover'), mode: pick(c.mode, ['grid', 'slides', 'strip'], 'grid'), cols: [2, 3, 4].indexOf(+c.cols) >= 0 ? +c.cols : 3,
+      start: parseTime(c.start), moments: moments, transcript: str(c.transcript, 60000), height: h >= 120 && h <= 1600 ? Math.round(h) : '', loop: !!c.loop, muted: !!c.muted, open: c.open !== false, load: pick(c.load, ['click', 'auto'], 'click'), split: Math.max(5, Math.min(95, +c.split || 50)), capPos: pick(c.capPos, ['below', 'over'], 'below') };
+  }
   function nextId(prefix, taken) {
     var n = 1, set = {}; taken.forEach(function (t) { set[t] = 1; var m = String(t).match(new RegExp('^' + prefix + '(\\d+)$')); if (m) n = Math.max(n, +m[1] + 1); });
     while (set[prefix + n]) n++; return prefix + n;
@@ -2803,7 +2999,12 @@ var DB = (function () {
     ['title', 'eyebrow', 'dek', 'byline', 'compiled', 'license'].forEach(function (k) { p.meta[k] = str(m[k], 2000); });
     var y = raw.style && typeof raw.style === 'object' ? raw.style : {}, yd = blankStyle();
     p.style = { accent: hex(y.accent), align: pick(y.align, ['left', 'center'], yd.align), width: pick(y.width, ['normal', 'wide', 'full'], yd.width), cards: pick(y.cards, ['card', 'flat', 'shadow'], yd.cards),
-      headFont: pick(y.headFont, ['serif', 'sans'], yd.headFont), stats: y.stats !== false, gap: pick(y.gap, ['tight', 'normal', 'roomy'], yd.gap) };
+      headFont: pick(y.headFont, ['serif', 'sans'], yd.headFont), stats: y.stats !== false, gap: pick(y.gap, ['tight', 'normal', 'roomy'], yd.gap),
+      flow: pick(y.flow, ['dense', 'order'], yd.flow), sections: pick(y.sections, ['tabs', 'scroll'], yd.sections) };
+    var cv = m.cover && typeof m.cover === 'object' ? m.cover : {};
+    p.meta.cover = { img: mediaSrc(cv.img, ''), alt: str(cv.alt, 1000), cap: str(cv.cap, 1000), pos: pick(cv.pos, ['none', 'above', 'behind', 'side'], 'none'), height: pick(cv.height, ['S', 'M', 'L'], 'M') };
+    if (!p.meta.cover.img) p.meta.cover.pos = 'none';
+    var fmtIn = typeof raw.format === 'number' ? raw.format : 1;
     if (!p.meta.title) p.meta.title = 'Untitled dashboard';
     seen = {};
     p.sources = (Array.isArray(raw.sources) ? raw.sources : []).filter(function (s) { return s && typeof s === 'object' && (s.fields || s.st); }).map(function (s, n) {
@@ -2850,11 +3051,13 @@ var DB = (function () {
       var id = clean(x.id) || 'p' + (n + 1); if (seen[id]) { fixes.push('Two panels shared the ID ' + id + '; the second was renamed.'); id = nextId('p', Object.keys(seen)); } seen[id] = 1;
       var type = PANEL_TYPES.indexOf(x.type) >= 0 ? x.type : 'text';
       var sec = clean(x.section); if (!p.sections.some(function (s) { return s.id === sec; })) sec = p.sections[0].id;
-      var span = spanOf({ span: x.span, width: x.width, type: type });
+      var span = spanOf({ span: x.span, width: x.width, type: type }, fmtIn);
       var cfg = x.cfg && typeof x.cfg === 'object' ? JSON.parse(JSON.stringify(x.cfg)) : {};
       if (type === 'text' && LOOKS.indexOf(cfg.look) < 0) cfg.look = 'plain';
-      return { id: id, section: sec, type: type, title: str(x.title, 300), sub: str(x.sub, 600), span: span, width: widthOf(span),
-        dataset: clean(x.dataset), cfg: cfg, cites: cites(x.cites), note: str(x.note, 4000), tall: !!x.tall };
+      if (type === 'media') cfg = mediaCfg(cfg);
+      var rows = rowsOf(x);
+      return { id: id, section: sec, type: type, title: str(x.title, 300), sub: str(x.sub, 600), span: span, width: widthOf(span), rows: rows, tall: rows > 1, frame: pick(x.frame, FRAMES, ''),
+        dataset: clean(x.dataset), cfg: cfg, cites: cites(x.cites), note: str(x.note, 4000) };
     });
     p.disputes = (Array.isArray(raw.disputes) ? raw.disputes : []).filter(Boolean).map(function (d) { return { title: str(d.title, 300), text: str(d.text, 4000), refs: (Array.isArray(d.refs) ? d.refs : []).map(clean).filter(Boolean) }; });
     p.gaps = (Array.isArray(raw.gaps) ? raw.gaps : []).map(function (g) { return str(g, 2000); }).filter(Boolean);
@@ -2877,7 +3080,7 @@ var DB = (function () {
     if (si < 0) return [];
     return ds.rows.map(function (r) { return { src: clean(r[si]), loc: li < 0 ? '' : str(r[li]), quote: qi < 0 ? '' : str(r[qi]) }; });
   }
-  var NEEDS = { stat: [], line: ['x'], bar: ['cat'], scatter: ['x', 'y'], pie: ['cat'], table: [], map: ['lat', 'lon'], timeline: [], text: [] };
+  var NEEDS = { stat: [], line: ['x'], bar: ['cat'], scatter: ['x', 'y'], pie: ['cat'], table: [], map: ['lat', 'lon'], timeline: [], text: [], media: [] };
   // What a map panel shows: rows of a data set ('data') or a map made in the OSINT Map Builder ('map').
   function mapFrom(x) { return x.cfg && x.cfg.from === 'map' ? 'map' : 'data'; }
   function audit(p, O, TYPES, TEXT_KEYS) {
@@ -2911,6 +3114,7 @@ var DB = (function () {
       if (!x.title && x.type !== 'text') rows.push({ level: 'check', where: x.id, msg: label + ' has no title.' });
       if (x.type === 'timeline') { if (!tl[x.cfg.timeline]) rows.push({ level: 'fix', where: x.id, msg: label + ' shows no timeline. Open a Timeline Builder file to add one.' }); return; }
       if (x.type === 'text') return;
+      if (x.type === 'media') return auditMedia(x, label);
       if (x.type === 'map' && mapFrom(x) === 'map') {
         var mm = mp[x.cfg.map]; if (!mm) return rows.push({ level: 'fix', where: x.id, msg: label + ' shows no map. Open a map file saved from the OSINT Map Builder.' });
         (mm.project.features || []).forEach(function (f) { if (!f.hidden) useCites(f.cites || [], x.id, label + ', map feature "' + (f.label || f.id) + '"'); });
@@ -2923,6 +3127,22 @@ var DB = (function () {
       if (x.type === 'bar' && x.cfg.split && colIndex(d, x.cfg.split) < 0) rows.push({ level: 'fix', where: x.id, msg: label + ' splits its bars by a column the data does not have.' });
       if ((x.type === 'line' || x.type === 'bar' || x.type === 'pie') && (x.cfg.op && x.cfg.op !== 'count' && x.cfg.op !== 'distinct') && colIndex(d, x.cfg.y) < 0) rows.push({ level: 'fix', where: x.id, msg: label + ' needs a number column to ' + x.cfg.op + '.' });
     });
+    function auditMedia(x, label) {
+      var c = x.cfg, kind = c.kind, its = kind === 'image' || kind === 'video' || kind === 'audio' || kind === 'embed' ? c.items.slice(0, 1) : c.items, any = x.cites.length > 0, credit = false, locals = [];
+      its.forEach(function (it, i) {
+        var lab = label + (its.length > 1 ? ', ' + (kind === 'compare' ? (i ? 'after' : 'before') + ' picture' : 'item ' + (i + 1)) : '');
+        if (it.cite.src) { any = true; useCites([it.cite], x.id, lab); }
+        if (it.credit) credit = true;
+        if (!it.src) return rows.push({ level: 'fix', where: x.id, msg: lab + ' has no ' + (kind === 'video' ? 'video' : kind === 'audio' ? 'sound file' : kind === 'embed' ? 'page to embed' : 'picture') + '.' });
+        if (kind === 'video' && !videoLink(it.src)) rows.push({ level: 'fix', where: x.id, msg: lab + ': the video link is not one the tool can play. Use a YouTube, Vimeo or Internet Archive link, or an .mp4 or .webm file.' });
+        if (kind === 'audio' && !audioLink(it.src)) rows.push({ level: 'fix', where: x.id, msg: lab + ': the sound link is not an .mp3, .m4a, .ogg or .wav file. For a podcast on Spotify or SoundCloud, use an Embed panel.' });
+        if (kind === 'embed' && !embedLink(it.src)) rows.push({ level: 'fix', where: x.id, msg: lab + ': an embedded page needs an address that starts with https://.' });
+        if ((kind === 'image' || kind === 'gallery' || kind === 'compare') && !clean(it.alt)) rows.push({ level: 'check', where: x.id, msg: lab + ' has no description for screen readers.' });
+        if (kind !== 'embed' && isLocal(it.src)) locals.push(it.src); if (isLocal(it.poster)) locals.push(it.poster);
+      });
+      if (locals.length) rows.push({ level: 'check', where: x.id, msg: label + ' uses ' + (locals.length > 1 ? locals.length + ' files' : 'a file') + ' that must sit next to the published page: ' + locals.slice(0, 6).join(', ') + (locals.length > 6 ? ' and ' + (locals.length - 6) + ' more' : '') + '.' });
+      if (!any) rows.push({ level: credit ? 'check' : 'fix', where: x.id, msg: label + (credit ? ' credits its media but cites no source. Cite where it came from, so readers can find the original.' : ' has no citation. Cite where the media came from, for the panel or item by item.') });
+    }
     p.disputes.forEach(function (d, i) { d.refs.forEach(function (r) { if (!pids[r]) rows.push({ level: 'fix', where: 'disputes', msg: 'Dispute "' + (d.title || i + 1) + '" points to ' + r + ', which is not a panel.' }); }); });
     var unrated = 0;
     p.sources.forEach(function (s) {
@@ -2938,7 +3158,7 @@ var DB = (function () {
   }
   function sizeOf(p) { try { return JSON.stringify(p).length; } catch (e) { return 0; } }
 
-  return { FORMAT: FORMAT, COL_TYPES: COL_TYPES, PANEL_TYPES: PANEL_TYPES, LOOKS: LOOKS, MAX_SERIES: MAX_SERIES, byCategorySplit: byCategorySplit, scatterPoints: scatterPoints, trend: trend, dateMs: dateMs,
+  return { FORMAT: FORMAT, COL_TYPES: COL_TYPES, PANEL_TYPES: PANEL_TYPES, LOOKS: LOOKS, MEDIA_KINDS: MEDIA_KINDS, FRAMES: FRAMES, SPANS: SPANS, RATIOS: RATIOS, snapSpan: snapSpan, rowsOf: rowsOf, mediaSrc: mediaSrc, isLocal: isLocal, parseTime: parseTime, fmtTime: fmtTime, videoLink: videoLink, audioLink: audioLink, embedLink: embedLink, mediaCfg: mediaCfg, mediaItem: mediaItem, blankCover: blankCover, MAX_SERIES: MAX_SERIES, byCategorySplit: byCategorySplit, scatterPoints: scatterPoints, trend: trend, dateMs: dateMs,
     addRow: addRow, setCell: setCell, addColumn: addColumn, removeColumn: removeColumn, moveColumn: moveColumn, appendCSV: appendCSV, blankStyle: blankStyle, spanOf: spanOf, widthOf: widthOf, mapFrom: mapFrom, hex: hex, keyOf: keyOf, parseCSV: parseCSV, toCSV: toCSV, csvCell: csvCell, num: num, normDate: normDate, showDate: showDate,
     guessType: guessType, datasetFromCSV: datasetFromCSV, coerce: coerce, retype: retype, colIndex: colIndex, colOfType: colOfType, bucketOf: bucketOf, statValue: statValue, byCategory: byCategory,
     overTime: overTime, reduce: reduce, fmt: fmt, niceTicks: niceTicks, blank: blank, nextId: nextId, normalize: normalize, sourceState: sourceState, rowCites: rowCites, audit: audit, sizeOf: sizeOf };
@@ -2958,8 +3178,10 @@ var DB = (function () {
   var SERIES = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--c6)', 'var(--c7)', 'var(--c8)'];
   var ZC = { G: 'var(--z-green)', Y: 'var(--z-yellow)', O: 'var(--z-orange)', R: 'var(--z-red)', X: 'var(--z-gray)' };
   var ZN = { G: 'Green', Y: 'Yellow', O: 'Orange', R: 'Red', X: 'Gray' };
-  var TYPE_NAMES = { stat: 'Figure', line: 'Line or area chart', bar: 'Bar chart', scatter: 'Scatter plot', pie: 'Pie or donut', table: 'Table', map: 'Map', timeline: 'Timeline', text: 'Text' };
-  var SPAN_NAMES = { 1: 'A sixth', 2: 'A third', 3: 'Half', 4: 'Two thirds', 5: 'Five sixths', 6: 'Full width' };
+  var TYPE_NAMES = { stat: 'Figure', line: 'Line or area chart', bar: 'Bar chart', scatter: 'Scatter plot', pie: 'Pie or donut', table: 'Table', map: 'Map', timeline: 'Timeline', text: 'Text', media: 'Media' };
+  var SPAN_NAMES = { 2: 'A sixth', 3: 'A quarter', 4: 'A third', 6: 'Half', 8: 'Two thirds', 9: 'Three quarters', 10: 'Five sixths', 12: 'Full width' };
+  var MEDIA_NAMES = { image: 'Picture', gallery: 'Gallery', compare: 'Before and after', video: 'Video', audio: 'Sound', embed: 'Embedded page' };
+  var FRAME_NAMES = { '': 'As set for the page', card: 'Card with a border', shadow: 'Card with a soft shadow', flat: 'Flat, no card', tint: 'Tinted with the accent', none: 'No frame at all' };
   var LOOK_NAMES = { plain: 'Plain text', heading: 'Section heading', note: 'Note (shaded box)', key: 'Key finding (large, accented)', warn: 'Caution (amber box)', quote: 'Pull quote' };
   var OPS = [['count', 'Count rows'], ['sum', 'Sum'], ['avg', 'Average'], ['median', 'Median'], ['min', 'Smallest'], ['max', 'Largest'], ['distinct', 'Count distinct values']];
 
@@ -2979,7 +3201,7 @@ var DB = (function () {
     if (r.fixes.length && !quiet) modal({ title: 'Opened, with a few repairs', body: '<ul>' + r.fixes.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>', actions: [{ label: 'OK', primary: true }] });
     return true;
   }
-  var ui = { mode: 'view', etab: 'panels', pid: null, did: null, sid: null, sec: null, tbl: {}, tlf: {}, open: {}, nums: {}, pw: {} };
+  var ui = { mode: 'view', etab: 'panels', pid: null, did: null, sid: null, sec: null, tbl: {}, tlf: {}, open: {}, nums: {}, pw: {}, slide: {}, local: {} };
   if (!PUBLISHED) {
     var saved = null; try { saved = JSON.parse(lsGet(STORE) || 'null'); } catch (e) { saved = null; }
     if (!(saved && saved.project && load(saved.project, true))) load(boot.project || DB.blank(), true);
@@ -3091,13 +3313,13 @@ var DB = (function () {
   function tip(o) { return ' data-tip="' + esc(JSON.stringify(o)) + '"'; }
 
   // ---------- chart renderers (return HTML strings) ----------
-  function chartW(x) { return Math.max(240, Math.round(ui.pw[x.id] || { 1: 150, 2: 330, 3: 520, 4: 720, 5: 920, 6: 1120 }[x.span || 4] || 720)); }
+  function chartW(x) { return Math.max(240, Math.round(ui.pw[x.id] || { 2: 150, 3: 240, 4: 330, 6: 520, 8: 720, 9: 820, 10: 920, 12: 1120 }[x.span || 8] || 720)); }
   function fmtV(v, cfg) { var s = DB.fmt(v, cfg && cfg.format === 'full' ? 'full' : 'compact', cfg && cfg.decimals); return (cfg && cfg.prefix || '') + s + (cfg && cfg.suffix || ''); }
   function colLabel(d, k) { var i = DB.colIndex(d, k); return i < 0 ? k : d.columns[i].label; }
   function needs(x, d) {
     var miss = [];
     if (x.type === 'map' && DB.mapFrom(x) === 'map') return '';
-    if (!d && x.type !== 'stat' && x.type !== 'text' && x.type !== 'timeline') return 'Pick a data set for this panel.';
+    if (!d && x.type !== 'stat' && x.type !== 'text' && x.type !== 'timeline' && x.type !== 'media') return 'Pick a data set for this panel.';
     ({ line: ['x'], bar: ['cat'], scatter: ['x', 'y'], pie: ['cat'], map: ['lat', 'lon'] }[x.type] || []).forEach(function (k) { if (DB.colIndex(d, x.cfg[k]) < 0) miss.push(k); });
     return miss.length ? 'Choose a column for: ' + miss.join(', ') + '.' : '';
   }
@@ -3549,7 +3771,7 @@ var DB = (function () {
     var id = DB.nextId('m', P.maps.map(function (m) { return m.id; }));
     P.maps.push({ id: id, name: mp.meta.title || name, project: mp });
     var pid = DB.nextId('p', P.panels.map(function (p) { return p.id; }));
-    P.panels.push({ id: pid, section: ui.sec && by(P.sections, ui.sec) ? ui.sec : P.sections[0].id, type: 'map', title: mp.meta.title || name, sub: mp.meta.dek || '', span: 6, width: 3, dataset: '', cfg: { from: 'map', map: id, base: 'saved' }, cites: [], note: '' });
+    P.panels.push({ id: pid, section: ui.sec && by(P.sections, ui.sec) ? ui.sec : P.sections[0].id, type: 'map', title: mp.meta.title || name, sub: mp.meta.dek || '', span: 12, width: 3, rows: 1, frame: '', dataset: '', cfg: { from: 'map', map: id, base: 'saved' }, cites: [], note: '' });
     touch(); ui.pid = pid; ui.mode = 'edit'; ui.etab = 'panels'; render();
     var lost = mp.features.filter(function (f) { return f.kind === 'image' && f.hidden; }).length;
     toast('Added the map "' + (mp.meta.title || name) + '" (' + mp.features.length + ' features) as a panel' + (lost ? '. ' + lost + ' scanned map' + (lost > 1 ? 's were' : ' was') + ' kept only in the Map Builder\'s browser and is hidden' : ''));
@@ -3658,6 +3880,10 @@ var DB = (function () {
       MAPC.shown(pp).forEach(function (f) { f.cites.forEach(function (c) { if (!first[c.src]) first[c.src] = { src: c.src, loc: c.loc, quote: c.quote, n: nb.num[c.src] || 0, feats: [] }; if (f.label && first[c.src].feats.indexOf(f.label) < 0) first[c.src].feats.push(f.label); }); });
       return nb.order.map(function (id) { var c = first[id]; c.num = c.n; c.uses = c.feats.length ? 'On the map: ' + c.feats.slice(0, 6).join(', ') + (c.feats.length > 6 ? ' and ' + (c.feats.length - 6) + ' more' : '') : ''; delete c.n; return c; }).concat(x.cites);
     }
+    if (x.type === 'media') {
+      var mn = mediaNums(x), wd = x.cfg.kind === 'compare' ? function (i) { return i ? 'After' : 'Before'; } : x.cfg.kind === 'gallery' ? function (i) { return 'Item ' + (i + 1); } : null;
+      return mn.order.map(function (o, k) { return { src: o.src, loc: o.loc, num: k + 1, uses: wd ? o.items.map(wd).join(', ') : '' }; }).concat(x.cites);
+    }
     var out = x.cites.slice(), d = x.type === 'text' || x.type === 'timeline' ? null : dataOf(x.dataset);
     if (d && x.type !== 'stat' || (x.type === 'stat' && x.cfg.mode === 'data' && d)) {
       out = out.concat(d.cites);
@@ -3682,6 +3908,139 @@ var DB = (function () {
     else if (x.type === 'stat' && c.mode === 'data') { head = ['Measure', 'Value']; rows = [[(OPS.filter(function (o) { return o[0] === (c.op || 'count'); })[0] || ['', 'Count'])[1] + (c.col ? ' of ' + colLabel(d, c.col) : ''), DB.statValue(d, c)]]; }
     return { head: head, rows: rows };
   }
+  // ---------- media ----------
+  // A file next to the page can be previewed while editing: the builder keeps a link to the copy on this computer for the session.
+  function mres(u) { return (ui.local && ui.local[u]) || u; }
+  function ratioCSS(r) { return r && r !== 'auto' ? 'aspect-ratio:' + r.replace(':', ' / ') + ';' : ''; }
+  function mediaNums(x) {
+    var nums = {}, order = [];
+    (x.cfg.items || []).forEach(function (it, i) { if (!it.cite || !it.cite.src) return; var k = it.cite.src + '|' + it.cite.loc; if (!(k in nums)) { order.push({ src: it.cite.src, loc: it.cite.loc, items: [] }); nums[k] = order.length; } order[nums[k] - 1].items.push(i); });
+    return { nums: nums, order: order };
+  }
+  function capHTML(x, it, mn, lead, extra) {
+    var n = it.cite && it.cite.src ? mn.nums[it.cite.src + '|' + it.cite.loc] : 0, meta = [];
+    if (it.date) meta.push(esc(DB.showDate(DB.normDate(it.date)) || it.date));
+    if (it.place) meta.push(esc(it.place));
+    if (it.credit) meta.push('<span class="cr">' + esc(it.credit) + '</span>');
+    if (n) meta.push('<button class="lk srcn" data-psrc="' + esc(x.id) + '" data-sopen="1">Source ' + n + '</button>');
+    if (!it.cap && !meta.length && !extra && !lead) return '';
+    return '<figcaption>' + (lead ? '<b class="mlead">' + esc(lead) + '</b> ' : '') + (it.cap ? '<span class="mcap">' + inline(esc(it.cap)) + '</span>' : '') + (meta.length ? '<span class="mmeta">' + meta.join('<i aria-hidden="true"> · </i>') + '</span>' : '') + (extra || '') + '</figcaption>';
+  }
+  function imgTag(it, cls, eager) { return '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + esc(mres(it.src)) + '" alt="' + esc(it.alt || '') + '"' + (eager ? '' : ' loading="lazy"') + ' decoding="async" referrerpolicy="no-referrer">'; }
+  function mEmpty(t) { return '<div class="hintbox mempty">' + esc(t) + '</div>'; }
+  function mImage(x, mn) {
+    var c = x.cfg, it = c.items[0]; if (!it.src) return mEmpty('Add a picture: choose a file, or give its link.');
+    var fixed = c.ratio !== 'auto';
+    return '<figure class="mfig' + (c.capPos === 'over' ? ' cap-over' : '') + '"><button type="button" class="mzoom' + (fixed ? ' fixed' : '') + '" data-mzoom="' + esc(x.id) + '" data-i="0" aria-label="Enlarge the picture" style="' + ratioCSS(c.ratio) + '">' + imgTag(it, fixed ? 'fit-' + c.fit : '') + '</button>' + capHTML(x, it, mn) + '</figure>';
+  }
+  function mGallery(x, mn) {
+    var c = x.cfg, its = c.items.map(function (it, i) { return { it: it, i: i }; }).filter(function (o) { return o.it.src; });
+    if (!its.length) return mEmpty('Add pictures to the gallery: choose files, or give their links.');
+    var r = c.ratio === 'auto' ? '4:3' : c.ratio;
+    function tile(o, eager) { return '<figure class="mfig"><button type="button" class="mzoom fixed" data-mzoom="' + esc(x.id) + '" data-i="' + o.i + '" aria-label="Enlarge picture ' + (o.i + 1) + '" style="' + ratioCSS(r) + '">' + imgTag(o.it, 'fit-' + c.fit, eager) + '</button>' + capHTML(x, o.it, mn) + '</figure>'; }
+    if (c.mode === 'slides') {
+      var cur = Math.min(ui.slide[x.id] || 0, its.length - 1);
+      return '<div class="mslides" data-mslides="' + esc(x.id) + '" aria-roledescription="carousel">' + its.map(function (it, k) { return '<div class="mslide" data-k="' + k + '"' + (k === cur ? '' : ' hidden') + ' aria-roledescription="slide" aria-label="' + (k + 1) + ' of ' + its.length + '">' + tile(it, k === cur) + '</div>'; }).join('') +
+        '<div class="mnav"><button type="button" class="btn small" data-mslide="' + esc(x.id) + '" data-d="-1" aria-label="Previous picture">‹</button><span class="mdots">' + its.map(function (it, k) { return '<button type="button" data-mdot="' + esc(x.id) + '" data-k="' + k + '" aria-label="Picture ' + (k + 1) + '" aria-current="' + (k === cur) + '"></button>'; }).join('') + '</span><span class="mcount">' + (cur + 1) + ' / ' + its.length + '</span><button type="button" class="btn small" data-mslide="' + esc(x.id) + '" data-d="1" aria-label="Next picture">›</button></div></div>';
+    }
+    if (c.mode === 'strip') return '<div class="mstrip" tabindex="0" aria-label="Pictures; scroll sideways">' + its.map(function (it) { return tile(it); }).join('') + '</div>';
+    return '<div class="mgrid" style="--mcols:' + c.cols + '">' + its.map(function (it) { return tile(it); }).join('') + '</div>';
+  }
+  function mCompare(x, mn) {
+    var c = x.cfg, a = c.items[0], b = c.items[1];
+    if (!a.src || !b.src) return mEmpty('Add two pictures of the same scene, taken from the same view: the one before, and the one after.');
+    var la = a.label || (a.date ? DB.showDate(DB.normDate(a.date)) || a.date : 'Before'), lb = b.label || (b.date ? DB.showDate(DB.normDate(b.date)) || b.date : 'After');
+    return '<figure class="mfig"><div class="mcmp' + (c.ratio !== 'auto' ? ' fixed' : '') + '" style="--x:' + c.split + '%;' + ratioCSS(c.ratio) + '" data-mcmp="' + esc(x.id) + '">' +
+      imgTag(b, 'cmp-b' + (c.ratio !== 'auto' ? ' fit-' + c.fit : '')) + '<div class="cmp-a">' + imgTag(a, 'fit-' + c.fit) + '</div>' +
+      '<div class="cmp-line" aria-hidden="true"><span class="cmp-knob">◂▸</span></div><span class="cmp-l l">' + esc(la) + '</span><span class="cmp-l r">' + esc(lb) + '</span>' +
+      '<input type="range" class="cmp-range" min="0" max="100" step="0.5" value="' + c.split + '" aria-label="Slide between ' + esc(la) + ' and ' + esc(lb) + '"></div>' +
+      '<div class="mcaps">' + capHTML(x, a, mn, la + ':') + capHTML(x, b, mn, lb + ':') + '</div></figure>';
+  }
+  function playURL(v, t, auto) {
+    var s2 = t ? Math.floor(t) : 0;
+    if (v.host === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0&playsinline=1' + (auto ? '&autoplay=1' : '') + (s2 ? '&start=' + s2 : '');
+    if (v.host === 'vimeo') return 'https://player.vimeo.com/video/' + v.id + '?dnt=1' + (v.hash ? '&h=' + v.hash : '') + (auto ? '&autoplay=1' : '') + (s2 ? '#t=' + s2 + 's' : '');
+    if (v.host === 'archive') return 'https://archive.org/embed/' + v.id + (auto ? '?autoplay=1' : '') + (s2 ? (auto ? '&' : '?') + 'start=' + s2 : '');
+    return '';
+  }
+  function watchURL(v) { return v.host === 'youtube' ? 'https://www.youtube.com/watch?v=' + v.id : v.host === 'vimeo' ? 'https://vimeo.com/' + v.id + (v.hash ? '/' + v.hash : '') : v.host === 'archive' ? 'https://archive.org/details/' + v.id : v.url; }
+  function facade(x, it, what, note) {
+    return '<button type="button" class="mface" data-mload="' + esc(x.id) + '">' + (it.poster ? imgTag({ src: it.poster, alt: '' }, 'poster fit-cover') : '') + '<span class="mplaybtn" aria-hidden="true"></span><span class="mface-t">' + esc(what) + '</span><span class="mface-n">' + esc(note) + '</span></button>';
+  }
+  function momentsHTML(x, c) {
+    return (c.moments.length ? '<div class="moments"><div class="mh">Key moments</div><ol>' + c.moments.map(function (m) { return '<li><button type="button" class="lk" data-mseek="' + esc(x.id) + '" data-t="' + m.t + '"><b>' + DB.fmtTime(m.t) + '</b>' + (m.label ? ' ' + inline(esc(m.label)) : '') + '</button></li>'; }).join('') + '</ol></div>' : '') +
+      (c.transcript ? '<details class="mtx"><summary>Transcript</summary><div class="prose">' + md(c.transcript) + '</div></details>' : '');
+  }
+  function mVideo(x, mn) {
+    var c = x.cfg, it = c.items[0]; if (!it.src) return mEmpty('Add a video: a YouTube, Vimeo or Internet Archive link, or an .mp4 or .webm file.');
+    var v = DB.videoLink(it.src); if (!v) return mEmpty('This link is not a video the tool can play. Use a YouTube, Vimeo or Internet Archive link, or an .mp4 or .webm file.');
+    var t = c.start != null ? c.start : v.start, box;
+    if (v.host === 'file') box = '<video controls preload="metadata" playsinline' + (it.poster ? ' poster="' + esc(mres(it.poster)) + '"' : '') + (c.loop ? ' loop' : '') + (c.muted ? ' muted' : '') + (it.alt ? ' aria-label="' + esc(it.alt) + '"' : '') + ' src="' + esc(mres(v.url)) + (t ? '#t=' + t : '') + '"></video>';
+    else box = facade(x, it, x.title || it.cap || 'Play the video', 'Plays from ' + v.label + '. Nothing loads from ' + v.label + ' until you press play.');
+    var link = c.open && !DB.isLocal(it.src) ? '<a class="mopen" href="' + esc(watchURL(v)) + '" target="_blank" rel="noopener noreferrer">' + (v.host === 'file' ? 'Open the file' : 'Watch on ' + v.label) + ' ↗</a>' : '';
+    return '<figure class="mfig"><div class="mplay" data-mplay="' + esc(x.id) + '" style="' + ratioCSS(c.ratio === 'auto' ? '16:9' : c.ratio) + '">' + box + '</div>' + capHTML(x, it, mn, '', link) + '</figure>' + momentsHTML(x, c);
+  }
+  function mAudio(x, mn) {
+    var c = x.cfg, it = c.items[0]; if (!it.src) return mEmpty('Add a sound file: an .mp3, .m4a, .ogg or .wav link, or a file next to the page.');
+    var a = DB.audioLink(it.src); if (!a) return mEmpty('This is not a sound file the tool can play. For Spotify or SoundCloud, use Embedded page.');
+    var link = c.open && !DB.isLocal(it.src) ? '<a class="mopen" href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">Open the file ↗</a>' : '';
+    return '<figure class="mfig maudio' + (it.poster ? ' has-art' : '') + '">' + (it.poster ? imgTag({ src: it.poster, alt: '' }, 'art') : '') + '<div class="mplay" data-mplay="' + esc(x.id) + '"><audio controls preload="metadata"' + (c.loop ? ' loop' : '') + (it.alt ? ' aria-label="' + esc(it.alt) + '"' : '') + ' src="' + esc(mres(a.url)) + (c.start ? '#t=' + c.start : '') + '"></audio></div>' + capHTML(x, it, mn, '', link) + '</figure>' + momentsHTML(x, c);
+  }
+  function mEmbed(x, mn) {
+    var c = x.cfg, it = c.items[0]; if (!it.src) return mEmpty('Add the address of a page to embed: a Datawrapper or Flourish chart, a Spotify or SoundCloud episode, a Google map, a published Google sheet.');
+    var e = DB.embedLink(it.src); if (!e) return mEmpty('An embedded page needs an address that starts with https://.');
+    if (e.video) { var vx = Object.assign({}, x, { cfg: Object.assign({}, c, { items: [Object.assign({}, it)] }) }); return mVideo(vx, mn); }
+    var h = c.height || e.h || '', st = h ? 'height:' + h + 'px' : ratioCSS(c.ratio === 'auto' ? '16:9' : c.ratio);
+    var box = c.load === 'auto' ? embedFrame(x, e.url) : facade(x, it, x.title || it.cap || 'Show the embedded page', 'Loads from ' + e.host + '. Nothing loads from ' + e.host + ' until you press here.');
+    var link = c.open ? '<a class="mopen" href="' + esc(it.src) + '" target="_blank" rel="noopener noreferrer">Open on ' + esc(e.label) + ' ↗</a>' : '';
+    return '<figure class="mfig"><div class="mplay membed" data-mplay="' + esc(x.id) + '" style="' + st + '">' + box + '</div>' + capHTML(x, it, mn, '', link) + '</figure>';
+  }
+  function embedFrame(x, url, video) {
+    return '<iframe src="' + esc(url) + '" title="' + esc(x.title || 'Embedded content') + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write"' + (video ? '' : ' sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"') + '></iframe>';
+  }
+  function rMedia(x) {
+    var mn = mediaNums(x), k = x.cfg.kind;
+    return '<div class="media k-' + k + '">' + (k === 'gallery' ? mGallery(x, mn) : k === 'compare' ? mCompare(x, mn) : k === 'video' ? mVideo(x, mn) : k === 'audio' ? mAudio(x, mn) : k === 'embed' ? mEmbed(x, mn) : mImage(x, mn)) + '</div>';
+  }
+  function mVideoOf(x) { var it = x.cfg.items[0]; if (x.cfg.kind === 'embed') { var e = DB.embedLink(it.src); return e && e.video; } return x.cfg.kind === 'video' ? DB.videoLink(it.src) : null; }
+  // load a player in place of its placeholder, or move a player to a key moment
+  function mediaPlay(id, t, from) {
+    var x = panelOf(id), el = (from && from.closest('.panel')) || $('pn-' + id), box = el && el.querySelector('[data-mplay]'); if (!x || !box) return;
+    var el2 = box.querySelector('video,audio');
+    if (el2) {
+      var go = function () { if (t != null) { try { el2.currentTime = t; } catch (e) { /* the file cannot seek */ } } var pr = el2.play(); if (pr && pr.catch) pr.catch(function () {}); };
+      if (el2.readyState >= 1) go(); else { el2.addEventListener('loadedmetadata', go, { once: true }); try { el2.load(); } catch (e) { /* ignore */ } }
+      return;
+    }
+    var v = mVideoOf(x);
+    if (v && v.host !== 'file') { box.innerHTML = embedFrame(x, playURL(v, t != null ? t : (x.cfg.start != null ? x.cfg.start : v.start), true), true); return; }
+    if (x.cfg.kind === 'embed') { var e = DB.embedLink(x.cfg.items[0].src); if (e && e.url) box.innerHTML = embedFrame(x, e.url); }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-mload],[data-mseek],[data-mslide],[data-mdot],[data-mzoom]'); if (!b || b.closest('.lay-p')) return;
+    if (b.hasAttribute('data-mload')) return mediaPlay(b.getAttribute('data-mload'), null, b);
+    if (b.hasAttribute('data-mseek')) return mediaPlay(b.getAttribute('data-mseek'), +b.getAttribute('data-t'), b);
+    if (b.hasAttribute('data-mzoom')) return lightbox(b.getAttribute('data-mzoom'), +b.getAttribute('data-i'), b);
+    var id = b.getAttribute('data-mslide') || b.getAttribute('data-mdot'), box = b.closest('[data-mslides]'); if (!box) return;
+    var sl = box.querySelectorAll('.mslide'), n = sl.length, cur = Math.min(ui.slide[id] || 0, n - 1);
+    cur = b.hasAttribute('data-mdot') ? +b.getAttribute('data-k') : (cur + +b.getAttribute('data-d') + n) % n; ui.slide[id] = cur;
+    sl.forEach(function (s2, k) { s2.hidden = k !== cur; if (k === cur) { var im = s2.querySelector('img[loading]'); if (im) im.removeAttribute('loading'); } });
+    box.querySelectorAll('[data-mdot]').forEach(function (d, k) { d.setAttribute('aria-current', k === cur); });
+    var ct = box.querySelector('.mcount'); if (ct) ct.textContent = (cur + 1) + ' / ' + n;
+  });
+  document.addEventListener('keydown', function (e) { var box = e.target.closest && e.target.closest('[data-mslides]'); if (!box || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.target.tagName === 'INPUT') return; var b = box.querySelector('[data-mslide][data-d="' + (e.key === 'ArrowLeft' ? -1 : 1) + '"]'); if (b) { e.preventDefault(); b.click(); } });
+  document.addEventListener('input', function (e) { var r = e.target; if (!r.classList || !r.classList.contains('cmp-range')) return; var box = r.closest('.mcmp'); if (box) box.style.setProperty('--x', r.value + '%'); });
+  // the enlarged view of a picture, with the gallery's other pictures a key press away
+  function lightbox(id, i, from) {
+    var x = panelOf(id); if (!x) return; var its = x.cfg.items.filter(function (it) { return it.src; }), mn = mediaNums(x), pos = Math.max(0, its.indexOf(x.cfg.items[i]));
+    if (!its.length) return;
+    var back = document.createElement('div'); back.className = 'mlb'; back.setAttribute('role', 'dialog'); back.setAttribute('aria-modal', 'true'); back.setAttribute('aria-label', 'Enlarged picture');
+    function draw() { var it = its[pos]; back.innerHTML = '<button type="button" class="mlb-x" aria-label="Close">×</button>' + (its.length > 1 ? '<button type="button" class="mlb-p" aria-label="Previous picture">‹</button><button type="button" class="mlb-n" aria-label="Next picture">›</button>' : '') + '<figure>' + imgTag(it, '', true) + capHTML(x, it, mn, its.length > 1 ? (pos + 1) + ' / ' + its.length : '') + '</figure>'; back.querySelector('.mlb-x').focus(); }
+    function close() { back.remove(); document.removeEventListener('keydown', key, true); if (from && from.focus) from.focus(); }
+    function key(e) { if (e.key === 'Escape') { e.stopPropagation(); close(); } else if (e.key === 'ArrowLeft' && its.length > 1) { pos = (pos - 1 + its.length) % its.length; draw(); } else if (e.key === 'ArrowRight' && its.length > 1) { pos = (pos + 1) % its.length; draw(); } }
+    back.addEventListener('click', function (e) { var t = e.target; if (t === back || t.closest('.mlb-x')) return close(); if (t.closest('.mlb-p')) { pos = (pos - 1 + its.length) % its.length; draw(); } if (t.closest('.mlb-n')) { pos = (pos + 1) % its.length; draw(); } if (t.closest('[data-sopen]')) { close(); } });
+    document.addEventListener('keydown', key, true); document.body.appendChild(back); draw();
+  }
   function rText(x) {
     var c = x.cfg, img = c.img && (/^https:\/\//.test(c.img) || /^data:image\/(png|jpe?g|gif|webp);base64,/.test(c.img)) ? '<figure class="tfig"><img src="' + esc(c.img) + '" alt="' + esc(c.imgAlt || '') + '" loading="lazy" referrerpolicy="no-referrer">' + (c.imgCap ? '<figcaption>' + inline(esc(c.imgCap)) + '</figcaption>' : '') + '</figure>' : '';
     var body = '<div class="prose">' + md(c.text) + '</div>', pos = c.imgPos || 'top';
@@ -3693,14 +4052,15 @@ var DB = (function () {
     try {
       body = need && x.type !== 'stat' ? '<div class="hintbox">' + esc(need) + '</div>' :
         x.type === 'stat' ? rStat(x) : x.type === 'line' ? rLine(x, d) : x.type === 'bar' ? rBar(x, d) : x.type === 'scatter' ? rScatter(x, d) : x.type === 'pie' ? rPie(x, d) : x.type === 'table' ? rTable(x, d) :
-        x.type === 'map' ? (glMap(x) ? rGLMap(x, d) : rMap(x, d)) : x.type === 'timeline' ? rTimeline(x) : rText(x);
+        x.type === 'map' ? (glMap(x) ? rGLMap(x, d) : rMap(x, d)) : x.type === 'timeline' ? rTimeline(x) : x.type === 'media' ? rMedia(x) : rText(x);
     } catch (err) { body = '<div class="hintbox">This panel could not be drawn: ' + esc(err.message) + '</div>'; }
     var cites = panelCites(x), disp = P.disputes.filter(function (dd) { return dd.refs.indexOf(x.id) >= 0; });
     var canNums = d && (x.type === 'line' || x.type === 'bar' || x.type === 'scatter' || x.type === 'pie' || (x.type === 'map' && DB.mapFrom(x) === 'data') || (x.type === 'stat' && x.cfg.mode === 'data'));
     var nums = '';
     if (canNums && ui.nums[x.id]) { var nt = numbersTable(x, d); nums = '<div class="tbl-wrap"><table class="dt"><thead><tr>' + nt.head.map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr></thead><tbody>' + nt.rows.map(function (r) { return '<tr>' + r.map(function (v) { return typeof v === 'number' ? '<td class="n">' + esc(DB.fmt(v, 'full')) + '</td>' : '<td>' + esc(v == null ? '–' : v) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>'; }
     var isStat = x.type === 'stat', look = x.type === 'text' ? ' look-' + (x.cfg.look || 'plain') : '';
-    return '<section class="panel s' + (x.span || 4) + ' t-' + x.type + look + (x.tall && !editing ? ' tall' : '') + '" id="pn-' + esc(x.id) + '" data-cw="' + chartW(x) + '" aria-label="' + esc(x.title || TYPE_NAMES[x.type]) + '">' +
+    var rows = DB.rowsOf(x), kind = x.type === 'media' ? ' mk-' + x.cfg.kind : '';
+    return '<section class="panel s' + (x.span || 8) + ' t-' + x.type + kind + look + (rows > 1 && !editing ? ' r' + rows : '') + (x.frame ? ' fr-' + x.frame : '') + '" id="pn-' + esc(x.id) + '" data-cw="' + chartW(x) + '" aria-label="' + esc(x.title || TYPE_NAMES[x.type]) + '">' +
       (x.title || x.sub ? '<div class="p-head">' + (x.title ? '<h3 class="p-title">' + esc(x.title) + '</h3>' : '') + (x.sub && !isStat ? '<p class="p-sub">' + esc(x.sub) + '</p>' : '') + '</div>' : '') +
       '<div class="p-body">' + body + (isStat && x.sub ? '<div class="stat-c">' + esc(x.sub) + '</div>' : '') + '</div>' + nums +
       (x.note ? '<p class="p-note">' + esc(x.note) + '</p>' : '') +
@@ -3749,10 +4109,18 @@ var DB = (function () {
     if (k === 'notes') return download(slug(P.meta.title) + '-footnotes.md', '# Sources: ' + P.meta.title + '\n\n' + P.sources.map(function (s, i) { return (i + 1) + '. ' + O.toMarkdown(built(s.fields, '').seg) + '\n'; }).join('') + '\n_Formatted to the OSINT Style Guide v1.5. Check each citation against its source before publishing._\n', 'text/markdown');
     if (k === 'publish') {
       var issues = DB.audit(P, O, TYPES, TEXT_KEYS).rows.filter(function (r) { return r.level === 'fix'; });
-      var go = function () { var data = JSON.stringify({ mode: 'published', project: P }).replace(/</g, '\\u003c'); download('index.html', SELF.replace(/(<script type="application\/json" id="db-data">)[\s\S]*?(<\/script>)/, function (_, a, b) { return a + data + b; }), 'text/html'); };
+      var files = localFiles(), go = function () { var data = JSON.stringify({ mode: 'published', project: P }).replace(/</g, '\\u003c'); download('index.html', SELF.replace(/(<script type="application\/json" id="db-data">)[\s\S]*?(<\/script>)/, function (_, a, b) { return a + data + b; }), 'text/html');
+        if (files.length) modal({ title: 'Put ' + (files.length > 1 ? 'these ' + files.length + ' files' : 'this file') + ' next to the page', body: '<p>The page plays or shows ' + (files.length > 1 ? 'them' : 'it') + ' from the same folder it sits in. On GitHub Pages, upload ' + (files.length > 1 ? 'them' : 'it') + ' to the repository with these names:</p><ul>' + files.map(function (f) { return '<li><code>' + esc(f) + '</code></li>'; }).join('') + '</ul><p class="hint">GitHub takes files up to 100 MB, but pages load faster with video under about 25 MB. For anything longer, a YouTube, Vimeo or Internet Archive link is easier on readers.</p>', actions: [{ label: 'OK', primary: true }] }); };
       if (issues.length) return modal({ title: issues.length + ' thing' + (issues.length > 1 ? 's' : '') + ' to fix before publishing', body: '<ul>' + issues.slice(0, 8).map(function (r) { return '<li>' + esc(r.msg) + '</li>'; }).join('') + (issues.length > 8 ? '<li>…and ' + (issues.length - 8) + ' more. See Edit → Check.</li>' : '') + '</ul>', actions: [{ label: 'Review in Check', fn: function () { ui.mode = 'edit'; ui.etab = 'audit'; render(); } }, { label: 'Export anyway', primary: true, fn: go }] });
       return go();
     }
+  }
+  // files a published page needs beside it: media named by path rather than a web address
+  function localFiles() {
+    var out = [], add = function (u) { if (u && DB.isLocal(u) && out.indexOf(u) < 0) out.push(u); };
+    P.panels.forEach(function (x) { if (x.type === 'media') x.cfg.items.forEach(function (it) { if (x.cfg.kind !== 'embed') add(it.src); add(it.poster); }); });
+    if (P.meta.cover) add(P.meta.cover.img);
+    return out;
   }
   function askReplace(fn) {
     if (!P.panels.length && !P.datasets.length) return fn();
@@ -3784,7 +4152,7 @@ var DB = (function () {
       tn.events.forEach(function (e) { e.cites.forEach(function (c) { if (map[c.src]) c.src = map[c.src]; }); });
       P.timelines.push(tn);
       var pid = DB.nextId('p', P.panels.map(function (p) { return p.id; }));
-      P.panels.push({ id: pid, section: ui.sec || P.sections[0].id, type: 'timeline', title: tn.name, sub: '', width: 3, dataset: '', cfg: { timeline: tid }, cites: [], note: '' });
+      P.panels.push({ id: pid, section: ui.sec || P.sections[0].id, type: 'timeline', title: tn.name, sub: '', span: 12, width: 3, rows: 1, frame: '', dataset: '', cfg: { timeline: tid }, cites: [], note: '' });
       touch(); ui.pid = pid; ui.mode = 'edit'; ui.etab = 'panels'; render(); return toast('Added the timeline "' + tn.name + '" (' + tn.events.length + ' events) as a panel');
     }
     if (j && (j.app === 'OSINT Citation Generator' || (Array.isArray(j.sources) && !Array.isArray(j.panels) && !Array.isArray(j.datasets)))) {
@@ -3805,24 +4173,27 @@ var DB = (function () {
     var nsrc = {}; P.panels.forEach(function (x) { panelCites(x).forEach(function (c) { if (c.src) nsrc[c.src] = 1; }); }); P.timelines.forEach(function (t) { t.events.forEach(function (e) { e.cites.forEach(function (c) { nsrc[c.src] = 1; }); }); });
     var rated = P.sources.some(function (s) { return zone(s.fields); }), y = P.style;
     applyStyle($('view'));
-    $('view').innerHTML = '<div class="wrap gut"><header class="v-head">' + (m.eyebrow ? '<div class="eyebrow">' + esc(m.eyebrow) + '</div>' : '') + '<h1 class="v-title">' + esc(m.title) + '</h1>' + (m.dek ? '<div class="dek">' + md(m.dek) + '</div>' : '') +
-      '<div class="meta">' + (y.stats ? '<span><b>' + P.panels.length + '</b> panels</span><span><b>' + P.datasets.reduce(function (a, d) { return a + d.rows.length; }, 0).toLocaleString('en-US') + '</b> data rows</span><span><b>' + Object.keys(nsrc).length + '</b> sources cited</span>' : '') + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + (m.compiled ? '<span>Compiled ' + esc(DB.showDate(DB.normDate(m.compiled)) || m.compiled) + '</span>' : '') + '</div></header>' +
-      (P.sections.length > 1 ? '<nav class="stabs" role="tablist" aria-label="Sections">' + P.sections.map(function (s) { return '<button role="tab" data-sec="' + esc(s.id) + '" aria-selected="' + (s.id === ui.sec) + '">' + esc(s.title) + '</button>'; }).join('') + '</nav>' : '') +
-      (sec.desc ? '<div class="sec-desc prose">' + md(sec.desc) + '</div>' : '') +
-      (panels.length ? '<div class="pgrid">' + panels.map(function (x) { return renderPanel(x); }).join('') + '</div>' : '<p class="empty">No panels in this section yet. Switch to <b>Edit</b> to add one.</p>') +
+    var counts = y.stats ? '<span><b>' + P.panels.length + '</b> panels</span><span><b>' + P.datasets.reduce(function (a, d) { return a + d.rows.length; }, 0).toLocaleString('en-US') + '</b> data rows</span><span><b>' + Object.keys(nsrc).length + '</b> sources cited</span>' : '';
+    var long = y.sections === 'scroll' && P.sections.length > 1;
+    var grid = function (ps) { return ps.length ? '<div class="pgrid">' + ps.map(function (x) { return renderPanel(x); }).join('') + '</div>' : '<p class="empty">No panels in this section yet.' + (PUBLISHED ? '' : ' Switch to <b>Edit</b> to add one.') + '</p>'; };
+    var body = long ? P.sections.map(function (s) { var ps = P.panels.filter(function (x) { return x.section === s.id; }); return '<section class="vsec" id="sec-' + esc(s.id) + '" aria-labelledby="sh-' + esc(s.id) + '"><h2 class="sec-h" id="sh-' + esc(s.id) + '">' + esc(s.title) + '</h2>' + (s.desc ? '<div class="sec-desc prose">' + md(s.desc) + '</div>' : '') + grid(ps) + '</section>'; }).join('') :
+      (sec.desc ? '<div class="sec-desc prose">' + md(sec.desc) + '</div>' : '') + grid(panels);
+    $('view').innerHTML = '<div class="wrap gut">' + headHTML(m, y, counts) +
+      (P.sections.length > 1 ? (long ? '<nav class="stabs" aria-label="Sections">' + P.sections.map(function (s, i) { return '<button data-secjump="' + esc(s.id) + '" aria-current="' + (i === 0) + '">' + esc(s.title) + '</button>'; }).join('') + '</nav>' : '<nav class="stabs" role="tablist" aria-label="Sections">' + P.sections.map(function (s) { return '<button role="tab" data-sec="' + esc(s.id) + '" aria-selected="' + (s.id === ui.sec) + '">' + esc(s.title) + '</button>'; }).join('') + '</nav>') : '') +
+      body +
       '<div class="v-foot">' +
       (P.disputes.length ? '<section class="box" id="disputes"><h3>Where the sources disagree</h3><p class="sub">Figures the sources contradict each other on. Select a panel ID to go to it.</p>' + P.disputes.map(function (d) { return '<details><summary>' + esc(d.title || 'Untitled') + '</summary><p>' + esc(d.text) + '</p><div class="refs">' + d.refs.map(function (r) { return '<button data-jp="' + esc(r) + '">' + esc(r) + '</button>'; }).join('') + '</div></details>'; }).join('') + '</section>' : '') +
       (P.gaps.length ? '<section class="box"><h3>What the data doesn\'t cover</h3><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul></section>' : '') +
       '<section class="box"><h3>Reading the sources</h3><ul><li>Every panel lists its sources under <b>Sources</b>. Each source is an OSINT Style Guide footnote: <i>Author, "Title," Location [Description] (Publisher: Date) URL: Locator.</i></li><li>Where a data set cites row by row, each row\'s source appears in its tooltip and in the table.</li><li><b>Show the numbers</b> opens the values behind a chart; <b>CSV</b> downloads them.</li>' +
       (rated ? '<li>Ratings use the Admiralty scale: a letter for the source (A reliable to F unknown) and a number for the information (1 confirmed to 6 unknown).<div class="zgrid"><span class="h"></span>' + 'ABCDEF'.split('').map(function (l) { return '<span class="h">' + l + '</span>'; }).join('') + [1, 2, 3, 4, 5, 6].map(function (n) { return '<span class="h">' + n + '</span>' + 'ABCDEF'.split('').map(function (l) { return '<span style="background:' + ZC[O.zoneOf(l + n)] + '">' + l + n + '</span>'; }).join(''); }).join('') + '</div></li>' : '') + '</ul></section></div>' +
       '<footer class="foot">' + (m.license ? esc(m.license) + ' · ' : '') + 'Citations follow the <a href="https://gmichaelrapp.github.io/OSINT_Cites/" target="_blank" rel="noopener">OSINT Style Guide</a>. Made with the <a href="' + TOOL_URL + '" target="_blank" rel="noopener">OSINT Dashboard Builder</a>. Map outlines: Natural Earth.' + (P.panels.some(glMap) ? ' Basemaps: OpenFreeMap, OpenMapTiles, OpenStreetMap contributors; drawn with MapLibre.' : '') + '</footer></div>';
-    fitCharts(); mountMaps();
+    fitCharts(); mountMaps(); if (long) watchSections();
   }
   // The page's look (Edit → Page & style): accent color, widths, panel style, header.
   function mix(hex, t) { var n = parseInt(hex.slice(1), 16), c = [n >> 16 & 255, n >> 8 & 255, n & 255].map(function (v) { return Math.round(v + (255 - v) * t); }); return '#' + c.map(function (v) { return (v < 16 ? '0' : '') + v.toString(16); }).join(''); }
   function applyStyle(el) {
     var y = P.style || DB.blankStyle();
-    el.className = 'pv w-' + y.width + ' cards-' + y.cards + ' gap-' + y.gap + ' hf-' + y.headFont + ' al-' + y.align;
+    el.className = 'pv w-' + y.width + ' cards-' + y.cards + ' gap-' + y.gap + ' hf-' + y.headFont + ' al-' + y.align + ' flow-' + (y.flow || 'dense');
     if (y.accent) { el.setAttribute('data-accent', ''); el.style.setProperty('--acc-l', y.accent); el.style.setProperty('--acc-d', mix(y.accent, 0.45)); }
     else { el.removeAttribute('data-accent'); el.style.removeProperty('--acc-l'); el.style.removeProperty('--acc-d'); }
   }
@@ -3848,10 +4219,17 @@ var DB = (function () {
     }
     if (ui.mode === 'edit') panelPreview();
   }
+  // in one long page, the link to the section being read is marked as it scrolls by
+  var secObs = null;
+  function watchSections() {
+    if (secObs) secObs.disconnect(); if (!window.IntersectionObserver) return;
+    secObs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; var id = e.target.id.slice(4); document.querySelectorAll('[data-secjump]').forEach(function (b) { b.setAttribute('aria-current', b.getAttribute('data-secjump') === id); }); }); }, { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('.vsec').forEach(function (s) { secObs.observe(s); });
+  }
   function jumpPanel(id) {
     var x = panelOf(id); if (!x) return toast('No panel ' + id);
     if (ui.mode !== 'view') { ui.mode = 'view'; render(); }
-    if (x.section !== ui.sec) { ui.sec = x.section; renderView(); }
+    if (x.section !== ui.sec && !(P.style.sections === 'scroll' && P.sections.length > 1)) { ui.sec = x.section; renderView(); }
     var el = $('pn-' + id); if (!el) return; el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     el.classList.add('flash'); setTimeout(function () { el.classList.remove('flash'); }, 1600);
   }
@@ -3860,7 +4238,8 @@ var DB = (function () {
     if ((b = t.closest('[data-jp]'))) return jumpPanel(b.getAttribute('data-jp'));
     if ((b = t.closest('[data-jd]'))) { var dd = $('disputes'); if (dd) { dd.scrollIntoView({ behavior: 'smooth', block: 'start' }); var id = b.getAttribute('data-jd'); dd.querySelectorAll('details').forEach(function (det, i) { if (P.disputes[i] && P.disputes[i].refs.indexOf(id) >= 0) det.open = true; }); } return; }
     if ((b = t.closest('[data-sec]'))) { ui.sec = b.getAttribute('data-sec'); renderView(); return; }
-    if ((b = t.closest('[data-psrc]'))) { var p = b.getAttribute('data-psrc'); ui.open[p] = !ui.open[p]; return rerenderPanel(p); }
+    if ((b = t.closest('[data-secjump]'))) { var sx = $('sec-' + b.getAttribute('data-secjump')); if (sx) sx.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); return; }
+    if ((b = t.closest('[data-psrc]'))) { var p = b.getAttribute('data-psrc'); if (b.hasAttribute('data-sopen') && ui.open[p]) { var ps = document.querySelector('#pn-' + p + ' .p-src'); if (ps) ps.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); return; } ui.open[p] = !ui.open[p]; rerenderPanel(p); if (b.hasAttribute('data-sopen')) { var ps2 = document.querySelector('#pn-' + p + ' .p-src'); if (ps2) ps2.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } return; }
     if ((b = t.closest('[data-pnum]'))) { var p2 = b.getAttribute('data-pnum'); ui.nums[p2] = !ui.nums[p2]; return rerenderPanel(p2); }
     if ((b = t.closest('[data-pcsv]'))) { var x = panelOf(b.getAttribute('data-pcsv')), nt = numbersTable(x, dataOf(x.dataset)); return download(slug(x.title || x.id) + '.csv', DB.toCSV(nt.head, nt.rows), 'text/csv'); }
     if ((b = t.closest('[data-tsort]'))) { var ts = ui.tbl[b.getAttribute('data-tsort')], k = b.getAttribute('data-k'); if (ts.sort === k) ts.dir = ts.dir === 'asc' ? 'desc' : 'asc'; else { ts.sort = k; ts.dir = 'asc'; } return rerenderPanel(b.getAttribute('data-tsort')); }
@@ -3896,7 +4275,7 @@ var DB = (function () {
   function edPanels() {
     if (ui.pid && !panelOf(ui.pid)) ui.pid = null;
     if (!ui.pid && P.panels.length) ui.pid = P.panels[0].id;
-    $('epane').innerHTML = '<div class="split"><div class="listcol"><div class="row"><select class="inp" id="newType" aria-label="Panel type" style="flex:1">' + opts(DB.PANEL_TYPES.map(function (t) { return [t, TYPE_NAMES[t]]; }), 'bar') + '</select><button class="btn primary" id="addPanel">Add panel</button></div><div class="list" id="plist">' + panelList() + '</div><p class="hint">Panels fill each row left to right: a sixth, a third, half, two thirds or the full width. Drag them into place under <b>Layout</b>. On a phone every panel is full width.</p></div><div id="pform"></div></div>';
+    $('epane').innerHTML = '<div class="split"><div class="listcol"><div class="row"><select class="inp" id="newType" aria-label="Panel type" style="flex:1">' + opts(DB.PANEL_TYPES.map(function (t) { return [t, TYPE_NAMES[t]]; }), 'bar') + '</select><button class="btn primary" id="addPanel">Add panel</button></div><div class="list" id="plist">' + panelList() + '</div><p class="hint">Panels fill each row left to right, from a sixth to the full width, and can be one to three rows tall. Drag them into place under <b>Layout</b>. On a phone every panel is full width.</p></div><div id="pform"></div></div>';
     panelForm();
   }
   function citeEditor(list, scope) {
@@ -3983,6 +4362,8 @@ var DB = (function () {
       }
     } else if (T2 === 'timeline') {
       cfg = '<div class="fgrid">' + field('Timeline', '<select data-cfg="timeline">' + opts(P.timelines.map(function (t) { return [t.id, t.name + ' (' + t.events.length + ' events)']; }), c.timeline, 'Choose…') + '</select>', 'Add a timeline with File → Open a file, choosing a file saved from the OSINT Timeline Builder.') + '</div>';
+    } else if (T2 === 'media') {
+      cfg = mediaForm(x);
     } else if (T2 === 'text') {
       cfg = '<div class="fgrid">' + field('Look', '<select data-cfg="look">' + opts(DB.LOOKS.map(function (k) { return [k, LOOK_NAMES[k]]; }), c.look || 'plain') + '</select>') + '</div>' +
         field('Text', '<div class="mdbar" role="toolbar" aria-label="Formatting"><button type="button" class="btn small" data-mdw="**" title="Bold"><b>B</b></button><button type="button" class="btn small" data-mdw="*" title="Italic"><i>I</i></button><button type="button" class="btn small" data-mdl="## " title="Heading">H</button><button type="button" class="btn small" data-mdl="- " title="Bulleted list">• List</button><button type="button" class="btn small" data-mdl="1. " title="Numbered list">1. List</button><button type="button" class="btn small" data-mdl="> " title="Quote">❝ Quote</button><button type="button" class="btn small" data-mdlink title="Link">Link</button></div><textarea data-cfg="text" id="mdText" rows="9" placeholder="Paragraphs separated by a blank line.\n## A heading\n- a list item\n> a quote\n**bold**, *italic*, [a link](https://…)">' + esc(c.text || '') + '</textarea>', 'Markdown: ## heading, - list, 1. numbered list, > quote, --- rule, **bold**, *italic*, [link](https://…), ![picture](https://…).', true) +
@@ -3990,27 +4371,70 @@ var DB = (function () {
         field('…or its link', '<input data-cfg="img" value="' + esc(/^https:/.test(c.img || '') ? c.img : '') + '" placeholder="https://…">') + field('Where', '<select data-cfg="imgPos">' + opts([['top', 'Above the text'], ['bottom', 'Below the text'], ['left', 'Left of the text'], ['right', 'Right of the text']], c.imgPos || 'top') + '</select>') + '</div>' +
         '<div class="fgrid">' + field('Describe it for screen readers', '<input data-cfg="imgAlt" value="' + esc(c.imgAlt || '') + '" placeholder="What the picture shows">') + field('Caption and credit', '<input data-cfg="imgCap" value="' + esc(c.imgCap || '') + '" placeholder="Satellite image, 2 June 2022. Maxar.">') + '</div>' + (c.img ? '<img class="thumb" src="' + esc(c.img) + '" alt="">' : '') + '</fieldset>';
     }
-    var span = x.span || 4;
+    var span = x.span || 8;
     box.innerHTML = '<div class="form" id="pf"><h2>' + TYPE_NAMES[T2] + ' <code>' + esc(x.id) + '</code></h2>' +
-      '<div class="fgrid">' + field(T2 === 'text' && c.look === 'quote' ? 'Title (optional)' : 'Title', '<input data-pf="title" value="' + esc(x.title) + '" placeholder="' + (T2 === 'stat' ? 'Recorded sales' : T2 === 'text' ? 'Optional' : 'What the panel shows') + '">', '', true) + field(T2 === 'stat' ? 'Context under the figure' : T2 === 'text' && c.look === 'quote' ? 'Who said it' : 'Subtitle', '<input data-pf="sub" value="' + esc(x.sub) + '" placeholder="' + (T2 === 'text' && c.look === 'quote' ? 'Name, role, date' : 'Period, units, or scope') + '">', '', true) + '</div>' +
-      '<div class="fgrid">' + field('Section', '<select data-pf="section">' + opts(P.sections.map(function (s) { return [s.id, s.title]; }), x.section) + '</select>') + field('Width', '<select data-pf="span">' + opts([1, 2, 3, 4, 5, 6].map(function (k) { return [k, SPAN_NAMES[k]]; }), span) + '</select>') + field('Type', '<select data-pf="type">' + opts(DB.PANEL_TYPES.map(function (t) { return [t, TYPE_NAMES[t]]; }), T2) + '</select>') + '<label class="check" style="align-self:end"><input type="checkbox" data-pfb="tall"' + (x.tall ? ' checked' : '') + '> Tall: spans two rows, so smaller panels fit beside it</label></div>' +
-      '<fieldset><legend>' + (T2 === 'text' ? 'Content' : T2 === 'stat' ? 'The figure' : 'Data') + '</legend>' + cfg + '</fieldset>' + (look ? '<fieldset><legend>Look</legend>' + look + '</fieldset>' : '') + notes +
-      (T2 === 'text' ? '' : '<fieldset><legend>' + (T2 === 'stat' && c.mode !== 'data' ? 'Citations for this figure' : 'Citations for this panel') + '</legend>' + (T2 === 'map' && DB.mapFrom(x) === 'map' ? '<p class="hint" style="margin-bottom:8px">The map\'s own citations come with it and are listed under the panel, numbered as on the map. Add citations here for anything the panel says beyond the map.</p>' : T2 !== 'stat' || c.mode === 'data' ? '<p class="hint" style="margin-bottom:8px">The data set\'s own citations, and any row-by-row sources, are added to the panel automatically. Add citations here for anything the panel says beyond the data.</p>' : '') + citeEditor(x.cites, 'panel') + '</fieldset>') +
+      '<div class="fgrid">' + field(T2 === 'text' && c.look === 'quote' ? 'Title (optional)' : 'Title', '<input data-pf="title" value="' + esc(x.title) + '" placeholder="' + (T2 === 'stat' ? 'Recorded sales' : T2 === 'text' ? 'Optional' : T2 === 'media' ? 'What it shows' : 'What the panel shows') + '">', '', true) + field(T2 === 'stat' ? 'Context under the figure' : T2 === 'text' && c.look === 'quote' ? 'Who said it' : 'Subtitle', '<input data-pf="sub" value="' + esc(x.sub) + '" placeholder="' + (T2 === 'text' && c.look === 'quote' ? 'Name, role, date' : 'Period, units, or scope') + '">', '', true) + '</div>' +
+      '<div class="fgrid">' + field('Section', '<select data-pf="section">' + opts(P.sections.map(function (s) { return [s.id, s.title]; }), x.section) + '</select>') + field('Type', '<select data-pf="type">' + opts(DB.PANEL_TYPES.map(function (t) { return [t, TYPE_NAMES[t]]; }), T2) + '</select>') + '</div>' +
+      '<div class="fgrid">' + field('Width', '<select data-pf="span">' + opts(DB.SPANS.map(function (k) { return [k, SPAN_NAMES[k]]; }), span) + '</select>') + field('Height', '<select data-pf="rows">' + opts([['1', 'One row'], ['2', 'Two rows'], ['3', 'Three rows']], String(DB.rowsOf(x))) + '</select>', 'Taller panels let smaller ones stack beside them.') + field('Frame', '<select data-pf="frame">' + opts(DB.FRAMES.map(function (f) { return [f, FRAME_NAMES[f]]; }), x.frame || '') + '</select>') + '</div>' +
+      '<fieldset><legend>' + (T2 === 'text' || T2 === 'media' ? 'Content' : T2 === 'stat' ? 'The figure' : 'Data') + '</legend>' + cfg + '</fieldset>' + (look ? '<fieldset><legend>Look</legend>' + look + '</fieldset>' : '') + notes +
+      (T2 === 'text' ? '' : '<fieldset><legend>' + (T2 === 'stat' && c.mode !== 'data' ? 'Citations for this figure' : 'Citations for this panel') + '</legend>' + (T2 === 'media' ? '<p class="hint" style="margin-bottom:8px">Each item\'s own source, chosen above, is listed under the panel and numbered in its caption. Add citations here for the panel as a whole, or for what its title and note say.</p>' : T2 === 'map' && DB.mapFrom(x) === 'map' ? '<p class="hint" style="margin-bottom:8px">The map\'s own citations come with it and are listed under the panel, numbered as on the map. Add citations here for anything the panel says beyond the map.</p>' : T2 !== 'stat' || c.mode === 'data' ? '<p class="hint" style="margin-bottom:8px">The data set\'s own citations, and any row-by-row sources, are added to the panel automatically. Add citations here for anything the panel says beyond the data.</p>' : '') + citeEditor(x.cites, 'panel') + '</fieldset>') +
       field('Note under the panel', '<textarea data-pf="note" rows="2" placeholder="Caveats, conflicts with other sources, how a figure was worked out">' + esc(x.note) + '</textarea>', '', true) +
       '<div><div class="hint" style="margin-bottom:6px">Preview</div><div id="ppreview" style="display:grid;grid-template-columns:minmax(0,1fr)"></div></div>' +
       '<div class="actions"><div class="row"><button class="btn" id="dupPanel">Duplicate</button><button class="btn" data-jp="' + esc(x.id) + '">See it in View</button><button class="btn" data-etab="layout">Arrange in Layout</button><button class="btn small" data-pmove="-1">Move up</button><button class="btn small" data-pmove="1">Move down</button></div><button class="btn danger" id="delPanel">Delete panel</button></div></div>';
     panelPreview();
   }
+  // ---- media form ----
+  function srcPick(sel) { return '<option value="">No source</option>' + P.sources.map(function (s2) { var f = s2.fields, a = (f.authors || '').split('\n')[0]; return '<option value="' + esc(s2.id) + '"' + (s2.id === sel ? ' selected' : '') + '>' + esc(s2.id + ' · ' + (a ? a.slice(0, 30) + ' — ' : '') + String(f.title || f.location || '').slice(0, 60)) + '</option>'; }).join('') + (sel && !sourceOf(sel) ? '<option value="' + esc(sel) + '" selected>Missing: ' + esc(sel) + '</option>' : ''); }
+  function mi(i, k, v, ph, extra) { return '<input data-mi="' + i + '" data-mif="' + k + '" value="' + esc(v || '') + '" placeholder="' + esc(ph || '') + '"' + (extra || '') + '>'; }
+  function itemEditor(x, it, i) {
+    var c = x.cfg, k = c.kind, av = k === 'video' || k === 'audio', pic = k === 'image' || k === 'gallery' || k === 'compare', n = c.items.length;
+    var head = k === 'gallery' ? '<div class="mi-head"><b>Picture ' + (i + 1) + '</b><span class="sp"></span><button type="button" class="btn small" data-mimove="' + i + '" data-d="-1"' + (i ? '' : ' disabled') + ' aria-label="Earlier">↑</button><button type="button" class="btn small" data-mimove="' + i + '" data-d="1"' + (i < n - 1 ? '' : ' disabled') + ' aria-label="Later">↓</button><button type="button" class="btn small danger" data-midel="' + i + '">Remove</button></div>' : k === 'compare' ? '<div class="mi-head"><b>' + (i ? 'After' : 'Before') + '</b><span class="sp"></span>' + (i ? '' : '<button type="button" class="btn small" data-miswap>Swap before and after</button>') + '</div>' : '';
+    var srcHelp = pic ? 'A picture from this computer is kept inside the dashboard, shrunk to 1600 pixels wide. Or give a link (https://…), or the name of a file that will sit next to the published page (media/strike.jpg).' :
+      k === 'video' ? 'A YouTube, Vimeo or Internet Archive link, a link to an .mp4 or .webm file, or the name of a file that will sit next to the published page (media/clip.mp4).' :
+      k === 'audio' ? 'A link to an .mp3, .m4a, .ogg or .wav file, or the name of a file that will sit next to the published page (media/interview.mp3).' :
+      'The page\'s address. Share links from YouTube, Vimeo, Spotify, SoundCloud, Flourish and Datawrapper are turned into their embeds. Published Google Sheets, Docs and Slides work too.';
+    var srcVal = /^data:/.test(it.src) ? '' : it.src, local = DB.isLocal(it.src) && it.src;
+    var fileBtn = pic ? '<button type="button" class="btn small" data-mipick="' + i + '">Choose a file…</button>' : av ? '<button type="button" class="btn small" data-mipick="' + i + '" title="Preview a file from this computer while you edit">Preview a file…</button>' : '';
+    var row1 = field(pic ? 'Picture' : k === 'video' ? 'Video' : k === 'audio' ? 'Sound' : 'Page to embed', '<div class="row">' + mi(i, 'src', srcVal, /^data:/.test(it.src) ? 'Kept inside the dashboard' : pic ? 'https://… or media/picture.jpg' : k === 'embed' ? 'https://…' : 'https://… or media/clip.mp4', ' style="flex:1;min-width:0"') + fileBtn + (/^data:/.test(it.src) ? '<button type="button" class="btn small danger" data-miclear="' + i + '">Remove</button>' : '') + '</div>' +
+      (local ? '<small class="mlocal">' + (ui.local[local] ? 'Previewing your copy. ' : '') + 'Put this file at <code>' + esc(local) + '</code> next to the published page.</small>' : ''), srcHelp, true);
+    var thumb = it.src && pic ? '<img class="thumb" src="' + esc(mres(it.src)) + '" alt="">' : '';
+    var row2 = '<div class="fgrid">' + (pic || av ? field(pic ? 'Describe it for screen readers' : 'Describe it for screen readers', mi(i, 'alt', it.alt, pic ? 'What the picture shows' : 'What the recording is')) : '') + field('Caption', mi(i, 'cap', it.cap, pic ? 'Smoke over the depot, looking north' : 'What it shows, and why it matters')) + '</div>';
+    var row3 = '<div class="fgrid">' + field('Credit', mi(i, 'credit', it.credit, 'Maxar Technologies; @user on X')) + field(k === 'video' || k === 'audio' ? 'Recorded' : 'Taken', mi(i, 'date', it.date, '2022-06-02, or Summer 2022')) + field('Place', mi(i, 'place', it.place, 'Kherson, Ukraine; 46.64, 32.61')) + (k === 'compare' ? field('Label on the picture', mi(i, 'label', it.label, i ? 'After · 4 Jun' : 'Before · 1 Jun')) : '') + '</div>';
+    var row4 = (av || (k === 'embed' && DB.embedLink(it.src) && DB.embedLink(it.src).video)) ? '<div class="fgrid">' + field(k === 'audio' ? 'Cover picture' : 'Still shown before it plays', '<div class="row">' + mi(i, 'poster', /^data:/.test(it.poster) ? '' : it.poster, /^data:/.test(it.poster) ? 'Kept inside the dashboard' : 'https://… or media/still.jpg', ' style="flex:1;min-width:0"') + '<button type="button" class="btn small" data-mipost="' + i + '">Choose…</button>' + (it.poster ? '<button type="button" class="btn small danger" data-mipostdel="' + i + '">Remove</button>' : '') + '</div>', k === 'audio' ? 'Optional: a show logo or a picture of the speaker.' : 'Optional. Without one, the player waits as a plain box, so nothing loads from the video site until a reader presses play.', true) + '</div>' : '';
+    var row5 = '<div class="fgrid">' + field('Source of this ' + (pic ? 'picture' : k === 'embed' ? 'page' : 'recording'), '<select data-mi="' + i + '" data-mif="cite.src">' + srcPick(it.cite.src) + '</select>') + field('Locator', mi(i, 'cite.loc', it.cite.loc, 'Frame at 0:42; post of 3 Jun 2022')) + '</div>';
+    return '<div class="mitem" data-mitem="' + i + '">' + head + (thumb ? '<div class="mi-body"><div>' + thumb + '</div><div>' : '<div>') + row1 + row2 + row3 + row4 + row5 + (thumb ? '</div></div>' : '</div>') + '</div>';
+  }
+  function mediaForm(x) {
+    var c = x.cfg, k = c.kind, ratio = field(k === 'gallery' ? 'Shape of each picture' : 'Shape', '<select data-cfg="ratio">' + opts(DB.RATIOS.map(function (r) { return [r, r === 'auto' ? (k === 'gallery' ? 'Landscape (4:3)' : k === 'image' || k === 'compare' ? 'As the picture is' : 'Widescreen (16:9)') : r === '16:9' ? 'Widescreen (16:9)' : r === '9:16' ? 'Upright phone video (9:16)' : r === '1:1' ? 'Square (1:1)' : r === '21:9' ? 'Cinema (21:9)' : r === '4:5' ? 'Portrait (4:5)' : r]; }), c.ratio) + '</select>');
+    var fit = field('Fill the shape', '<select data-cfg="fit">' + opts([['cover', 'Fill it, cropping the edges'], ['contain', 'Show all of the picture']], c.fit) + '</select>');
+    var h = '<div class="fgrid">' + field('Kind', '<select data-cfg="kind">' + opts(DB.MEDIA_KINDS.map(function (m) { return [m, MEDIA_NAMES[m]]; }), k) + '</select>', { image: 'One picture; readers can enlarge it.', gallery: 'Several pictures, as a grid, a slideshow or a strip.', compare: 'Two pictures of one place, with a slider between them: satellite images before and after, say.', video: 'From YouTube, Vimeo, the Internet Archive, or a video file.', audio: 'A sound file: a podcast clip, an intercept, an interview.', embed: 'A page from another site: a chart, a map, a podcast player.' }[k]) + '</div>';
+    var look = '';
+    if (k === 'image') look = '<div class="fgrid">' + ratio + (c.ratio !== 'auto' ? fit : '') + field('Caption', '<select data-cfg="capPos">' + opts([['below', 'Below the picture'], ['over', 'Over the bottom of the picture']], c.capPos) + '</select>') + '</div>';
+    if (k === 'gallery') look = '<div class="fgrid">' + field('Show as', '<select data-cfg="mode">' + opts([['grid', 'A grid'], ['slides', 'A slideshow, one at a time'], ['strip', 'A strip that scrolls sideways']], c.mode) + '</select>') + (c.mode === 'grid' ? field('Across', '<select data-cfg="cols">' + opts([['2', 'Two'], ['3', 'Three'], ['4', 'Four']], String(c.cols)) + '</select>', 'Fewer on a phone.') : '') + ratio + fit + '</div>';
+    if (k === 'compare') look = '<div class="fgrid">' + ratio + (c.ratio !== 'auto' ? fit : '') + field('Slider starts at', '<input data-cfg="split" type="number" min="5" max="95" value="' + c.split + '">', 'Percent from the left.') + '</div><p class="hint">Both pictures should show the same view at the same size, or the slider will not line them up. Crop them to match first.</p>';
+    if (k === 'video') look = '<div class="fgrid">' + ratio + field('Start at', '<input data-cfg="start" value="' + esc(c.start != null ? DB.fmtTime(c.start) : '') + '" placeholder="0:00">', 'Minutes and seconds, such as 1:25.') + '<div class="checks-col">' + cbox('loop', 'Play on a loop (files only)', c.loop) + cbox('muted', 'Start muted (files only)', c.muted) + cbox('open', 'Link to the original', c.open) + '</div></div>';
+    if (k === 'audio') look = '<div class="fgrid">' + field('Start at', '<input data-cfg="start" value="' + esc(c.start != null ? DB.fmtTime(c.start) : '') + '" placeholder="0:00">') + '<div class="checks-col">' + cbox('loop', 'Play on a loop', c.loop) + cbox('open', 'Link to the file', c.open) + '</div></div>';
+    if (k === 'embed') look = '<div class="fgrid">' + ratio + field('Or a fixed height', '<input data-cfg="height" type="number" min="120" max="1600" step="10" value="' + esc(c.height || '') + '" placeholder="Pixels">', 'For players and charts that need a set height.') + field('Load it', '<select data-cfg="load">' + opts([['click', 'When the reader presses it'], ['auto', 'As the page opens']], c.load || 'click') + '</select>', 'Waiting for a press means the other site sees nothing until a reader asks for it.') + '<div class="checks-col">' + cbox('open', 'Link to the original', c.open) + '</div></div>';
+    var items = (k === 'gallery' || k === 'compare' ? c.items : c.items.slice(0, 1)).map(function (it, i) { return itemEditor(x, it, i); }).join('');
+    var more = k === 'gallery' ? '<div class="row" style="margin-top:8px"><button type="button" class="btn" data-miadd>Add a picture</button><button type="button" class="btn" data-mimany>Add several from this computer…</button></div>' : '';
+    var av = k === 'video' || k === 'audio' || (k === 'embed' && mVideoOf(x));
+    var moments = av ? '<fieldset><legend>Key moments</legend><p class="hint" style="margin-bottom:6px">Times readers can jump to: an impact, a statement, a change of scene. They appear as a list under the player.</p><div class="minirows">' + c.moments.map(function (m, i) { return '<div class="mrow" data-momi="' + i + '"><input class="inp" data-momf="t" value="' + esc(DB.fmtTime(m.t)) + '" placeholder="0:42" aria-label="Time" style="width:84px"><input class="inp" data-momf="label" value="' + esc(m.label) + '" placeholder="What happens" aria-label="What happens" style="flex:1"><button type="button" class="btn small danger" data-momdel="' + i + '">Remove</button></div>'; }).join('') + '</div><button type="button" class="btn small" data-momadd>Add a moment</button></fieldset>' +
+      '<fieldset><legend>Transcript or translation</legend>' + field('', '<textarea data-cfg="transcript" rows="5" placeholder="[0:00] Speaker: what was said.\n\nMarkdown works here.">' + esc(c.transcript || '') + '</textarea>', 'Optional. Readers open it under the player. Say who translated it, and from what language.', true) + '</fieldset>' : '';
+    return h + '<div class="mitems">' + items + '</div>' + more + (look ? '<fieldset><legend>Look</legend>' + look + '</fieldset>' : '') + moments +
+      '<input type="file" id="miFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input type="file" id="miMany" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden><input type="file" id="miAV" accept="video/*,audio/*" hidden>';
+  }
   function panelPreview() {
     var pv = $('ppreview'), x = panelOf(ui.pid); if (!pv || !x) return;
     var keep = ui.pw[x.id]; ui.pw[x.id] = Math.max(240, pv.clientWidth - 34);
-    pv.innerHTML = renderPanel(x, true).replace(/class="panel s\d/, 'class="panel'); ui.pw[x.id] = keep;
+    pv.innerHTML = renderPanel(x, true).replace(/class="panel s\d+/, 'class="panel'); ui.pw[x.id] = keep;
     clearTimeout(panelPreview.t); panelPreview.t = setTimeout(mountMaps, 250);
   }
   function refreshPanelList() { var l = $('plist'); if (l) { var sc = l.scrollTop; l.innerHTML = panelList(); l.scrollTop = sc; } }
   function cfgDefaults(x) {
     var c = x.cfg;
     if (x.type === 'text' && !c.look) c.look = 'plain';
+    if (x.type === 'media' && !Array.isArray(c.items)) { x.cfg = DB.mediaCfg(c.img ? { kind: 'image', items: [{ src: c.img, alt: c.imgAlt, cap: c.imgCap }] } : { kind: 'image' }); return; }
+    if (x.type === 'media') { x.cfg = DB.mediaCfg(c); return; }
     if (x.type === 'map' && !c.from) c.from = 'data';
     if (x.type === 'map' && c.from === 'map' && !mapOf(c.map) && P.maps[0]) c.map = P.maps[0].id;
     var d = dataOf(x.dataset); if (!d) return;
@@ -4021,8 +4445,9 @@ var DB = (function () {
     if (x.type === 'map' && c.from !== 'map') { if (DB.colIndex(d, c.lat) < 0) c.lat = first(['lat']); if (DB.colIndex(d, c.lon) < 0) c.lon = first(['lon']); if (!c.label) c.label = first(['text']); }
   }
   // Shrinks a picture to at most 1600 pixels wide and keeps it as a data: URL.
-  function readPicture(file, done) {
-    if (!/^image\//.test(file.type)) return toast('Choose a PNG, JPEG, WebP or GIF picture.');
+  function readPicture(file, done, fail) {
+    fail = fail || function () {};
+    if (!/^image\//.test(file.type)) { toast('Choose a PNG, JPEG, WebP or GIF picture.'); return fail(); }
     var r = new FileReader();
     r.onload = function () {
       var im = new Image();
@@ -4032,7 +4457,7 @@ var DB = (function () {
         var cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(im, 0, 0, w, h);
         done(cv.toDataURL(file.type === 'image/png' && file.size < 1500000 ? 'image/png' : 'image/jpeg', 0.86));
       };
-      im.onerror = function () { toast('That picture could not be read.'); };
+      im.onerror = function () { toast('That picture could not be read.'); fail(); };
       im.src = String(r.result);
     };
     r.readAsDataURL(file);
@@ -4044,7 +4469,11 @@ var DB = (function () {
     if (t.closest('#pf')) {
       var x = panelOf(ui.pid); if (!x) return;
       if (t.dataset.pf && ['title', 'sub', 'note'].indexOf(t.dataset.pf) >= 0) { x[t.dataset.pf] = t.value; touch(); refreshPanelList(); return panelPreview(); }
-      if (t.dataset.cfg && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.type !== 'checkbox') { x.cfg[t.dataset.cfg] = t.type === 'number' ? (t.value === '' ? '' : +t.value) : t.value; touch(); return panelPreview(); }
+      if (t.dataset.mi != null && t.tagName === 'INPUT') { setItem(x, +t.dataset.mi, t.dataset.mif, t.value); touch(); return panelPreview(); }
+      if (t.closest('[data-momi]') && t.dataset.momf === 'label') { x.cfg.moments[+t.closest('[data-momi]').dataset.momi].label = t.value; touch(); return panelPreview(); }
+      if (t.closest('[data-momi]')) return;
+      if (x.type === 'media' && t.dataset.cfg === 'start') return;
+      if (t.dataset.cfg && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.type !== 'checkbox') { x.cfg[t.dataset.cfg] = t.type === 'number' ? (t.value === '' ? '' : +t.value) : t.value; if (x.type === 'media' && t.type === 'number') x.cfg = DB.mediaCfg(x.cfg); touch(); return panelPreview(); }
       var rr = t.closest('[data-refi]'); if (rr && t.dataset.rf) { var ref = x.cfg.refs[+rr.dataset.refi]; ref[t.dataset.rf] = t.dataset.rf === 'v' ? (t.value === '' ? '' : +t.value) : t.value; touch(); return panelPreview(); }
       var mr = t.closest('[data-marki]'); if (mr && t.dataset.mf2) { x.cfg.marks[+mr.dataset.marki][t.dataset.mf2] = t.value; touch(); return panelPreview(); }
     }
@@ -4055,16 +4484,25 @@ var DB = (function () {
       var x = panelOf(ui.pid); if (!x) return;
       if (t.id === 'imgIn' && t.files[0]) { readPicture(t.files[0], function (url) { x.cfg.img = url; touch(); panelForm(); }); t.value = ''; return; }
       if (t.dataset.pf === 'dataset') { x.dataset = t.value; cfgDefaults(x); touch(); return panelForm(); }
-      if (t.dataset.pf === 'type') { x.type = t.value; if (x.type === 'stat') x.span = Math.min(x.span || 2, 2); cfgDefaults(x); x.width = DB.widthOf(x.span); touch(); refreshPanelList(); return panelForm(); }
+      if (t.dataset.pf === 'type') { x.type = t.value; if (x.type === 'stat') x.span = Math.min(x.span || 3, 4); cfgDefaults(x); x.width = DB.widthOf(x.span); touch(); refreshPanelList(); return panelForm(); }
       if (t.dataset.pf === 'span') { x.span = +t.value; x.width = DB.widthOf(x.span); touch(); refreshPanelList(); return panelPreview(); }
+      if (t.dataset.pf === 'rows') { x.rows = +t.value; x.tall = x.rows > 1; touch(); return panelPreview(); }
+      if (t.dataset.pf === 'frame') { x.frame = t.value; touch(); return panelPreview(); }
+      if (t.dataset.mi != null && t.tagName === 'SELECT') { setItem(x, +t.dataset.mi, t.dataset.mif, t.value); touch(); return panelPreview(); }
+      if (t.id === 'miFile' && t.files[0]) { var tgt = ui.mtarget; readPicture(t.files[0], function (url) { var it = x.cfg.items[tgt.i]; if (!it) return; it[tgt.k] = url; touch(); panelForm(); }); t.value = ''; return; }
+      if (t.id === 'miMany' && t.files.length) { var fl = Array.prototype.slice.call(t.files, 0, 40), left = fl.length; t.value = ''; fl.forEach(function (f) { readPicture(f, function (url) { var its = x.cfg.items; if (its.length === 1 && !its[0].src) its.pop(); its.push(DB.mediaItem({ src: url, alt: '', cap: '' }, 'gallery')); if (--left <= 0) { touch(); panelForm(); } }, function () { if (--left <= 0) { touch(); panelForm(); } }); }); return; }
+      if (t.id === 'miAV' && t.files[0]) { var f2 = t.files[0], it2 = x.cfg.items[ui.mtarget.i], path = DB.isLocal(it2.src) && it2.src ? it2.src : 'media/' + f2.name.replace(/[^\w.\-()~+]+/g, '-'); try { if (ui.local[path]) URL.revokeObjectURL(ui.local[path]); ui.local[path] = URL.createObjectURL(f2); } catch (e) { return toast('That file could not be read.'); } it2.src = path; t.value = ''; touch(); panelForm(); return toast('Previewing ' + f2.name + '. Put it at ' + path + ' next to the published page.'); }
       if (t.dataset.pf === 'section') { x.section = t.value; touch(); return refreshPanelList(); }
       if (t.dataset.cfg && t.tagName === 'SELECT') {
         x.cfg[t.dataset.cfg] = t.value; touch();
-        if (t.dataset.cfg === 'look' && t.value === 'heading') { x.span = 6; x.width = 3; }
+        if (t.dataset.cfg === 'look' && t.value === 'heading') { x.span = 12; x.width = 3; }
+        if (x.type === 'media') { x.cfg = DB.mediaCfg(x.cfg); if (['kind', 'mode', 'ratio'].indexOf(t.dataset.cfg) >= 0) return panelForm(); return panelPreview(); }
         if (['mode', 'from', 'split', 'colors', 'orient', 'base', 'look', 'series'].indexOf(t.dataset.cfg) >= 0) { cfgDefaults(x); return panelForm(); }
         return panelPreview();
       }
       if (t.dataset.cfgb) { x.cfg[t.dataset.cfgb] = t.checked; touch(); return panelPreview(); }
+      if (x.type === 'media' && t.dataset.cfg === 'start') { x.cfg.start = DB.parseTime(t.value); t.value = x.cfg.start != null ? DB.fmtTime(x.cfg.start) : ''; touch(); return panelPreview(); }
+      if (t.closest('[data-momi]') && t.dataset.momf === 't') { var mm = x.cfg.moments[+t.closest('[data-momi]').dataset.momi], tt = DB.parseTime(t.value); if (mm && tt != null) mm.t = tt; x.cfg.moments.sort(function (a, b) { return a.t - b.t; }); touch(); return panelForm(); }
       if (t.dataset.pfb) { x[t.dataset.pfb] = t.checked; touch(); return; }
       if (t.dataset.tcol) { x.cfg.cols = Array.prototype.slice.call(document.querySelectorAll('[data-tcol]')).filter(function (b) { return b.checked; }).map(function (b) { return b.getAttribute('data-tcol'); }); touch(); return panelPreview(); }
     }
@@ -4081,6 +4519,17 @@ var DB = (function () {
     if ((b = t.closest('[data-refdel]'))) { x2.cfg.refs.splice(+b.dataset.refdel, 1); touch(); return panelForm(); }
     if (t.closest('[data-markadd]')) { (x2.cfg.marks = x2.cfg.marks || []).push({ x: '', label: '' }); touch(); return panelForm(); }
     if ((b = t.closest('[data-markdel]'))) { x2.cfg.marks.splice(+b.dataset.markdel, 1); touch(); return panelForm(); }
+    if ((b = t.closest('[data-mipick]'))) { ui.mtarget = { i: +b.dataset.mipick, k: 'src' }; return $(x2.cfg.kind === 'video' || x2.cfg.kind === 'audio' ? 'miAV' : 'miFile').click(); }
+    if ((b = t.closest('[data-mipost]'))) { ui.mtarget = { i: +b.dataset.mipost, k: 'poster' }; return $('miFile').click(); }
+    if ((b = t.closest('[data-mipostdel]'))) { x2.cfg.items[+b.dataset.mipostdel].poster = ''; touch(); return panelForm(); }
+    if ((b = t.closest('[data-miclear]'))) { x2.cfg.items[+b.dataset.miclear].src = ''; touch(); return panelForm(); }
+    if (t.closest('[data-miadd]')) { x2.cfg.items.push(DB.mediaItem({}, 'gallery')); touch(); return panelForm(); }
+    if (t.closest('[data-mimany]')) return $('miMany').click();
+    if ((b = t.closest('[data-midel]'))) { x2.cfg.items.splice(+b.dataset.midel, 1); if (!x2.cfg.items.length) x2.cfg.items.push(DB.mediaItem({}, 'gallery')); touch(); return panelForm(); }
+    if ((b = t.closest('[data-mimove]'))) { var it3 = x2.cfg.items, a3 = +b.dataset.mimove, b3 = a3 + +b.dataset.d; if (b3 < 0 || b3 >= it3.length) return; var tmp = it3[a3]; it3[a3] = it3[b3]; it3[b3] = tmp; touch(); return panelForm(); }
+    if (t.closest('[data-miswap]')) { x2.cfg.items.reverse(); touch(); return panelForm(); }
+    if (t.closest('[data-momadd]')) { var last = x2.cfg.moments[x2.cfg.moments.length - 1]; x2.cfg.moments.push({ t: last ? last.t + 30 : 0, label: '' }); touch(); return panelForm(); }
+    if ((b = t.closest('[data-momdel]'))) { x2.cfg.moments.splice(+b.dataset.momdel, 1); touch(); return panelForm(); }
     if (t.id === 'imgUp') return $('imgIn').click();
     if (t.id === 'imgDel') { delete x2.cfg.img; touch(); return panelForm(); }
     var ta = $('mdText');
@@ -4091,10 +4540,16 @@ var DB = (function () {
     if (t.dataset.pmove) { var same = P.panels.filter(function (p) { return p.section === x2.section; }), i = same.indexOf(x2), j = i + +t.dataset.pmove; if (j < 0 || j >= same.length) return; var a = P.panels.indexOf(x2), bb = P.panels.indexOf(same[j]); P.panels[a] = same[j]; P.panels[bb] = x2; touch(); return refreshPanelList(); }
     if (t.id === 'delPanel') return modal({ title: 'Delete panel ' + x2.id + '?', body: '<p>' + esc(x2.title || TYPE_NAMES[x2.type]) + '. Its data stays under Data.</p>', actions: [{ label: 'Cancel' }, { label: 'Delete', danger: true, fn: function () { P.panels.splice(P.panels.indexOf(x2), 1); P.disputes.forEach(function (d) { d.refs = d.refs.filter(function (r) { return r !== x2.id; }); }); ui.pid = null; touch(); edPanels(); } }] });
   });
+  function setItem(x, i, k, v) {
+    var it = x.cfg.items[i]; if (!it) return;
+    if (k === 'cite.src') it.cite.src = v; else if (k === 'cite.loc') it.cite.loc = v;
+    else if (k === 'src' || k === 'poster') { var kind = x.cfg.kind, ok = DB.mediaSrc(v, (kind === 'video' || kind === 'audio') && k === 'src' ? 'av' : ''); it[k] = ok || (kind === 'embed' && k === 'src' ? v.trim() : ''); var el = document.querySelector('[data-mi="' + i + '"][data-mif="' + k + '"]'); if (el) el.classList.toggle('bad', !!v.trim() && !it[k]); }
+    else it[k] = v;
+  }
   function addPanel(type, section) {
-    var d0 = P.datasets[P.datasets.length - 1], span = type === 'stat' ? 2 : type === 'timeline' || type === 'text' || type === 'map' ? 6 : type === 'pie' ? 3 : 4;
+    var d0 = P.datasets[P.datasets.length - 1], span = type === 'stat' ? 3 : type === 'timeline' || type === 'text' || type === 'map' ? 12 : type === 'pie' || type === 'media' ? 6 : 8;
     var x = { id: DB.nextId('p', P.panels.map(function (p) { return p.id; })), section: section || (ui.sec && by(P.sections, ui.sec) ? ui.sec : P.sections[0].id), type: type, title: '', sub: '', span: span, width: DB.widthOf(span),
-      dataset: ['line', 'bar', 'scatter', 'pie', 'table', 'map'].indexOf(type) >= 0 && d0 ? d0.id : '', cfg: type === 'stat' ? { mode: 'manual' } : type === 'timeline' && P.timelines[0] ? { timeline: P.timelines[0].id } : type === 'map' ? { from: d0 || !P.maps.length ? 'data' : 'map', base: 'auto' } : {}, cites: [], note: '' };
+      dataset: ['line', 'bar', 'scatter', 'pie', 'table', 'map'].indexOf(type) >= 0 && d0 ? d0.id : '', cfg: type === 'stat' ? { mode: 'manual' } : type === 'timeline' && P.timelines[0] ? { timeline: P.timelines[0].id } : type === 'map' ? { from: d0 || !P.maps.length ? 'data' : 'map', base: 'auto' } : type === 'media' ? DB.mediaCfg({ kind: 'image' }) : {}, cites: [], note: '', rows: 1, frame: '' };
     cfgDefaults(x); P.panels.push(x); ui.pid = x.id; touch(); ui.etab = 'panels'; return renderEdit();
   }
   // --- layout: arrange panels by dragging, resize them by their edge ---
@@ -4102,8 +4557,8 @@ var DB = (function () {
     var h = renderPanel(x, false).replace(/data-glmap="/g, 'data-glmap-off="').replace('Loading the map…', 'The map draws here in View').replace(/ id="pn-/, ' id="lp-');
     var tool = '<div class="lay-tool"><span class="grip" draggable="true" data-ldrag="' + esc(x.id) + '" title="Drag to move" aria-hidden="true">⠿</span><span class="lt">' + esc(x.title || '(untitled ' + TYPE_NAMES[x.type].toLowerCase() + ')') + '</span><span class="sp"></span>' +
       '<button class="btn small" data-lmove="-1" aria-label="Move earlier">◀</button><button class="btn small" data-lmove="1" aria-label="Move later">▶</button>' +
-      '<button class="btn small" data-lw="-1" aria-label="Narrower"' + ((x.span || 4) <= 1 ? ' disabled' : '') + '>−</button><span class="lw">' + SPAN_NAMES[x.span || 4] + '</span><button class="btn small" data-lw="1" aria-label="Wider"' + ((x.span || 4) >= 6 ? ' disabled' : '') + '>+</button>' +
-      '<button class="btn small toggle" data-ltall aria-pressed="' + !!x.tall + '" title="Span two rows">Tall</button><button class="btn small" data-ledit>Edit</button></div>';
+      '<button class="btn small" data-lw="-1" aria-label="Narrower"' + ((x.span || 8) <= 2 ? ' disabled' : '') + '>−</button><span class="lw">' + SPAN_NAMES[x.span || 8] + '</span><button class="btn small" data-lw="1" aria-label="Wider"' + ((x.span || 8) >= 12 ? ' disabled' : '') + '>+</button>' +
+      '<button class="btn small toggle" data-ltall aria-pressed="' + (DB.rowsOf(x) > 1) + '" title="How many rows it spans: press to go 1, 2, 3">' + DB.rowsOf(x) + (DB.rowsOf(x) > 1 ? ' rows' : ' row') + '</button><button class="btn small" data-ledit>Edit</button></div>';
     return h.replace(/^<section class="panel/, '<section data-lp="' + esc(x.id) + '" class="panel lay-p').replace(/(<section[^>]*>)/, '$1' + tool) .replace(/<\/section>$/, '<div class="lay-rs" data-lrs="' + esc(x.id) + '" title="Drag to change the width" aria-hidden="true"></div></section>');
   }
   function edLayout() {
@@ -4111,7 +4566,7 @@ var DB = (function () {
     var ps = P.panels.filter(function (x) { return x.section === ui.lsec; });
     $('epane').innerHTML = '<div class="lay"><div class="lay-bar"><nav class="lay-tabs" aria-label="Sections">' + P.sections.map(function (s) { var n = P.panels.filter(function (x) { return x.section === s.id; }).length; return '<button data-lsec="' + esc(s.id) + '" aria-selected="' + (s.id === ui.lsec) + '">' + esc(s.title) + ' <span class="n">' + n + '</span></button>'; }).join('') + '<button class="btn small" id="layAddSec">+ Section</button></nav>' +
       '<div class="row"><select class="inp" id="layType" aria-label="Panel type">' + opts(DB.PANEL_TYPES.map(function (t) { return [t, TYPE_NAMES[t]]; }), 'bar') + '</select><button class="btn primary" id="layAdd">Add panel here</button></div></div>' +
-      '<p class="hint">Drag a panel by <b>⠿</b> to move it, or drop it on a section tab to move it there. Drag its right edge, or use − and +, to change its width. Panels fill each row left to right, as in View.</p>' +
+      '<p class="hint">Drag a panel by <b>⠿</b> to move it, or drop it on a section tab to move it there. Drag its right edge, or use − and +, to change its width: a sixth, a quarter, a third, half, two thirds, three quarters, five sixths or the full row. The row button makes a panel one, two or three rows tall, so smaller panels stack beside it. ' + (P.style.flow === 'order' ? 'Panels keep the order you give them; gaps stay open.' : 'Smaller panels move up to fill gaps; choose <b>Keep the order</b> under Page & style to stop that.') + '</p>' +
       '<div id="layv"><div class="pgrid lgrid" id="lgrid">' + ps.map(layCard).join('') + '<div class="lay-end" data-ldrop="end">' + (ps.length ? 'Drop here to put a panel last' : 'No panels in this section yet. Add one above, or drop one here.') + '</div></div></div></div>';
     applyStyle($('layv')); $('layv').classList.add('layv');
     fitLayout();
@@ -4145,14 +4600,14 @@ var DB = (function () {
     else movePanel(id, null, false, ui.lsec);
     edLayout();
   }, true);
-  // resizing by the right edge, snapping to sixths of the row
+  // resizing by the right edge, snapping to the widths the tool offers (in twelfths of the row)
   document.addEventListener('pointerdown', function (e) {
     var h = e.target.closest && e.target.closest('[data-lrs]'); if (!h) return;
     var x = panelOf(h.getAttribute('data-lrs')), card = h.closest('.lay-p'), grid = $('lgrid'); if (!x || !card || !grid) return;
     e.preventDefault(); h.setPointerCapture(e.pointerId);
-    var gs = getComputedStyle(grid), gap = parseFloat(gs.columnGap) || 16, cols = gs.gridTemplateColumns.split(' ').length, colW = (grid.clientWidth - gap * (cols - 1)) / cols, w0 = card.getBoundingClientRect().width, x0 = e.clientX, span = x.span || 4;
+    var gs = getComputedStyle(grid), gap = parseFloat(gs.columnGap) || 16, cols = gs.gridTemplateColumns.split(' ').length, colW = (grid.clientWidth - gap * (cols - 1)) / cols, w0 = card.getBoundingClientRect().width, x0 = e.clientX, span = x.span || 8;
     card.classList.add('resizing');
-    function mv(ev) { var w = w0 + ev.clientX - x0, n = Math.max(1, Math.min(6, Math.round((w + gap) / (colW + gap) * (6 / cols)))); if (n !== span) { card.classList.remove('s' + span); span = n; card.classList.add('s' + span); var lw = card.querySelector('.lw'); if (lw) lw.textContent = SPAN_NAMES[span]; } }
+    function mv(ev) { var w = w0 + ev.clientX - x0, n = DB.snapSpan((w + gap) / (colW + gap) * (12 / cols)); if (n !== span) { card.classList.remove('s' + span); span = n; card.classList.add('s' + span); var lw = card.querySelector('.lw'); if (lw) lw.textContent = SPAN_NAMES[span]; } }
     function up() { h.removeEventListener('pointermove', mv); h.removeEventListener('pointerup', up); card.classList.remove('resizing'); if (span !== x.span) { x.span = span; x.width = DB.widthOf(span); touch(); } edLayout(); }
     h.addEventListener('pointermove', mv); h.addEventListener('pointerup', up);
   });
@@ -4162,8 +4617,8 @@ var DB = (function () {
     if (t.id === 'layAdd') { addPanel($('layType').value, ui.lsec); return; }
     if (t.id === 'layAddSec') { var sid = DB.nextId('sec', P.sections.map(function (s) { return s.id; })); P.sections.push({ id: sid, title: 'New section', desc: '' }); ui.lsec = sid; touch(); toast('Added a section. Rename it under Sections.'); return edLayout(); }
     var card = t.closest('.lay-p'), x = card && panelOf(card.getAttribute('data-lp')); if (!x) return;
-    if ((b = t.closest('[data-lw]'))) { x.span = Math.max(1, Math.min(6, (x.span || 4) + +b.getAttribute('data-lw'))); x.width = DB.widthOf(x.span); touch(); return edLayout(); }
-    if (t.closest('[data-ltall]')) { x.tall = !x.tall; touch(); return edLayout(); }
+    if ((b = t.closest('[data-lw]'))) { var si = DB.SPANS.indexOf(DB.snapSpan(x.span || 8)) + +b.getAttribute('data-lw'); x.span = DB.SPANS[Math.max(0, Math.min(DB.SPANS.length - 1, si))]; x.width = DB.widthOf(x.span); touch(); return edLayout(); }
+    if (t.closest('[data-ltall]')) { x.rows = DB.rowsOf(x) % 3 + 1; x.tall = x.rows > 1; touch(); return edLayout(); }
     if (t.closest('[data-ledit]')) { ui.pid = x.id; ui.etab = 'panels'; renderEdit(); window.scrollTo(0, 0); return; }
     if ((b = t.closest('[data-lmove]'))) {
       var same = P.panels.filter(function (p) { return p.section === x.section; }), i = same.indexOf(x), j = i + +b.getAttribute('data-lmove'); if (j < 0 || j >= same.length) return;
@@ -4327,7 +4782,7 @@ var DB = (function () {
     if (t.id === 'addBlank') return blankModal();
     var mp = mapOf(ui.did);
     if (mp && t.id === 'mpRepl') { mapTarget = mp; return $('mpIn').click(); }
-    if (mp && t.id === 'mpPanel') { var pid = DB.nextId('p', P.panels.map(function (p) { return p.id; })); P.panels.push({ id: pid, section: ui.sec && by(P.sections, ui.sec) ? ui.sec : P.sections[0].id, type: 'map', title: mp.name, sub: '', span: 6, width: 3, dataset: '', cfg: { from: 'map', map: mp.id, base: 'saved' }, cites: [], note: '' }); touch(); ui.pid = pid; ui.etab = 'panels'; return renderEdit(); }
+    if (mp && t.id === 'mpPanel') { var pid = DB.nextId('p', P.panels.map(function (p) { return p.id; })); P.panels.push({ id: pid, section: ui.sec && by(P.sections, ui.sec) ? ui.sec : P.sections[0].id, type: 'map', title: mp.name, sub: '', span: 12, rows: 1, frame: '', width: 3, dataset: '', cfg: { from: 'map', map: mp.id, base: 'saved' }, cites: [], note: '' }); touch(); ui.pid = pid; ui.etab = 'panels'; return renderEdit(); }
     if (mp && t.id === 'delMap') { var n = P.panels.filter(function (x) { return x.type === 'map' && x.cfg.map === mp.id; }).length; return modal({ title: 'Delete the map "' + mp.name + '"?', body: '<p>' + (n ? n + ' panel' + (n > 1 ? 's show' : ' shows') + ' it and will ask for another map.' : 'No panel shows it.') + ' Its sources stay in the source list.</p>', actions: [{ label: 'Cancel' }, { label: 'Delete', danger: true, fn: function () { P.maps.splice(P.maps.indexOf(mp), 1); ui.did = null; touch(); edData(); } }] }); }
     var d = dataOf(ui.did); if (!d) { if (t.id === 'delTL') { var tl = tlOf(ui.did); return modal({ title: 'Delete "' + tl.name + '"?', body: '<p>Timeline panels that show it will be empty.</p>', actions: [{ label: 'Cancel' }, { label: 'Delete', danger: true, fn: function () { P.timelines.splice(P.timelines.indexOf(tl), 1); ui.did = null; touch(); edData(); } }] }); } return; }
     if (t.id === 'rowAdd') { DB.addRow(d); touch(); ui.dpage = Math.floor((d.rows.length - 1) / ROWS_PER_PAGE); refreshRows(); var last = document.querySelector('[data-cell="' + (d.rows.length - 1) + ',0"]'); if (last) last.focus(); return; }
@@ -4344,7 +4799,7 @@ var DB = (function () {
   // --- sources (same fields as the OSINT Citation Generator) ---
   function newSource() { var s = { id: DB.nextId('s', P.sources.map(function (x) { return x.id; })), fields: { type: 'web', titleStyle: 'quotes', access: [], quals: [] } }; P.sources.push(s); ui.sid = s.id; return s; }
   function useCount(id) {
-    var n = 0; P.panels.forEach(function (x) { x.cites.forEach(function (c) { if (c.src === id) n++; }); });
+    var n = 0; P.panels.forEach(function (x) { x.cites.forEach(function (c) { if (c.src === id) n++; }); if (x.type === 'media') x.cfg.items.forEach(function (it) { if (it.cite && it.cite.src === id) n++; }); });
     P.datasets.forEach(function (d) { d.cites.forEach(function (c) { if (c.src === id) n++; }); DB.rowCites(d).forEach(function (c) { if (c.src === id) n++; }); });
     P.timelines.forEach(function (t) { t.events.forEach(function (e) { e.cites.forEach(function (c) { if (c.src === id) n++; }); }); });
     P.maps.forEach(function (m) { m.project.features.forEach(function (f) { f.cites.forEach(function (c) { if (c.src === id) n++; }); }); });
@@ -4475,15 +4930,38 @@ var DB = (function () {
       '<fieldset><legend>Accent color</legend><p class="hint" style="margin-bottom:8px">Used for links, the selected section tab and highlights. In dark mode it is lightened so it stays readable.</p><div class="row" style="flex-wrap:wrap;gap:8px">' + ACC.map(function (c) { return '<button type="button" class="accsw" data-acc="' + c + '" style="--c:' + c + '" aria-label="Accent ' + c + '" aria-pressed="' + (y.accent === c) + '"></button>'; }).join('') +
       '<label class="check">Custom <input type="color" id="accPick" value="' + esc(y.accent || '#0F4761') + '" aria-label="Custom accent color"></label><button type="button" class="btn small" data-acc="">Default</button></div></fieldset>' +
       '<div class="fgrid">' + ys('headFont', 'Title font', [['serif', 'Serif (bookish)'], ['sans', 'Sans-serif (modern)']]) + ys('align', 'Header', [['left', 'Aligned left'], ['center', 'Centered']]) + ys('width', 'Page width', [['normal', 'Normal (1200 px)'], ['wide', 'Wide (1440 px)'], ['full', 'Full window']]) + '</div>' +
-      '<div class="fgrid">' + ys('cards', 'Panels', [['card', 'Cards with a border'], ['shadow', 'Cards with a soft shadow'], ['flat', 'Flat, no cards']]) + ys('gap', 'Space between panels', [['tight', 'Tight'], ['normal', 'Normal'], ['roomy', 'Roomy']]) + '<label class="check" style="align-self:end"><input type="checkbox" id="yStats"' + (y.stats ? ' checked' : '') + '> Show the counts under the title (panels, rows, sources)</label></div>' +
+      '<div class="fgrid">' + ys('cards', 'Panels', [['card', 'Cards with a border'], ['shadow', 'Cards with a soft shadow'], ['flat', 'Flat, no cards']], 'Each panel can override this under Panels → Frame.') + ys('gap', 'Space between panels', [['tight', 'Tight'], ['normal', 'Normal'], ['roomy', 'Roomy']]) + '<label class="check" style="align-self:end"><input type="checkbox" id="yStats"' + (y.stats ? ' checked' : '') + '> Show the counts under the title (panels, rows, sources)</label></div>' +
+      '<div class="fgrid">' + ys('sections', 'Sections', [['tabs', 'As tabs, one at a time'], ['scroll', 'One long page, with links to each']], 'A long page reads like an article and prints whole.') + ys('flow', 'Gaps in a row', [['dense', 'Let smaller panels fill them'], ['order', 'Keep the order, leave the gap']]) + '</div>' +
+      '<h2 style="margin-top:8px">Header picture</h2>' + coverForm() +
       '<div><div class="hint" style="margin-bottom:6px">Preview of the header</div><div id="hprev" class="hprev"></div></div>' +
       '<p class="hint">Size: about ' + Math.round(DB.sizeOf(P) / 1024) + ' KB of data. Pages up to a few megabytes load quickly; past about 10 MB, summarize the data before importing it.</p></div>';
     headPreview();
   }
+  function coverForm() {
+    var cv = P.meta.cover || DB.blankCover();
+    return '<div class="fgrid">' + field('Picture', '<div class="row"><input id="cvSrc" value="' + esc(/^data:/.test(cv.img) ? '' : cv.img) + '" placeholder="' + (/^data:/.test(cv.img) ? 'Kept inside the dashboard' : 'https://… or media/cover.jpg') + '" style="flex:1;min-width:0"><button type="button" class="btn small" id="cvUp">Choose a file…</button>' + (cv.img ? '<button type="button" class="btn small danger" id="cvDel">Remove</button>' : '') + '</div><input type="file" id="cvIn" accept="image/png,image/jpeg,image/webp,image/gif" hidden>', 'A wide picture works best: a satellite view, a scene, a document.', true) + '</div>' +
+      '<div class="fgrid">' + field('Where', '<select data-cvf="pos">' + opts([['none', 'Not shown'], ['above', 'Above the title'], ['behind', 'Behind the title, darkened'], ['side', 'Beside the title']], cv.img ? cv.pos : 'none') + '</select>') + field('Height', '<select data-cvf="height">' + opts([['S', 'Short'], ['M', 'Medium'], ['L', 'Tall']], cv.height) + '</select>') + '</div>' +
+      '<div class="fgrid">' + field('Describe it for screen readers', '<input data-cvf="alt" value="' + esc(cv.alt) + '" placeholder="What the picture shows">') + field('Caption and credit', '<input data-cvf="cap" value="' + esc(cv.cap) + '" placeholder="Satellite image, 14 Mar 2022. © Maxar Technologies.">') + '</div>';
+  }
+  function coverHTML(m) {
+    var cv = m.cover; if (!cv || !cv.img || cv.pos === 'none') return { cls: '', pre: '', bg: '', side: '' };
+    var img = '<img src="' + esc(mres(cv.img)) + '" alt="' + esc(cv.alt) + '" decoding="async" referrerpolicy="no-referrer">', cap = cv.cap ? '<figcaption>' + inline(esc(cv.cap)) + '</figcaption>' : '';
+    if (cv.pos === 'above') return { cls: '', pre: '<figure class="cover cover-above ch-' + cv.height + '">' + img + cap + '</figure>', bg: '', side: '' };
+    if (cv.pos === 'side') return { cls: ' has-side', pre: '', bg: '', side: '<figure class="cover cover-side ch-' + cv.height + '">' + img + cap + '</figure>' };
+    return { cls: ' has-bg ch-' + cv.height, pre: '', bg: '<div class="cover-bg" aria-hidden="' + (cv.alt ? 'false' : 'true') + '">' + img + '</div>' + (cv.cap ? '<div class="cover-cap">' + inline(esc(cv.cap)) + '</div>' : ''), side: '' };
+  }
+  document.addEventListener('input', function (ev) { var t = ev.target; if (ui.mode !== 'edit' || ui.etab !== 'page') return; var cv = P.meta.cover; if (t.id === 'cvSrc') { var ok = DB.mediaSrc(t.value, ''); t.classList.toggle('bad', !!t.value.trim() && !ok); cv.img = ok; if (cv.img && cv.pos === 'none') cv.pos = 'above'; touch(); headPreview(); } else if (t.dataset && t.dataset.cvf && t.tagName === 'INPUT') { cv[t.dataset.cvf] = t.value; touch(); headPreview(); } });
+  document.addEventListener('change', function (ev) { var t = ev.target; if (ui.mode !== 'edit' || ui.etab !== 'page') return; var cv = P.meta.cover; if (t.dataset && t.dataset.cvf && t.tagName === 'SELECT') { cv[t.dataset.cvf] = t.value; touch(); headPreview(); } if (t.id === 'cvSrc') edPage(); if (t.id === 'cvIn' && t.files[0]) { readPicture(t.files[0], function (url) { cv.img = url; if (cv.pos === 'none') cv.pos = 'above'; touch(); edPage(); }); t.value = ''; } });
+  document.addEventListener('click', function (ev) { if (ui.mode !== 'edit' || ui.etab !== 'page') return; var t = ev.target; if (t.id === 'cvUp') $('cvIn').click(); if (t.id === 'cvDel') { P.meta.cover = DB.blankCover(); touch(); edPage(); } });
+  function headHTML(m, y, counts, inEditor) {
+    var cv = coverHTML(m);
+    var inner = (m.eyebrow ? '<div class="eyebrow">' + esc(m.eyebrow) + '</div>' : '') + '<h1 class="v-title">' + esc(m.title) + '</h1>' + (m.dek ? '<div class="dek">' + md(m.dek) + '</div>' : '') + '<div class="meta">' + counts + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + (m.compiled ? '<span>Compiled ' + esc(DB.showDate(DB.normDate(m.compiled)) || m.compiled) + '</span>' : '') + '</div>';
+    return cv.pre + '<header class="v-head' + cv.cls + '"' + (inEditor ? ' style="padding-block:14px 6px"' : '') + '>' + cv.bg + (cv.side ? '<div class="vh-text">' + inner + '</div>' + cv.side : '<div class="vh-text">' + inner + '</div>') + '</header>';
+  }
   function headPreview() {
     var h = $('hprev'); if (!h) return; var m = P.meta;
     applyStyle(h); h.classList.add('hprev');
-    h.innerHTML = '<div class="wrap"><header class="v-head" style="padding-block:14px 6px">' + (m.eyebrow ? '<div class="eyebrow">' + esc(m.eyebrow) + '</div>' : '') + '<h1 class="v-title">' + esc(m.title) + '</h1>' + (m.dek ? '<div class="dek">' + md(m.dek) + '</div>' : '') + '<div class="meta">' + (P.style.stats ? '<span><b>' + P.panels.length + '</b> panels</span>' : '') + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + '</div></header>' +
+    h.innerHTML = '<div class="wrap">' + headHTML(m, P.style, P.style.stats ? '<span><b>' + P.panels.length + '</b> panels</span>' : '', true) +
       (P.sections.length > 1 ? '<nav class="stabs" style="position:static">' + P.sections.slice(0, 4).map(function (s, i) { return '<button aria-selected="' + (i === 0) + '" tabindex="-1">' + esc(s.title) + '</button>'; }).join('') + '</nav>' : '') + '</div>';
   }
   document.addEventListener('input', function (ev) { var k = ev.target.dataset && ev.target.dataset.mf; if (k) { P.meta[k] = ev.target.value; touch(); headPreview(); } if (ev.target.id === 'accPick') { P.style.accent = DB.hex(ev.target.value); touch(); headPreview(); document.querySelectorAll('.accsw').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); }); } });

@@ -86,7 +86,10 @@ ok(DB.normalize(boot.project, T.TEXT_KEYS).project.panels.length > 0, 'page ship
 
 // ---- 8. Version 1.1: layout, chart data, editing rows, maps ----
 const v1 = DB.normalize({ panels: [{ id: 'a', type: 'stat', width: 1 }, { id: 'b', type: 'bar', width: 2 }, { id: 'c', type: 'text', width: 3, cfg: { text: 'x' } }] }, T.TEXT_KEYS).project;
-eq(v1.panels.map((x) => x.span), [2, 4, 6], 'widths in thirds become spans in sixths');
+eq(v1.panels.map((x) => x.span), [4, 8, 12], 'widths in thirds become spans in twelfths');
+eq(DB.normalize({ format: 2, panels: [{ id: 'a', type: 'stat', span: 1 }, { id: 'b', type: 'bar', span: 4 }, { id: 'c', type: 'map', span: 6 }] }, T.TEXT_KEYS).project.panels.map((x) => x.span), [2, 8, 12], 'format 2 spans in sixths are doubled');
+eq(DB.normalize({ format: 3, panels: [{ id: 'a', type: 'stat', span: 3 }, { id: 'b', type: 'bar', span: 9 }, { id: 'c', type: 'bar', span: 7 }] }, T.TEXT_KEYS).project.panels.map((x) => x.span), [3, 9, 6], 'format 3 spans stay, odd ones snap to a width the tool offers');
+eq(DB.normalize({ format: 2, panels: [{ id: 'a', type: 'bar', span: 4, tall: true }, { id: 'b', type: 'bar', rows: 3 }, { id: 'c', type: 'bar', rows: 7, frame: 'odd' }] }, T.TEXT_KEYS).project.panels.map((x) => [x.rows, x.frame]), [[2, ''], [3, ''], [1, '']], 'tall becomes two rows; bad rows and frames fall back');
 eq(v1.panels[2].cfg.look, 'plain', 'text panels get a look');
 eq(DB.normalize({ panels: [{ id: 'a', type: 'pie', span: 3 }] }, T.TEXT_KEYS).project.panels[0].width, 2, 'a half-width panel still has a width older versions read');
 eq(v1.style, DB.blankStyle(), 'a file with no style gets the default look');
@@ -117,6 +120,40 @@ ok(MAPC.normalize({ features: [{ kind: 'point', coords: [[1, 2]] }] }, T.TEXT_KE
 ok(/var MIL_NAMES = \{/.test(block('mil-names')), 'military symbol names are built in for map keys');
 ok(/integrity="|el\.integrity = L\.sri/.test(block('app')), 'map libraries load with integrity checks');
 ok(p.panels.some((x) => x.type === 'map' && x.cfg.base && x.cfg.base !== 'svg'), 'the example\'s map uses a real basemap');
+
+// ---- 7. Media ----
+eq(DB.videoLink('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1m5s'), { host: 'youtube', id: 'dQw4w9WgXcQ', start: 65, label: 'YouTube' }, 'YouTube watch link with a start time');
+eq(DB.videoLink('https://youtu.be/dQw4w9WgXcQ').id, 'dQw4w9WgXcQ', 'YouTube short link');
+eq(DB.videoLink('https://www.youtube.com/shorts/dQw4w9WgXcQ').id, 'dQw4w9WgXcQ', 'YouTube Shorts link');
+eq([DB.videoLink('https://vimeo.com/76979871/abc123def').id, DB.videoLink('https://vimeo.com/76979871/abc123def').hash], ['76979871', 'abc123def'], 'Vimeo link with a private hash');
+eq(DB.videoLink('https://archive.org/details/some_item').host, 'archive', 'Internet Archive item');
+eq(DB.videoLink('media/clip.mp4').host, 'file', 'a video file next to the page');
+eq(DB.videoLink('https://example.org/page'), null, 'a page is not a video');
+eq(DB.audioLink('media/call.mp3').url, 'media/call.mp3', 'a sound file next to the page');
+eq(DB.embedLink('https://open.spotify.com/episode/4rOoJ6Egrf8K2IrywzwOMk?si=x').url, 'https://open.spotify.com/embed/episode/4rOoJ6Egrf8K2IrywzwOMk', 'Spotify share link becomes its embed');
+eq(DB.embedLink('https://public.flourish.studio/visualisation/123456/').url, 'https://flo.uri.sh/visualisation/123456/embed', 'Flourish link becomes its embed');
+eq(DB.embedLink('https://www.datawrapper.de/_/AbC12/').url, 'https://datawrapper.dwcdn.net/AbC12/', 'Datawrapper link becomes its embed');
+eq(DB.embedLink('http://example.org'), null, 'embeds need https');
+[['75', 75], ['1:15', 75], ['1:02:03', 3723], ['1m15s', 75], ['2h', 7200], ['soon', null]].forEach(([v, w]) => eq(DB.parseTime(v), w, 'time ' + v));
+eq(DB.fmtTime(3723), '1:02:03', 'times are shown as h:mm:ss');
+eq(['https://x.org/a.jpg', 'media/a.jpg', 'javascript:alert(1)', '../secret.jpg', '/abs.jpg', '//x.org/a.jpg', 'data:text/html;base64,AAAA'].map((u) => DB.mediaSrc(u, '')), ['https://x.org/a.jpg', 'media/a.jpg', '', '', '', '', ''], 'only safe picture addresses are kept');
+const big = 'data:image/jpeg;base64,' + 'A'.repeat(300000);
+eq(DB.mediaSrc(big, '').length, big.length, 'pictures kept inside the dashboard are not cut short');
+eq(DB.mediaSrc(big, 'av'), '', 'video and sound are never kept inside the dashboard');
+const med = DB.normalize({ format: 3, sources: [{ id: 's1', fields: { type: 'web', title: 'T', descType: 'Photo', url: 'https://x.org' } }], panels: [
+  { id: 'm1', type: 'media', cfg: { kind: 'compare', items: [{ src: 'media/a.jpg', alt: 'a', cite: { src: 's1' } }] } },
+  { id: 'm2', type: 'media', cfg: { kind: 'video', items: [{ src: 'https://example.org/nope', credit: 'Someone' }], moments: [{ t: '1:30', label: 'b' }, { t: '0:10', label: 'a' }, { t: 'x' }] } },
+  { id: 'm3', type: 'media', cfg: { kind: 'gallery', items: [{ src: 'https://x.org/1.jpg' }] }, cites: [{ src: 's1' }] }] }, T.TEXT_KEYS).project;
+eq(med.panels[0].cfg.items.length, 2, 'a before-and-after always has two pictures');
+eq(med.panels[1].cfg.moments.map((m) => m.t), [10, 90], 'key moments are sorted and bad times dropped');
+const mrows = DB.audit(med, O, T.TYPES, T.TEXT_KEYS).rows.map((x) => x.level + ': ' + x.msg);
+ok(mrows.some((m) => /^fix: Panel m1, after picture has no picture/.test(m)), 'flags a missing after picture');
+ok(mrows.some((m) => /^check: Panel m1 uses a file that must sit next to the published page: media\/a\.jpg/.test(m)), 'lists files that must sit next to the page');
+ok(mrows.some((m) => /^fix: Panel m2.*not one the tool can play/.test(m)), 'flags a video link it cannot play');
+ok(mrows.some((m) => /^check: Panel m2 credits its media but cites no source/.test(m)), 'a credit without a citation is a check, not a pass');
+ok(mrows.some((m) => /^check: Panel m3.* has no description for screen readers/.test(m)), 'flags pictures with no description');
+ok(!mrows.some((m) => /^fix: Panel m3 has no citation/.test(m)), 'a panel citation covers a gallery');
+ok(!mrows.some((m) => /Source s1 is not cited/.test(m)), 'item citations count as uses of a source');
 
 console.log((failed ? 'FAILED ' : 'All passed: ') + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

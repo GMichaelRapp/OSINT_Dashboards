@@ -2,7 +2,7 @@
 
 This file tells an AI assistant how to turn data and documents into a dashboard file that the OSINT Dashboard Builder can open. Give it to your assistant along with the material, or point the assistant at this address, and ask for a dashboard file.
 
-It matches format 2 of the OSINT Dashboard Builder (version 1.1). The tool still opens format 1 files. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
+It matches format 3 of the OSINT Dashboard Builder (version 1.2). The tool still opens format 1 and 2 files; in those, `span` is in sixths of a row. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
 
 The point of the dashboard is that a reader can check every number. A figure that cannot be traced to a source and a passage has failed, however good the chart looks.
 
@@ -21,8 +21,8 @@ The point of the dashboard is that a reader can check every number. A figure tha
 ```json
 {
   "app": "OSINT Dashboard Builder",
-  "format": 2,
-  "meta": { "title": "", "eyebrow": "", "dek": "", "byline": "", "compiled": "2026-10-22", "license": "" },
+  "format": 3,
+  "meta": { "title": "", "eyebrow": "", "dek": "", "byline": "", "compiled": "2026-10-22", "license": "", "cover": { "img": "", "alt": "", "cap": "", "pos": "none", "height": "M" } },
   "sources": [ { "id": "s1", "fields": { "type": "archival", "authors": "…", "title": "…", "titleStyle": "plain", "location": "…", "descType": "Trial Transcript", "descDetails": "ECF No. 216", "date": "02 February 2015", "url": "…" } } ],
   "datasets": [
     {
@@ -44,12 +44,12 @@ The point of the dashboard is that a reader can check every number. A figure tha
   ],
   "timelines": [],
   "maps": [],
-  "style": { "accent": "", "align": "left", "width": "normal", "cards": "card", "headFont": "serif", "stats": true, "gap": "normal" },
+  "style": { "accent": "", "align": "left", "width": "normal", "cards": "card", "headFont": "serif", "stats": true, "gap": "normal", "flow": "dense", "sections": "tabs" },
   "sections": [ { "id": "overview", "title": "Overview", "desc": "" } ],
   "panels": [
-    { "id": "p1", "section": "overview", "type": "stat", "title": "Recorded sales", "sub": "Period and scope", "span": 2,
+    { "id": "p1", "section": "overview", "type": "stat", "title": "Recorded sales", "sub": "Period and scope", "span": 3,
       "cfg": { "mode": "manual", "value": "$213.9M" }, "cites": [ { "src": "s1", "loc": "p. 84", "quote": "the exact words that give the figure" } ], "note": "" },
-    { "id": "p2", "section": "overview", "type": "bar", "title": "Bitcoin in the case", "sub": "In BTC", "span": 4, "dataset": "d1",
+    { "id": "p2", "section": "overview", "type": "bar", "title": "Bitcoin in the case", "sub": "In BTC", "span": 9, "dataset": "d1",
       "cfg": { "cat": "what", "y": "btc", "op": "none", "sort": "desc" }, "cites": [], "note": "" }
   ],
   "disputes": [ { "title": "", "text": "Which source says what.", "refs": ["p1"] } ],
@@ -82,7 +82,11 @@ The values above are placeholders that show the form.
 
 Line, bar and scatter charts also take `xTitle`, `yTitle`, `yMin`, `yMax`, `h` (`S`, `M`, `L`, `XL`), `color` (`c1` to `c8`), `grid` (false to hide), and `refs` (reference lines: `[{"v": 100, "label": "Target"}]`). A reference line is a claim like any other: it needs a source or must be a figure computed from the data, said so in the panel's `note`.
 
-Every panel has `id`, `section`, `type`, `title`, `sub`, `span` (its width in sixths of a row: 2 is a third, 3 half, 4 two thirds, 6 the full row), and optionally `tall` (span two rows), `dataset`, `cites`, and `note`. Panels fill each row left to right in the order they are listed. A section's `desc` is Markdown and introduces the section.
+| `media` | `kind`: `image`, `gallery`, `compare`, `video`, `audio`, or `embed`. `items`: a list of `{ "src", "alt", "cap", "credit", "date", "place", "label", "poster", "cite": { "src": "s1", "loc": "…" } }`; one item for `image`, `video`, `audio` and `embed`, two for `compare` (before, then after), any number for `gallery`. Optional `ratio` (`auto`, `16:9`, `4:3`, `3:2`, `1:1`, `4:5`, `9:16`, `21:9`), `fit` (`cover` or `contain`), `capPos` (`below` or `over`), `mode` for a gallery (`grid`, `slides`, `strip`) with `cols` (2 to 4), `split` for a before-and-after (where the slider starts, 5 to 95), `start` (seconds), `moments` (`[{"t": 42, "label": "Impact"}]`), `transcript` (Markdown), `loop`, `muted`, `open` (link to the original; default true), and for an embed `height` (pixels) and `load` (`click` or `auto`) |
+
+`src` is an `https://` address or the path of a file that will sit next to the published page, such as `media/clip.mp4`. For a video it is a YouTube, Vimeo or Internet Archive link, or an `.mp4` or `.webm` file; for sound an `.mp3`, `.m4a`, `.ogg` or `.wav` file. Use only media you were given. Never guess a video ID or a picture's address, and never describe a picture you have not seen: write `alt` from what the person tells you, or leave it empty for them to fill in. Every item needs a `credit` and, wherever the person has the source, a `cite`. A picture's `date` and `place` are when and where it was taken, as the source states them; if they come from your own geolocation or reasoning, say so in the panel's `note`.
+
+Every panel has `id`, `section`, `type`, `title`, `sub`, `span` (its width in twelfths of a row: 2 is a sixth, 3 a quarter, 4 a third, 6 half, 8 two thirds, 9 three quarters, 10 five sixths, 12 the full row), and optionally `rows` (1 to 3: how many rows tall it is, so smaller panels stack beside it), `frame` (`card`, `shadow`, `flat`, `tint` or `none`, to override the page's panel style), `dataset`, `cites`, and `note`. Panels fill each row left to right in the order they are listed; with `"flow": "order"` in `style` they keep that order exactly, leaving gaps, and with `"dense"` smaller panels move up to fill them. `style.sections` is `tabs` or `scroll` (one long page). A section's `desc` is Markdown and introduces the section. `meta.cover` is an optional header picture: `img`, `alt`, `cap` (caption and credit), `pos` (`none`, `above`, `behind`, or `side`), and `height` (`S`, `M`, `L`).
 
 `maps` holds maps from the OSINT Map Builder: `{"id": "m1", "name": "…", "project": { …the Map Builder file… }}`. Do not write these by hand; the person adds them by opening a Map Builder file. Their sources go in the dashboard's `sources`, and the map's features cite them by ID.
 
