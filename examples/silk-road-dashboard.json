@@ -1,6 +1,6 @@
 {
  "app": "OSINT Dashboard Builder",
- "format": 1,
+ "format": 2,
  "meta": {
   "title": "Silk Road, by the Numbers",
   "eyebrow": "Case file · United States v. Ulbricht, 14-cr-68 (S.D.N.Y.)",
@@ -9,11 +9,19 @@
   "compiled": "2026-10-22",
   "license": ""
  },
+ "style": {
+  "accent": "",
+  "align": "left",
+  "width": "normal",
+  "cards": "card",
+  "headFont": "serif",
+  "stats": true,
+  "gap": "normal"
+ },
  "sources": [
   {
    "id": "s1",
    "fields": {
-    "type": "archival",
     "authors": "US Court of Appeals for the Second Circuit",
     "title": "United States v. Ulbricht, 858 F.3d 71 (opinion, reproduced in the appendix to the petition for certiorari)",
     "titleStyle": "plain",
@@ -21,55 +29,55 @@
     "descType": "Court Opinion",
     "descDetails": "Appendix to petition for certiorari",
     "date": "2017",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "20171222095925240_Ulbricht cert appendix.pdf"
    }
   },
   {
    "id": "s5",
    "fields": {
-    "type": "journal",
     "authors": "Wesley Lacson\nBeata Jones",
     "title": "The 21st Century DarkNet Market: Lessons from the Fall of Silk Road",
     "titleStyle": "quotes",
     "location": "International Journal of Cyber Criminology",
     "descType": "Journal Article",
     "descDetails": "Vol. 10, No. 1",
+    "date": "2016",
+    "url": "https://doi.org/10.5281/zenodo.58521",
+    "note": "",
+    "type": "journal",
+    "access": [],
     "quals": [
      "review status unclear"
     ],
-    "date": "2016",
-    "url": "https://doi.org/10.5281/zenodo.58521",
-    "access": [],
-    "note": "",
     "file": "Lacson&Jonesvol10issue1IJCC2016.pdf"
    }
   },
   {
    "id": "s6",
    "fields": {
-    "type": "archival",
     "authors": "Tigran Gambaryan",
     "title": "Affidavit in support of criminal complaint against Carl Mark Force IV and Shaun W. Bridges",
     "titleStyle": "plain",
     "location": "United States v. Force and Bridges, No. 3:15-mj-70370 (N.D. Cal.)",
     "descType": "Affidavit",
     "descDetails": "via National Security Archive",
+    "date": "25 March 2015",
+    "note": "",
+    "type": "archival",
+    "access": [],
     "quals": [
      "scan"
     ],
-    "date": "25 March 2015",
-    "access": [],
-    "note": "",
     "file": "National-Security-Archive-1-Special-Agent-Tigran.pdf"
    }
   },
   {
    "id": "s7",
    "fields": {
-    "type": "web",
     "authors": "US Department of Justice, Office of Public Affairs",
     "title": "Former Secret Service Agent Pleads Guilty to Money Laundering",
     "titleStyle": "quotes",
@@ -77,16 +85,16 @@
     "descType": "Government Press Release",
     "descDetails": "via National Security Archive",
     "date": "16 August 2017",
+    "note": "",
+    "type": "web",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "National-Security-Archive-2-U-S-Department-of.pdf"
    }
   },
   {
    "id": "s8",
    "fields": {
-    "type": "web",
     "authors": "US Department of Justice, Office of Public Affairs",
     "title": "Former Secret Service Agent Sentenced in Scheme Related to Silk Road Investigation",
     "titleStyle": "quotes",
@@ -94,16 +102,16 @@
     "descType": "Government Press Release",
     "descDetails": "via National Security Archive",
     "date": "07 November 2017",
+    "note": "",
+    "type": "web",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "National-Security-Archive-3-U-S-Department-of.pdf"
    }
   },
   {
    "id": "s10",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Northern District of California",
     "title": "Transcript of proceedings (change of plea), United States v. Shaun W. Bridges",
     "titleStyle": "plain",
@@ -111,16 +119,16 @@
     "descType": "Court Record",
     "descDetails": "Document 132; via National Security Archive",
     "date": "31 August 2015",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "National-Security-Archive-7-Official-Reporter.pdf"
    }
   },
   {
    "id": "s12",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Judgment in a Criminal Case",
     "titleStyle": "quotes",
@@ -128,16 +136,16 @@
     "descType": "Judgment",
     "descDetails": "ECF No. 269",
     "date": "01 June 2015",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "Ross_Ulbricht_Sentencing_Ruling_06-01-15.pdf"
    }
   },
   {
    "id": "s15",
    "fields": {
-    "type": "archival",
     "authors": "Joshua L. Dratel",
     "title": "Brief for defendant-appellant",
     "titleStyle": "plain",
@@ -145,16 +153,16 @@
     "descType": "Legal Brief",
     "descDetails": "Document 30",
     "date": "12 January 2016",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "United-States-of-America-Appellee-v-Ross-William.pdf"
    }
   },
   {
    "id": "s18",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Opinion and Order on motions in limine",
     "titleStyle": "plain",
@@ -163,16 +171,16 @@
     "descDetails": "ECF No. 142",
     "date": "2015-01-07",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.142.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.142.0.pdf"
    }
   },
   {
    "id": "s23",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -181,16 +189,16 @@
     "descDetails": "ECF No. 196; filed 25 February 2015",
     "date": "13 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.196.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.196.0.pdf"
    }
   },
   {
    "id": "s24",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -199,16 +207,16 @@
     "descDetails": "ECF No. 198; filed 25 February 2015",
     "date": "14 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.198.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.198.0.pdf"
    }
   },
   {
    "id": "s25",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -217,16 +225,16 @@
     "descDetails": "ECF No. 200; filed 25 February 2015",
     "date": "15 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.200.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.200.0.pdf"
    }
   },
   {
    "id": "s26",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -235,16 +243,16 @@
     "descDetails": "ECF No. 202; filed 25 February 2015",
     "date": "20 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.202.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.202.0.pdf"
    }
   },
   {
    "id": "s27",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -253,16 +261,16 @@
     "descDetails": "ECF No. 204; filed 25 February 2015",
     "date": "21 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.204.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.204.0.pdf"
    }
   },
   {
    "id": "s28",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -271,16 +279,16 @@
     "descDetails": "ECF No. 208; filed 25 February 2015",
     "date": "22 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.208.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.208.0.pdf"
    }
   },
   {
    "id": "s29",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -289,16 +297,16 @@
     "descDetails": "ECF No. 210; filed 25 February 2015",
     "date": "26 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.210.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.210.0.pdf"
    }
   },
   {
    "id": "s30",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -307,16 +315,16 @@
     "descDetails": "ECF No. 212; filed 25 February 2015",
     "date": "29 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.212.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.212.0.pdf"
    }
   },
   {
    "id": "s31",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -325,16 +333,16 @@
     "descDetails": "ECF No. 214; filed 25 February 2015",
     "date": "28 January 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.214.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.214.0.pdf"
    }
   },
   {
    "id": "s32",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -343,16 +351,16 @@
     "descDetails": "ECF No. 216; filed 25 February 2015",
     "date": "02 February 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.216.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.216.0.pdf"
    }
   },
   {
    "id": "s33",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -361,16 +369,16 @@
     "descDetails": "ECF No. 218; filed 25 February 2015",
     "date": "03 February 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.218.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.218.0.pdf"
    }
   },
   {
    "id": "s34",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Trial transcript",
     "titleStyle": "plain",
@@ -379,16 +387,16 @@
     "descDetails": "ECF No. 220; filed 25 February 2015",
     "date": "04 February 2015",
     "url": "https://www.archive.org/download/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.220.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.220.0.pdf"
    }
   },
   {
    "id": "s39",
    "fields": {
-    "type": "archival",
     "authors": "US Attorney's Office for the Southern District of New York",
     "title": "Previously sealed government letters on the Force investigation, Nov 2014–Feb 2015 (exhibit A)",
     "titleStyle": "plain",
@@ -397,16 +405,16 @@
     "descDetails": "ECF No. 230-1",
     "date": "2015-04-03",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.230.1.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.230.1.pdf"
    }
   },
   {
    "id": "s42",
    "fields": {
-    "type": "archival",
     "authors": "HSI Chicago",
     "title": "Silk Road Investigation Report (exhibit 6 to defense reply)",
     "titleStyle": "quotes",
@@ -415,16 +423,16 @@
     "descDetails": "ECF No. 232-6",
     "date": "2015-04-16",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.232.6.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.232.6.pdf"
    }
   },
   {
    "id": "s44",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Opinion and Order denying motion for a new trial",
     "titleStyle": "plain",
@@ -433,16 +441,16 @@
     "descDetails": "ECF No. 237",
     "date": "2015-04-27",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.237.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.237.0.pdf"
    }
   },
   {
    "id": "s45",
    "fields": {
-    "type": "archival",
     "authors": "US Attorney's Office for the Southern District of New York",
     "title": "Government's memorandum in opposition to the motion to dismiss",
     "titleStyle": "plain",
@@ -451,16 +459,16 @@
     "descDetails": "ECF No. 26",
     "date": "2014-04-28",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.26.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.26.0.pdf"
    }
   },
   {
    "id": "s46",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Opinion and Order",
     "titleStyle": "quotes",
@@ -469,16 +477,16 @@
     "descDetails": "ECF No. 42",
     "date": "2014-07-09",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.42.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.42.0.pdf"
    }
   },
   {
    "id": "s49",
    "fields": {
-    "type": "archival",
     "authors": "Christopher Tarbell",
     "title": "Declaration of Christopher Tarbell",
     "titleStyle": "quotes",
@@ -487,16 +495,16 @@
     "descDetails": "ECF No. 57",
     "date": "2014-09-05",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.57.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.57.0.pdf"
    }
   },
   {
    "id": "s54",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Opinion and Order",
     "titleStyle": "quotes",
@@ -505,16 +513,16 @@
     "descDetails": "ECF No. 89",
     "date": "2014-10-10",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.89.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.89.0.pdf"
    }
   },
   {
    "id": "s55",
    "fields": {
-    "type": "archival",
     "authors": "US District Court for the Southern District of New York",
     "title": "Opinion and Order",
     "titleStyle": "quotes",
@@ -523,16 +531,16 @@
     "descDetails": "ECF No. 94",
     "date": "2014-10-24",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.94.0.pdf",
+    "note": "",
+    "type": "archival",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "gov.uscourts.nysd.422823.94.0.pdf"
    }
   },
   {
    "id": "s56",
    "fields": {
-    "type": "live",
     "authors": "CourtListener",
     "title": "Docket for United States v. Ulbricht, 1:14-cr-00068",
     "titleStyle": "plain",
@@ -541,16 +549,16 @@
     "descDetails": "CSV export",
     "publisher": "Free Law Project",
     "accessed": "22 October 2026",
+    "note": "",
+    "type": "live",
     "access": [],
     "quals": [],
-    "note": "",
     "file": "united-states-v-ulbricht.nysd.4353251.2026-10-22.csv"
    }
   },
   {
    "id": "s57",
    "fields": {
-    "type": "archival",
     "authors": "US Attorney's Office for the Southern District of New York",
     "title": "Government letter on the complaint's revenue and commission figures",
     "titleStyle": "plain",
@@ -559,6 +567,7 @@
     "descDetails": "ECF No. 163",
     "date": "2015-01-26",
     "url": "https://storage.courtlistener.com/recap/gov.uscourts.nysd.422823/gov.uscourts.nysd.422823.163.0.pdf",
+    "type": "archival",
     "access": [],
     "quals": [],
     "file": "gov.uscourts.nysd.422823.163.0.pdf"
@@ -3808,7 +3817,7 @@
     [
      "New York (S.D.N.Y.)",
      40.71,
-     -74.0,
+     -74,
      "Courts",
      "Trial of Ross Ulbricht",
      "2015-01-13",
@@ -3886,6 +3895,7 @@
     {
      "id": "C004",
      "date": "2011-01-27",
+     "end": "",
      "prec": "exact",
      "thread": "market",
      "key": true,
@@ -3895,7 +3905,8 @@
       {
        "src": "s29",
        "loc": "p. 47, Tr. 1272:13-16",
-       "quote": "shroomery message board account has been created. Date is 1/27/2011, 6:22 p.m."
+       "quote": "shroomery message board account has been created. Date is 1/27/2011, 6:22 p.m.",
+       "note": ""
       }
      ],
      "notes": "GX 304, 305, 308-A. Shroomery post date (January 27, 2011) at Tr. 1261:25-1262:1; registration and post same day at Tr. 1263:4-10."
@@ -3903,6 +3914,7 @@
     {
      "id": "C007",
      "date": "2011-02-06",
+     "end": "",
      "prec": "range",
      "thread": "market",
      "key": true,
@@ -3912,7 +3924,8 @@
       {
        "src": "s32",
        "loc": "pp. 82-84, Tr. 1924:23-1926:7",
-       "quote": "it covered February 6, 2011 through October 2, 2013, so the entirety of what was in the database."
+       "quote": "it covered February 6, 2011 through October 2, 2013, so the entirety of what was in the database.",
+       "note": ""
       }
      ],
      "notes": "Range end 2013-10-02. Totals at Tr. 1926:1-7. The earliest transaction is February 6, 2011, consistent with the government's \"February of 2011\" start (Doc 210, Tr. 1255:1-3); the defense pointed to \"June 18, 2011\" as the start of the site's \"current form\" (Doc 214, Tr. 1406:24-1407:1)."
@@ -3920,6 +3933,7 @@
     {
      "id": "D002",
      "date": "2011-06",
+     "end": "",
      "prec": "month",
      "thread": "investigation",
      "key": true,
@@ -3929,12 +3943,14 @@
       {
        "src": "s42",
        "loc": "p. 2 (3505-00295)",
-       "quote": "-June of 2011, HSI Chicago started monitoring unusual drugs seizures from the Mail Branch related to the Silk Road"
+       "quote": "-June of 2011, HSI Chicago started monitoring unusual drugs seizures from the Mail Branch related to the Silk Road",
+       "note": ""
       },
       {
        "src": "s23",
        "loc": "p. 62; Tr. 76:17-76:25",
-       "quote": "This is approximately June 2011. An officer brought to my attention several --"
+       "quote": "This is approximately June 2011. An officer brought to my attention several --",
+       "note": ""
       }
      ],
      "notes": "Defense reply exhibit (ECF 232-6), an HSI Chicago internal chronology; author perspective is HSI Chicago."
@@ -3942,6 +3958,7 @@
     {
      "id": "D003",
      "date": "2011-10-13",
+     "end": "",
      "prec": "exact",
      "thread": "investigation",
      "key": true,
@@ -3951,12 +3968,14 @@
       {
        "src": "s42",
        "loc": "p. 2 (3505-00295)",
-       "quote": "On October 13, 2011, HSI Chicago opened case Operation Dime Store to document the findings of the seizures coming into the mail branch."
+       "quote": "On October 13, 2011, HSI Chicago opened case Operation Dime Store to document the findings of the seizures coming into the mail branch.",
+       "note": ""
       },
       {
        "src": "s23",
        "loc": "p. 60; Tr. 74:3-74:4",
-       "quote": "Q. When was that? A. It was October 2011."
+       "quote": "Q. When was that? A. It was October 2011.",
+       "note": ""
       }
      ],
      "notes": "He first heard of the site approx. late Sept/early Oct 2011 (Tr. 88:1). Bitcoin ~$2-4 then (198 Tr. 153:21-22)."
@@ -3964,6 +3983,7 @@
     {
      "id": "A010",
      "date": "2012-01",
+     "end": "",
      "prec": "approx",
      "thread": "market",
      "key": true,
@@ -3973,7 +3993,8 @@
       {
        "src": "s1",
        "loc": "p. 16 (App. 14a)",
-       "quote": "Around January 2012, the Silk Road user who represented himself as the lead administrator of the site adopted the username Dread Pirate Roberts."
+       "quote": "Around January 2012, the Silk Road user who represented himself as the lead administrator of the site adopted the username Dread Pirate Roberts.",
+       "note": ""
       }
      ],
      "notes": "PGP key recovery: App. 15a."
@@ -3981,6 +4002,7 @@
     {
      "id": "D007",
      "date": "2012-02-17",
+     "end": "",
      "prec": "approx",
      "thread": "rogue",
      "key": true,
@@ -3990,12 +4012,14 @@
       {
        "src": "s6",
        "loc": "p. 39 (Aff. p. 38); p. 23 n.14",
-       "quote": "On or about February 17, 2012, FORCE began working on the Silk Road investigation."
+       "quote": "On or about February 17, 2012, FORCE began working on the Silk Road investigation.",
+       "note": ""
       },
       {
        "src": "s15",
        "loc": "p. 61 (Br. 44)",
-       "quote": "Nor was Force’s investigation into Silk Road transitory or superficial in any respect. It began in February 2012,"
+       "quote": "Nor was Force’s investigation into Silk Road transitory or superficial in any respect. It began in February 2012,",
+       "note": ""
       }
      ],
      "notes": "p.23 n.14 says \"approximately February 2012\". OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF. Gov Nov 21, 2014 letter: \"In 2012 and 2013, SA Force was involved as an undercover agent\" in the D. Md. investigation (Br. 11)."
@@ -4003,6 +4027,7 @@
     {
      "id": "D012",
      "date": "2013-01-17",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4012,12 +4037,14 @@
       {
        "src": "s6",
        "loc": "p. 42 (Aff. p. 41)",
-       "quote": "On or about January 17, 2013, FORCE and BRIDGES were part of a team that apprehended C.G. ina controlled delivery for a kilogram of cocaine."
+       "quote": "On or about January 17, 2013, FORCE and BRIDGES were part of a team that apprehended C.G. ina controlled delivery for a kilogram of cocaine.",
+       "note": ""
       },
       {
        "src": "s39",
        "loc": "p. 3 (Gov. 11/21/2014 sealed ltr p. 3)",
-       "quote": "Green was arrested by SA Force and several other agents involved in the USAO-Baltimore investigation on January 17, 2013."
+       "quote": "Green was arrested by SA Force and several other agents involved in the USAO-Baltimore investigation on January 17, 2013.",
+       "note": ""
       }
      ],
      "notes": "Green named only as \"C.G.\" in complaint; identified as Curtis Green in SDNY filings. Footnote: DPR cut off Flush access, regained 2013-01-20. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF. Same date in Gov 12/18/2014 letter (p.56) and Court 12/22/2014 sealed opinion (p.77)."
@@ -4025,6 +4052,7 @@
     {
      "id": "D015",
      "date": "2013-01-25",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4034,22 +4062,26 @@
       {
        "src": "s10",
        "loc": "p. 11, Tr. 11:2-13; Tr. 16:1-17:2",
-       "quote": "move approximately 20,000 Bitcoins from various 11 Silk Road vendor accounts into a wallet, which he exercised 12 control"
+       "quote": "move approximately 20,000 Bitcoins from various 11 Silk Road vendor accounts into a wallet, which he exercised 12 control",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 43-44 (Aff. p. 42-43)",
-       "quote": "On January 25, 2013, during the afternoon and into the night, the Silk Road website suffered a series of sizeable thefts."
+       "quote": "On January 25, 2013, during the afternoon and into the night, the Silk Road website suffered a series of sizeable thefts.",
+       "note": ""
       },
       {
        "src": "s1",
        "loc": "p. 11 (App. 9a)",
-       "quote": "in January 2013, Bridges used the Flush username to change other users’ passwords, empty their Bitcoin wallets,7 and keep $350,000 in Bitcoins in offshore bank accounts"
+       "quote": "in January 2013, Bridges used the Flush username to change other users’ passwords, empty their Bitcoin wallets,7 and keep $350,000 in Bitcoins in offshore bank accounts",
+       "note": ""
       },
       {
        "src": "s15",
        "loc": "p. 48 (Br. 31)",
-       "quote": "“[i]n late January 2013, members of the Baltimore Silk Road Task Force, to include BRIDGES and FORCE, gained access to a Silk Road administrator account"
+       "quote": "“[i]n late January 2013, members of the Baltimore Silk Road Task Force, to include BRIDGES and FORCE, gained access to a Silk Road administrator account",
+       "note": ""
       }
      ],
      "notes": "Plea factual basis (Aug. 31, 2015). Contrasts with SDNY sealed filings attributing the theft suspicion to Force/Green (230.1 p.3-4). SDNY sealed letters date the theft report 2013-01-26. Bridges reportedly left the proffer early. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF. The \"7\" after wallets is a footnote marker in the source. Conflict: the gov Nov 21, 2014 pretrial disclosure attributed this $350,000 theft to Force; the complaint attributes it to Bridges (App. 9a n.8)."
@@ -4057,6 +4089,7 @@
     {
      "id": "D024",
      "date": "2013-01-29",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4066,12 +4099,14 @@
       {
        "src": "s39",
        "loc": "p. 51 (Ex. A); p. 4",
-       "quote": "(2013-01-29 12:48) Nob: my guy got back to me at quoted 80K for the hit"
+       "quote": "(2013-01-29 12:48) Nob: my guy got back to me at quoted 80K for the hit",
+       "note": ""
       },
       {
        "src": "s18",
        "loc": "p. 4",
-       "quote": "On January 26, 2013, CC-1 informed Ulbricht that he had determined that the Employee was responsible for the theft of bitcoins from various vendor accounts."
+       "quote": "On January 26, 2013, CC-1 informed Ulbricht that he had determined that the Employee was responsible for the theft of bitcoins from various vendor accounts.",
+       "note": ""
       }
      ],
      "notes": "Staging and $80,000 payment described in Gov 11/21/2014 letter p.4; no date given there for the staging. 2d Cir identifies this as the \"Flush\" (Curtis Green) hit: DPR paid Nob (Force) $80,000 and Force faked the murder; charged separately in D. Md. No. 13-0222-CCB (App. 17a n.15). Conflict: 2d Cir says gov did not present the Flush murder-for-hire at trial, while ECF 142 (pretrial) granted gov leave to offer it."
@@ -4079,6 +4114,7 @@
     {
      "id": "A026",
      "date": "2013-03-31",
+     "end": "",
      "prec": "exact",
      "thread": "market",
      "key": true,
@@ -4088,12 +4124,14 @@
       {
        "src": "s18",
        "loc": "p. 7",
-       "quote": "Through further messages exchanged on March 31, 2013, DPR and redandwhite agreed upon a price of 1,670 bitcoins (approximately $150,000) for the murder-for-hire."
+       "quote": "Through further messages exchanged on March 31, 2013, DPR and redandwhite agreed upon a price of 1,670 bitcoins (approximately $150,000) for the murder-for-hire.",
+       "note": ""
       },
       {
        "src": "s32",
        "loc": "pp. 42-44, Tr. 1884:22-1886:2",
-       "quote": "The exchange rate is above 90 right now, so at $90/btc, $150k is about 1670 btc."
+       "quote": "The exchange rate is above 90 right now, so at $90/btc, $150k is about 1670 btc.",
+       "note": ""
       }
      ],
      "notes": "Laptop log entries: Mar 28 \"being blackmailed\", Mar 29 \"commissioned hit\" (ECF 142 p.8). GX 630 (blockchain). In the same exchange DPR wrote \"Not long ago, I had a clean hit done for $80k\" (Tr. 1883:12-13) and \"I've only ever commissioned the one other hit\" (Tr. 1884:19-20). Stipulation GX 805 states Canadian authorities have no record of a homicide in White Rock on or about March 31, 2013 (Tr. 1908:23-1909:4)."
@@ -4101,6 +4139,7 @@
     {
      "id": "D029",
      "date": "2013-04-01",
+     "end": "",
      "prec": "approx",
      "thread": "rogue",
      "key": true,
@@ -4110,17 +4149,20 @@
       {
        "src": "s39",
        "loc": "p. 108 (Gov. 2/1/2015 sealed ltr p. 2)",
-       "quote": "it started on or about April 1, 2013, when “DeathFromAbove” started making accusations that the “Dread Pirate Roberts” was responsible for the disappearance and death of Curtis Green"
+       "quote": "it started on or about April 1, 2013, when “DeathFromAbove” started making accusations that the “Dread Pirate Roberts” was responsible for the disappearance and death of Curtis Green",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 25-26 (Aff. p. 24-25)",
-       "quote": "On or about April 1, 2013, FORCE created a fictitious persona on the Silk Road website named “Death from Above.”"
+       "quote": "On or about April 1, 2013, FORCE created a fictitious persona on the Silk Road website named “Death from Above.”",
+       "note": ""
       },
       {
        "src": "s1",
        "loc": "p. 13 (App. 11a)",
-       "quote": "in one such chat that took place on April 16, 2013, DeathFromAbove told DPR that he knew that DPR’s true identity was Anand Athavale."
+       "quote": "in one such chat that took place on April 16, 2013, DeathFromAbove told DPR that he knew that DPR’s true identity was Anand Athavale.",
+       "note": ""
       }
      ],
      "notes": "NSA-1 complaint dates the itemized-ID message 2013-04-10 rather than 04-16 (see complaint rows). Complaint ties persona to Force via screen-recording video in his DEA case file (Ex. A). OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF. Gov revealed DeathFromAbove = Force only in a Feb 1, 2015 letter (Br. 29)."
@@ -4128,6 +4170,7 @@
     {
      "id": "A035",
      "date": "2013-06",
+     "end": "",
      "prec": "approx",
      "thread": "investigation",
      "key": true,
@@ -4137,7 +4180,8 @@
       {
        "src": "s49",
        "loc": "p. 3 ¶7",
-       "quote": "In or about early June 2013, another member of CY-2 and I closely examined the traffic data being sent from the Silk Road website"
+       "quote": "In or about early June 2013, another member of CY-2 and I closely examined the traffic data being sent from the Silk Road website",
+       "note": ""
       }
      ],
      "notes": "Contested: defense (Horowitz Decl., ECF 70) called this \"implausible\" given Nginx config. Gov: no other contemporaneous records exist (ECF 70-4 p.4). Gov denied NSA involvement (ECF 75 p.5-6)."
@@ -4145,6 +4189,7 @@
     {
      "id": "A040",
      "date": "2013-07-10",
+     "end": "",
      "prec": "exact",
      "thread": "market",
      "key": true,
@@ -4154,12 +4199,14 @@
       {
        "src": "s18",
        "loc": "p. 12",
-       "quote": "On July 10, 2013—the same day that shefoundme’s package was “inbound out of customs”—federal agents with U.S. Customs and Border Protection (“CPB”) intercepted a package from Canada"
+       "quote": "On July 10, 2013—the same day that shefoundme’s package was “inbound out of customs”—federal agents with U.S. Customs and Border Protection (“CPB”) intercepted a package from Canada",
+       "note": ""
       },
       {
        "src": "s31",
        "loc": "pp. 152-155, Tr. 1468:25-1471:23",
-       "quote": "Q. So when, approximately, were these IDs seized by CBP? A. Approximately in the neighborhood of July 10th of 2013."
+       "quote": "Q. So when, approximately, were these IDs seized by CBP? A. Approximately in the neighborhood of July 10th of 2013.",
+       "note": ""
       }
      ],
      "notes": "Jurisdictions listed slightly differently in ECF 108 p.4 (Alberta, New South Wales). GX 400-402. DOB 3/27/1984 on all nine (Tr. 1470:18-23). Matches Silk Road messages in which buyer \"shefoundme\" ordered IDs from \"KingOfClubs\" (Doc 212, Tr. 1794:14-1802:6)."
@@ -4167,6 +4214,7 @@
     {
      "id": "A043",
      "date": "2013-07-23",
+     "end": "",
      "prec": "exact",
      "thread": "investigation",
      "key": true,
@@ -4176,17 +4224,20 @@
       {
        "src": "s49",
        "loc": "p. 6 ¶12",
-       "quote": "After obtaining the necessary court order under Icelandic law, the RMP imaged the Subject Server on July 23, 2013."
+       "quote": "After obtaining the necessary court order under Icelandic law, the RMP imaged the Subject Server on July 23, 2013.",
+       "note": ""
       },
       {
        "src": "s26",
        "loc": "p. 113; Tr. 695:17-695:19",
-       "quote": "the U.S. government, got access to the Silk Road servers no later than July 23, 2013, right? A. The FBI did."
+       "quote": "the U.S. government, got access to the Silk Road servers no later than July 23, 2013, right? A. The FBI did.",
+       "note": ""
       },
       {
        "src": "s30",
        "loc": "p. 179, Tr. 1740:19-21",
-       "quote": "The government had access to the servers -- the U.S. government had access to the servers in July of 2013, correct? A. That's what I've been told"
+       "quote": "The government had access to the servers -- the U.S. government had access to the servers in July of 2013, correct? A. That's what I've been told",
+       "note": ""
       }
      ],
      "notes": "Horowitz: orange21.tar.gz mtime July 23, 2013 matches; three other tarballs dated June 6, 2013 (ECF 70 p.16). RMP imaged by booting single-user mode and tar copying (ECF 70-4 p.7). Witness lacked personal knowledge of location (Tr. 697:7-698:6). Defense summation relied on this, arguing the government let the site run from July to the end of September 2013 (Doc 218, Tr. 2209:4-8). Yum said he received the server IP from the investigative team and could not speak to how it was found (Tr. 1740:5-9)."
@@ -4194,6 +4245,7 @@
     {
      "id": "B054",
      "date": "2013-07-26",
+     "end": "",
      "prec": "approx",
      "thread": "investigation",
      "key": true,
@@ -4203,7 +4255,8 @@
       {
        "src": "s24",
        "loc": "p. 146; Tr. 266:22-266:24",
-       "quote": "Approximately July 26, 27th of 2013."
+       "quote": "Approximately July 26, 27th of 2013.",
+       "note": ""
       }
      ],
      "notes": "Elsewhere 'late July 2013' (Tr. 265:18). He was not cirrus on July 23 but was by Aug 2 (202 Tr. 630:7-12)."
@@ -4211,6 +4264,7 @@
     {
      "id": "B061",
      "date": "2013-09-10",
+     "end": "",
      "prec": "approx",
      "thread": "investigation",
      "key": true,
@@ -4220,7 +4274,8 @@
       {
        "src": "s24",
        "loc": "p. 192; Tr. 312:10-312:16",
-       "quote": "It was approximately around September 10th, September 11th, 2013."
+       "quote": "It was approximately around September 10th, September 11th, 2013.",
+       "note": ""
       }
      ],
      "notes": "He had never heard of Ulbricht before (Tr. 312:8-9; 200 Tr. 460:1-3)."
@@ -4228,6 +4283,7 @@
     {
      "id": "D046",
      "date": "2013-09-15",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4237,7 +4293,8 @@
       {
        "src": "s6",
        "loc": "p. 24 (Aff. p. 23)",
-       "quote": "Silk Road server data reveals that DPR made a payment on September 15, 2013, for 770 bitcoins."
+       "quote": "Silk Road server data reveals that DPR made a payment on September 15, 2013, for 770 bitcoins.",
+       "note": ""
       }
      ],
      "notes": "At least 600 BTC moved from CampBX to Force's Bitstamp account in Nov. 2013. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF."
@@ -4245,6 +4302,7 @@
     {
      "id": "A052",
      "date": "2013-09-17",
+     "end": "",
      "prec": "range",
      "thread": "investigation",
      "key": true,
@@ -4254,17 +4312,20 @@
       {
        "src": "s49",
        "loc": "p. 8 ¶19",
-       "quote": "During the period from September 17 to September 20, 2013, the FBI obtained several judicially authorized pen registers for the purpose of confirming the identity of Ulbricht as “DPR”"
+       "quote": "During the period from September 17 to September 20, 2013, the FBI obtained several judicially authorized pen registers for the purpose of confirming the identity of Ulbricht as “DPR”",
+       "note": ""
       },
       {
        "src": "s54",
        "loc": "p. 4",
-       "quote": "Pen-Trap Order No. 1: To Comcast re IP address 67.170.232.207 (9/16/13);"
+       "quote": "Pen-Trap Order No. 1: To Comcast re IP address 67.170.232.207 (9/16/13);",
+       "note": ""
       },
       {
        "src": "s54",
        "loc": "p. 4",
-       "quote": "Pen-Trap Order No. 4: Re certain computer devices associated with MAC addresses including 88-53-2E-9C-81-96, (9/20/13); and"
+       "quote": "Pen-Trap Order No. 4: Re certain computer devices associated with MAC addresses including 88-53-2E-9C-81-96, (9/20/13); and",
+       "note": ""
       }
      ],
      "notes": "Range end 2013-09-20. Five pen-trap orders total (ECF 89 p.4-5; App. 7a). Defense argued they tracked his location; Tarbell denied (¶21). Conflict: Tarbell says the pen registers were obtained September 17-20, 2013 (ECF 57 ¶19). ECF 89 dates Order No. 2 (Comcast) 9/19/2013; defense memo dates the second Comcast order September 17, 2013 (ECF 48 p.19). Same text in ulbrichtchargesstand.txt. MAC 88-53-2E-9C-81-96 matches the Samsung laptop in Warrant No. 6."
@@ -4272,6 +4333,7 @@
     {
      "id": "A056",
      "date": "2013-09-27",
+     "end": "",
      "prec": "exact",
      "thread": "takedown",
      "key": true,
@@ -4281,17 +4343,20 @@
       {
        "src": "s45",
        "loc": "p. 8",
-       "quote": "On September 27, 2013, Ulbricht was charged by complaint (the “Complaint”) with one count of conspiring to commit narcotics trafficking"
+       "quote": "On September 27, 2013, Ulbricht was charged by complaint (the “Complaint”) with one count of conspiring to commit narcotics trafficking",
+       "note": ""
       },
       {
        "src": "s26",
        "loc": "p. 124; Tr. 706:13-706:15",
-       "quote": "this is sworn under oath September 27, 2013 for the purpose of obtaining an arrest warrant against Mr. Ulbricht"
+       "quote": "this is sworn under oath September 27, 2013 for the purpose of obtaining an arrest warrant against Mr. Ulbricht",
+       "note": ""
       },
       {
        "src": "s31",
        "loc": "p. 114, Tr. 1427:12-13",
-       "quote": "on or about September 27th, 2013, the Honorable Frank Maas signed this criminal complaint"
+       "quote": "on or about September 27th, 2013, the Honorable Frank Maas signed this criminal complaint",
+       "note": ""
       }
      ],
      "notes": "Gov noted Ulbricht was separately charged in D. Md. for one attempted murder for hire (ECF 26 p.9 n.1). Counsel's statement at sidebar. Der-Yeghiayan: FBI obtained arrest warrant 'sometime late September 2013' (198 Tr. 313:15-19). 614,305 BTC: 204 Tr. 834:21-835:6. Counsel's description, not testimony."
@@ -4299,6 +4364,7 @@
     {
      "id": "A059",
      "date": "2013-10-01",
+     "end": "",
      "prec": "exact",
      "thread": "takedown",
      "key": true,
@@ -4308,22 +4374,26 @@
       {
        "src": "s1",
        "loc": "p. 14 (App. 12a)",
-       "quote": "Ulbricht was arrested in a San Francisco public library on October 1, 2013"
+       "quote": "Ulbricht was arrested in a San Francisco public library on October 1, 2013",
+       "note": ""
       },
       {
        "src": "s28",
        "loc": "pp. 26-27, Tr. 1036:22-1037:17",
-       "quote": "Q. What would have happened if the defendant had closed his laptop before the FBI seized it? A. It would have went into an encrypted state."
+       "quote": "Q. What would have happened if the defendant had closed his laptop before the FBI seized it? A. It would have went into an encrypted state.",
+       "note": ""
       },
       {
        "src": "s33",
        "loc": "pp. 98-99, Tr. 2161:8-2162:24",
-       "quote": "after the defendant enters the library at 3:08 p.m. DPR shows up on staff chat."
+       "quote": "after the defendant enters the library at 3:08 p.m. DPR shows up on staff chat.",
+       "note": ""
       },
       {
        "src": "s27",
        "loc": "p. 68; Tr. 847:4-847:12",
-       "quote": "The initial arrest was going to be on October 2nd, which is at his residence"
+       "quote": "The initial arrest was going to be on October 2nd, which is at his residence",
+       "note": ""
       }
      ],
      "notes": "Laptop was seized incident to arrest with the Cirrus chat open and the DPR-only \"Mastermind\" page in use (App. 12a). Library location at Tr. 1037:25-1038:3 (GX 128H). On cross, Kiernan acknowledged telling prosecutors twice that Ulbricht sat with his back to him looking out the window (Tr. 1038:19-1039:8; 3508-2, 3508-7), which conflicts with the seat shown in the photo. Doc 208 is the docketed \"corrected\" 1/22/2015 transcript; original Doc 206 has same text at pp.26-27, Tr. 1056:23-1057:18. Summation characterizes Der-Yeghiayan testimony given on earlier trial days (not in this file set); chat timestamps were UTC (+7). Turner said Der-Yeghiayan took over the cirrus account \"back in July\" (Tr. 2162:15-17). Turner also said the arrest notes in the trash matched DPR forum posts of August 11 and September 12 (Tr. 2163:15-23). Der-Yeghiayan describes plan to chat with DPR while defendant in public (198 Tr. 313:22-315:5)."
@@ -4331,6 +4401,7 @@
     {
      "id": "A060",
      "date": "2013-10-01",
+     "end": "",
      "prec": "exact",
      "thread": "takedown",
      "key": true,
@@ -4340,17 +4411,20 @@
       {
        "src": "s44",
        "loc": "p. 5",
-       "quote": "There were also Bitcoin wallets on the laptop containing over 144,000 Bitcoins, valued at the time of Ulbricht’s arrest at $16-18 million."
+       "quote": "There were also Bitcoin wallets on the laptop containing over 144,000 Bitcoins, valued at the time of Ulbricht’s arrest at $16-18 million.",
+       "note": ""
       },
       {
        "src": "s26",
        "loc": "p. 109; Tr. 691:4-691:8",
-       "quote": "the 144,000 bitcoins that were seized from Mr. Ulbricht's laptop, right? A. Yes."
+       "quote": "the 144,000 bitcoins that were seized from Mr. Ulbricht's laptop, right? A. Yes.",
+       "note": ""
       },
       {
        "src": "s30",
        "loc": "pp. 112-113, Tr. 1673:25-1674:12",
-       "quote": "A. It was approximately 144,000 bitcoins. ... it would have been anywhere between 16- to $18 million."
+       "quote": "A. It was approximately 144,000 bitcoins. ... it would have been anywhere between 16- to $18 million.",
+       "note": ""
       }
      ],
      "notes": "Date is the arrest/seizure date; actual seizure/forfeiture transfer date not stated. 2d Cir: \"approximately $18 million\" seized, \"about 89%\" from Silk Road servers in Iceland (App. 15a). Seizure date not stated. Contrast government opening '$18 million' (196 Tr. 47:12, 55:14-16). The transfer date is not stated in this transcript; Yum said only that it came after the arrest (\"prior to when I received that wallet file\"). Kiernan's hand-off of wallet.dat to Yum: Doc 208, Tr. 1033:6-8."
@@ -4358,6 +4432,7 @@
     {
      "id": "A061",
      "date": "2013-10-02",
+     "end": "",
      "prec": "exact",
      "thread": "takedown",
      "key": true,
@@ -4367,22 +4442,26 @@
       {
        "src": "s49",
        "loc": "p. 7 ¶14",
-       "quote": "the arrest of Ulbricht and the takedown of the Silk Road website, which occurred on October 1 and 2, 2013, respectively"
+       "quote": "the arrest of Ulbricht and the takedown of the Silk Road website, which occurred on October 1 and 2, 2013, respectively",
+       "note": ""
       },
       {
        "src": "s25",
        "loc": "p. 74; Tr. 420:15-420:25",
-       "quote": "October 2nd, around -- I think like around 10 a.m., I want to say, 11."
+       "quote": "October 2nd, around -- I think like around 10 a.m., I want to say, 11.",
+       "note": ""
       },
       {
        "src": "s30",
        "loc": "p. 85, Tr. 1646:10-20",
-       "quote": "wait for the team that's on-ground in San Francisco, the FBI arrest team, and wait for them to give me a confirmation that the defendant has been arrested."
+       "quote": "wait for the team that's on-ground in San Francisco, the FBI arrest team, and wait for them to give me a confirmation that the defendant has been arrested.",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 11 (Aff. p. 10)",
-       "quote": "The Silk Road website was established in early 2011 and operated until on or about October 2, 2013, when it was seized by law enforcement."
+       "quote": "The Silk Road website was established in early 2011 and operated until on or about October 2, 2013, when it was seized by law enforcement.",
+       "note": ""
       }
      ],
      "notes": "Tarbell n.8: request asked to let FBI post a seizure banner; seizure/re-imaging performed solely by RMP. Also 196 Tr. 97:12-13. He took one of two mirrored drives from the market server and kept the site running to drain the bitcoin server (Tr. 1647:22-1650:22). Shaw's cross put the market-server image creation date at October 8, 2013 (Doc 216, Tr. 1976:7-23). Ulbricht arrested 2013-10-01 (same complaint p.12). OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF."
@@ -4390,6 +4469,7 @@
     {
      "id": "A065",
      "date": "2014-02-04",
+     "end": "",
      "prec": "exact",
      "thread": "court",
      "key": true,
@@ -4399,7 +4479,8 @@
       {
        "src": "s46",
        "loc": "p. 1",
-       "quote": "On February 4, 2014, a Grand Jury sitting in the Southern District of New York returned Indictment 14 Cr. 68"
+       "quote": "On February 4, 2014, a Grand Jury sitting in the Southern District of New York returned Indictment 14 Cr. 68",
+       "note": ""
       }
      ],
      "notes": ""
@@ -4407,6 +4488,7 @@
     {
      "id": "A068",
      "date": "2014-05-04",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4416,17 +4498,20 @@
       {
        "src": "s15",
        "loc": "p. 50 (Br. 33)",
-       "quote": "Force resigned from the DEA May 4, 2014, “shortly after law enforcement began the current investigation.”"
+       "quote": "Force resigned from the DEA May 4, 2014, “shortly after law enforcement began the current investigation.”",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 8 (Aff. p. 7); p. 36; p. 47",
-       "quote": "FORCE resigned on May 4, 2014, shortly after law enforcement began the current investigation."
+       "quote": "FORCE resigned on May 4, 2014, shortly after law enforcement began the current investigation.",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 40 (Aff. p. 39)",
-       "quote": "On or about May 8, 2014, presumably after learning of the government’s investigation and after he had resigned, FORCE wired $235,000 to an offshore account in Panama."
+       "quote": "On or about May 8, 2014, presumably after learning of the government’s investigation and after he had resigned, FORCE wired $235,000 to an offshore account in Panama.",
+       "note": ""
       }
      ],
      "notes": "Force interviewed May 30, 2014 (same page). p.47 says letter of resignation submitted \"By May 4, 2014\" effective later that month. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF."
@@ -4434,6 +4519,7 @@
     {
      "id": "A071",
      "date": "2014-08-21",
+     "end": "",
      "prec": "exact",
      "thread": "court",
      "key": true,
@@ -4443,7 +4529,8 @@
       {
        "src": "s55",
        "loc": "p. 2",
-       "quote": "The Superseding Indictment, filed on August 21, 2014, charges Ulbricht with seven crimes"
+       "quote": "The Superseding Indictment, filed on August 21, 2014, charges Ulbricht with seven crimes",
+       "note": ""
       }
      ],
      "notes": "Count Three also alleged payments of ~$150,000 and ~$500,000 for murders (p.2-3)."
@@ -4451,6 +4538,7 @@
     {
      "id": "A080",
      "date": "2014-10-10",
+     "end": "",
      "prec": "exact",
      "thread": "court",
      "key": true,
@@ -4460,7 +4548,8 @@
       {
        "src": "s54",
        "loc": "p. 26",
-       "quote": "Ulbricht therefore has no basis to challenge as violations of his Fourth Amendment rights: (1) the investigation that preceded and led to the Icelandic server,"
+       "quote": "Ulbricht therefore has no basis to challenge as violations of his Fourth Amendment rights: (1) the investigation that preceded and led to the Icelandic server,",
+       "note": ""
       }
      ],
      "notes": "Also held pen-trap info \"entirely appropriate\" (p.33). Opinion lists 14 warrants/orders (p.4). Same text in ulbrichtchargesstand.txt."
@@ -4468,6 +4557,7 @@
     {
      "id": "A083",
      "date": "2014-11-21",
+     "end": "",
      "prec": "exact",
      "thread": "court",
      "key": true,
@@ -4477,12 +4567,14 @@
       {
        "src": "s1",
        "loc": "p. 52 (App. 50a)",
-       "quote": "on November 21, 2014, the government wrote a sealed ex parte letter to the district court seeking permission to disclose to the defense information about the Force grand jury investigation"
+       "quote": "on November 21, 2014, the government wrote a sealed ex parte letter to the district court seeking permission to disclose to the defense information about the Force grand jury investigation",
+       "note": ""
       },
       {
        "src": "s39",
        "loc": "p. 1-6",
-       "quote": "He is now being investigated by USAO-San Francisco for, among other things, leaking information about USAO- Baltimore’s investigation to Ulbricht in exchange for payment"
+       "quote": "He is now being investigated by USAO-San Francisco for, among other things, leaking information about USAO- Baltimore’s investigation to Ulbricht in exchange for payment",
+       "note": ""
       }
      ],
      "notes": "Letter said Force was the undercover agent Ulbricht allegedly hired for the D. Md. murder-for-hire (Br. 24). Letter asserts Force \"played no role\" in SDNY investigation and info is not Brady. Bridges was not mentioned (Gov. ECF 230 p.12 n.1: he became a target later)."
@@ -4490,6 +4582,7 @@
     {
      "id": "A091",
      "date": "2015-01-13",
+     "end": "",
      "prec": "exact",
      "thread": "trial",
      "key": true,
@@ -4499,12 +4592,14 @@
       {
        "src": "s1",
        "loc": "p. 15 (App. 13a)",
-       "quote": "Ulbricht’s trial lasted approximately three weeks, from January 13 through February 4, 2015."
+       "quote": "Ulbricht’s trial lasted approximately three weeks, from January 13 through February 4, 2015.",
+       "note": ""
       },
       {
        "src": "s23",
        "loc": "p. 28; Tr. 42:12-42:24",
-       "quote": "in 2009 began what he described as, quote, a secret project. Using his laptop computer, he created the Silk Road website."
+       "quote": "in 2009 began what he described as, quote, a secret project. Using his laptop computer, he created the Silk Road website.",
+       "note": ""
       }
      ],
      "notes": "One-week delay from Jan 5 due to a personal matter of a government attorney (ECF 237 p.2 n.1). Government opening; allegation, not evidence."
@@ -4512,6 +4607,7 @@
     {
      "id": "A094",
      "date": "2015-02-01",
+     "end": "",
      "prec": "exact",
      "thread": "trial",
      "key": true,
@@ -4521,12 +4617,14 @@
       {
        "src": "s15",
        "loc": "p. 46 (Br. 29)",
-       "quote": "it appears that “DeathFromAbove,” was controlled by former Special Agent Force"
+       "quote": "it appears that “DeathFromAbove,” was controlled by former Special Agent Force",
+       "note": ""
       },
       {
        "src": "s39",
        "loc": "p. 110-111",
-       "quote": "the Government consulted with the lead Assistant U.S. Attorney handling the Force investigation, who provided evidence that Force controlled the “DeathFromAbove” account"
+       "quote": "the Government consulted with the lead Assistant U.S. Attorney handling the Force investigation, who provided evidence that Force controlled the “DeathFromAbove” account",
+       "note": ""
       }
      ],
      "notes": "Defense was barred from using the DeathFromAbove chats (App. 21a). Gov. ECF 230 p.16, 26 n.10: SDNY learned this only during trial. Exclusion: Tr. 1871-73 per ECF 230 p.16."
@@ -4534,6 +4632,7 @@
     {
      "id": "A096",
      "date": "2015-02-04",
+     "end": "",
      "prec": "exact",
      "thread": "trial",
      "key": true,
@@ -4543,22 +4642,26 @@
       {
        "src": "s1",
        "loc": "p. 25 (App. 23a)",
-       "quote": "After deliberating for about three and a half hours, the jury returned a guilty verdict on all seven counts in the Indictment."
+       "quote": "After deliberating for about three and a half hours, the jury returned a guilty verdict on all seven counts in the Indictment.",
+       "note": ""
       },
       {
        "src": "s34",
        "loc": "pp. 84-87, Tr. 2334:3-2337:5",
-       "quote": "As to Count One, how do you find the defendant? Guilty."
+       "quote": "As to Count One, how do you find the defendant? Guilty.",
+       "note": ""
       },
       {
        "src": "s44",
        "loc": "p. 2",
-       "quote": "On February 4, 2015, after just a few hours of deliberation, the jury returned guilty verdicts on all counts."
+       "quote": "On February 4, 2015, after just a few hours of deliberation, the jury returned guilty verdicts on all counts.",
+       "note": ""
       },
       {
        "src": "s34",
        "loc": "p. 79, Tr. 2329:25",
-       "quote": "(At 11:55 a.m., the jury retired to deliberate)"
+       "quote": "(At 11:55 a.m., the jury retired to deliberate)",
+       "note": ""
       }
      ],
      "notes": "Brief: deliberations began 11:55 a.m.; verdict note 3:23 p.m. (Br. 17). Special findings on Counts One-Three: heroin 1 kg+, cocaine 5 kg+, LSD 10 g+, methamphetamine 500 g+ (Tr. 2335:1-2336:13); the Count Two LSD line reads \"ten kilograms\" (Tr. 2335:23), likely a transcription error. Jury polled (Tr. 2337:9-2338:14). ECF 230 p.11 says three-and-a-half hours of deliberation. Session start time 10:06 a.m. (Tr. 2251:9). Counts listed at Tr. 2277:16-2278:7."
@@ -4566,6 +4669,7 @@
     {
      "id": "A098",
      "date": "2015-03-25",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4575,12 +4679,14 @@
       {
        "src": "s15",
        "loc": "p. 35 (Br. 18)",
-       "quote": "on March 25, 2015, seven weeks after trial concluded in this case, the government filed criminal charges against Force and another participant in the Silk Road investigation"
+       "quote": "on March 25, 2015, seven weeks after trial concluded in this case, the government filed criminal charges against Force and another participant in the Silk Road investigation",
+       "note": ""
       },
       {
        "src": "s6",
        "loc": "p. 1-3; p. 51",
-       "quote": "Sworn to before me and signed in my presence. Date: 03/25/2015"
+       "quote": "Sworn to before me and signed in my presence. Date: 03/25/2015",
+       "note": ""
       }
      ],
      "notes": "Bridges case: No. CR 15-319 (RS) (N.D. Cal.) (Br. 23). Complaint unsealed 2015-03-30 per SDNY letter (ECF 226). NSA-4 (Case3:15-mj-70370, Document 3 filed 03/25/15) is image-only; its OCR was not available. OCR text (the .ocr.txt has no form-feeds; pinpoint is PDF page from per-page OCR); verify quote against PDF."
@@ -4588,6 +4694,7 @@
     {
      "id": "A100",
      "date": "2015-04-27",
+     "end": "",
      "prec": "exact",
      "thread": "after",
      "key": true,
@@ -4597,12 +4704,14 @@
       {
        "src": "s44",
        "loc": "p. 25",
-       "quote": "For the reasons set forth above, Ulbricht’s motion for a new trial is DENIED."
+       "quote": "For the reasons set forth above, Ulbricht’s motion for a new trial is DENIED.",
+       "note": ""
       },
       {
        "src": "s44",
        "loc": "p. 16-19, 25",
-       "quote": "The Government’s failure to reveal more regarding the investigation of either individual violated neither its discovery nor its Brady obligations."
+       "quote": "The Government’s failure to reveal more regarding the investigation of either individual violated neither its discovery nor its Brady obligations.",
+       "note": ""
       }
      ],
      "notes": "Court: \"Rogue Agents\" did not take part in the SDNY investigation and no trial evidence came from the Baltimore probe (p.17)."
@@ -4610,6 +4719,7 @@
     {
      "id": "A101",
      "date": "2015-05-29",
+     "end": "",
      "prec": "exact",
      "thread": "after",
      "key": true,
@@ -4619,17 +4729,20 @@
       {
        "src": "s1",
        "loc": "p. 28 (App. 26a)",
-       "quote": "Ulbricht’s sentencing hearing took place on May 29, 2015."
+       "quote": "Ulbricht’s sentencing hearing took place on May 29, 2015.",
+       "note": ""
       },
       {
        "src": "s12",
        "loc": "p. 1, 3 (Judgment, ECF 269)",
-       "quote": "Counts Two (2) and Four (4): Life to run concurrently; Count (5): Five (5) Years to run concurrently"
+       "quote": "Counts Two (2) and Four (4): Life to run concurrently; Count (5): Five (5) Years to run concurrently",
+       "note": ""
       },
       {
        "src": "s5",
        "loc": "p. 21",
-       "quote": "His sentencing took place on May 29, 2015, with another trial waiting for a murder-to-hire plot in Baltimore."
+       "quote": "His sentencing took place on May 29, 2015, with another trial waiting for a murder-to-hire plot in Baltimore.",
+       "note": ""
       }
      ],
      "notes": "Counts One and Three vacated as lesser included offenses; life on Counts Two and Four (App. 26a n.22; Br. 19). Letters of support: 97 (2d Cir) vs 99 (Br. 19). CONFLICT ON DATE: Judgment lists 5/29/2015 as \"Date of Imposition of Judgment\" and transcript ECF 277 is of sentencing held 5/29/2015; docket minute entry says \"Sentencing held on 6/1/2015\" and judgment filed 6/1/15. Lacson & Jones (secondary) also say May 29, 2015. SECONDARY SOURCE (Lacson & Jones, Int'l J. of Cyber Criminology 10(1), 2016). ERROR in source: the NDCA defendants were a DEA agent (Force) and a Secret Service agent (Bridges), not FBI agents; its \"$33 million\" seized figure is uncorroborated here."
@@ -4637,6 +4750,7 @@
     {
      "id": "D101",
      "date": "2015-08-31",
+     "end": "",
      "prec": "exact",
      "thread": "rogue",
      "key": true,
@@ -4646,7 +4760,8 @@
       {
        "src": "s10",
        "loc": "p. 23, Tr. 23:7-17; Tr. 24-25",
-       "quote": "how do you plead, Mr. Bridges? Guilty or not 11 guilty? 12 THE DEFENDANT: Guilty."
+       "quote": "how do you plead, Mr. Bridges? Guilty or not 11 guilty? 12 THE DEFENDANT: Guilty.",
+       "note": ""
       }
      ],
      "notes": "Cover page says \"Wednesday August 31, 2015\" but Tr. 3:1 says \"MONDAY\"; 8/31/2015 was a Monday. AUSA Haun referenced an earlier \"Force entry of plea\" (Tr. 3:24-25) without date. Govt raised Bridges' attempts to change name/SSN; court added conditions, no remand."
@@ -4654,6 +4769,7 @@
     {
      "id": "A107",
      "date": "2017-05-31",
+     "end": "",
      "prec": "exact",
      "thread": "after",
      "key": true,
@@ -4663,12 +4779,14 @@
       {
        "src": "s1",
        "loc": "p. 6 (App. 4a)",
-       "quote": "Because we identify no reversible error, we AFFIRM Ulbricht’s conviction and sentence in all respects."
+       "quote": "Because we identify no reversible error, we AFFIRM Ulbricht’s conviction and sentence in all respects.",
+       "note": ""
       },
       {
        "src": "s56",
        "loc": "line 348 (ECF 296)",
-       "quote": "Ordered, Adjudged and Decreed that the judgment of the District Court is AFFIRMED."
+       "quote": "Ordered, Adjudged and Decreed that the judgment of the District Court is AFFIRMED.",
+       "note": ""
       }
      ],
      "notes": "Decided May 31, 2017 (App. 3a). Mandate date; opinion date not given in index line."
@@ -4676,6 +4794,7 @@
     {
      "id": "D114",
      "date": "2025-01-21",
+     "end": "",
      "prec": "exact",
      "thread": "after",
      "key": true,
@@ -4685,7 +4804,8 @@
       {
        "src": "s56",
        "loc": "line 474 (ECF 403)",
-       "quote": "The President of the U. S. grants a full and unconditional pardon to the defendant."
+       "quote": "The President of the U. S. grants a full and unconditional pardon to the defendant.",
+       "note": ""
       }
      ],
      "notes": "Docket entry entered 1/28/2025."
@@ -4693,6 +4813,7 @@
    ]
   }
  ],
+ "maps": [],
  "sections": [
   {
    "id": "overview",
@@ -4717,8 +4838,9 @@
    "type": "stat",
    "title": "Recorded sales on Silk Road",
    "sub": "6 Feb 2011 – 2 Oct 2013, from the server database",
+   "span": 2,
    "width": 1,
-   "key": true,
+   "dataset": "",
    "cfg": {
     "mode": "manual",
     "value": "$213.9M"
@@ -4727,10 +4849,12 @@
     {
      "src": "s32",
      "loc": "p. 84, Tr. 1926:2-7",
-     "quote": "for a total U.S. dollar amount recorded in the database of $213,888,103 U.S. dollars."
+     "quote": "for a total U.S. dollar amount recorded in the database of $213,888,103 U.S. dollars.",
+     "note": ""
     }
    ],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p2",
@@ -4738,7 +4862,9 @@
    "type": "stat",
    "title": "Transactions",
    "sub": "Same period and database",
+   "span": 2,
    "width": 1,
+   "dataset": "",
    "cfg": {
     "mode": "manual",
     "value": "1,530,252"
@@ -4747,10 +4873,12 @@
     {
      "src": "s32",
      "loc": "p. 84, Tr. 1926:2-7",
-     "quote": "You see we have 1,530,252 total transactions"
+     "quote": "You see we have 1,530,252 total transactions",
+     "note": ""
     }
    ],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p3",
@@ -4758,7 +4886,9 @@
    "type": "stat",
    "title": "Commissions to the operator",
    "sub": "About $13.2 million at recorded values",
+   "span": 2,
    "width": 1,
+   "dataset": "",
    "cfg": {
     "mode": "manual",
     "value": "642,455 BTC"
@@ -4767,15 +4897,18 @@
     {
      "src": "s32",
      "loc": "p. 84, Tr. 1926:2-7",
-     "quote": "The commission value in bitcoins here is 642,455.36 bitcoins, and the recorded value in U.S. dollars for the commission was 13,174,896 U.S. dollars."
+     "quote": "The commission value in bitcoins here is 642,455.36 bitcoins, and the recorded value in U.S. dollars for the commission was 13,174,896 U.S. dollars.",
+     "note": ""
     },
     {
      "src": "s57",
      "loc": "p. 4",
-     "quote": "The Complaint states that, from February 6, 2011 to July 23, 2013, Silk Road generated revenue totaling 9,519,664 Bitcoins and commissions totaling 614,305 Bitcoins."
+     "quote": "The Complaint states that, from February 6, 2011 to July 23, 2013, Silk Road generated revenue totaling 9,519,664 Bitcoins and commissions totaling 614,305 Bitcoins.",
+     "note": ""
     }
    ],
-   "note": "The criminal complaint gave 614,305 BTC in commissions. The government said the two figures cover different periods: the complaint stops at July 23, 2013, the trial figure at October 2013."
+   "note": "The criminal complaint gave 614,305 BTC in commissions. The government said the two figures cover different periods: the complaint stops at July 23, 2013, the trial figure at October 2013.",
+   "tall": false
   },
   {
    "id": "p5",
@@ -4783,17 +4916,20 @@
    "type": "map",
    "title": "Where it happened",
    "sub": "Investigation, seizures and arrests, and the courts",
+   "span": 4,
    "width": 2,
-   "tall": true,
    "dataset": "d4",
    "cfg": {
     "lat": "lat",
     "lon": "lon",
     "label": "place",
-    "color": "kind"
+    "color": "kind",
+    "base": "auto",
+    "labels": "always"
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": true
   },
   {
    "id": "p4",
@@ -4801,7 +4937,9 @@
    "type": "stat",
    "title": "Drug listings at shutdown",
    "sub": "2 Oct 2013",
+   "span": 2,
    "width": 1,
+   "dataset": "",
    "cfg": {
     "mode": "manual",
     "value": "13,802"
@@ -4810,15 +4948,18 @@
     {
      "src": "s1",
      "loc": "p. 100 (App. 98a)",
-     "quote": "At the time the government shut down Silk Road on October 2, 2013, there were approximately 13,802 listings for controlled substances on the website."
+     "quote": "At the time the government shut down Silk Road on October 2, 2013, there were approximately 13,802 listings for controlled substances on the website.",
+     "note": ""
     },
     {
      "src": "s24",
      "loc": "p. 26; Tr. 146:19-146:21",
-     "quote": "So in total there were 2,020 drug listings in April of 2012. By October how many? A. There is 13,810."
+     "quote": "So in total there were 2,020 drug listings in April of 2012. By October how many? A. There is 13,810.",
+     "note": ""
     }
    ],
-   "note": "Trial testimony gave 13,810 for October 1, 2013, from a screenshot of the homepage."
+   "note": "Trial testimony gave 13,810 for October 1, 2013, from a screenshot of the homepage.",
+   "tall": false
   },
   {
    "id": "p6",
@@ -4826,6 +4967,7 @@
    "type": "table",
    "title": "Sentences",
    "sub": "Prison terms in the Silk Road prosecutions",
+   "span": 2,
    "width": 1,
    "dataset": "d3",
    "cfg": {
@@ -4837,7 +4979,8 @@
     "pageSize": 10
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p7",
@@ -4845,12 +4988,15 @@
    "type": "timeline",
    "title": "Headline events",
    "sub": "36 of 321 entries in the full Silk Road timeline",
+   "span": 6,
    "width": 3,
+   "dataset": "",
    "cfg": {
     "timeline": "t1"
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p8",
@@ -4858,6 +5004,7 @@
    "type": "bar",
    "title": "Bitcoin in the case",
    "sub": "Amounts named in the record, in BTC",
+   "span": 4,
    "width": 2,
    "dataset": "d2",
    "cfg": {
@@ -4865,10 +5012,12 @@
     "y": "btc",
     "op": "none",
     "sort": "desc",
-    "format": "full"
+    "format": "full",
+    "color": "c4"
    },
    "cites": [],
-   "note": "The laptop figure dwarfs the rest. The smaller payments, which tie Ulbricht to the murder-for-hire allegations and the rogue agents, are easiest to compare in the table view."
+   "note": "The laptop figure dwarfs the rest. The smaller payments, which tie Ulbricht to the murder-for-hire allegations and the rogue agents, are easiest to compare in the table view.",
+   "tall": false
   },
   {
    "id": "p9",
@@ -4876,7 +5025,9 @@
    "type": "stat",
    "title": "Forfeiture money judgment",
    "sub": "Entered 3 Jun 2015",
+   "span": 2,
    "width": 1,
+   "dataset": "",
    "cfg": {
     "mode": "manual",
     "value": "$183,961,921"
@@ -4885,10 +5036,12 @@
     {
      "src": "s56",
      "loc": "line 320 (ECF 273)",
-     "quote": "a money judgment in the amount of $183,961,921 inUnited States currency (the \"Money Judgment\") shall be enteredagainst the defendant"
+     "quote": "a money judgment in the amount of $183,961,921 inUnited States currency (the \"Money Judgment\") shall be enteredagainst the defendant",
+     "note": ""
     }
    ],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p10",
@@ -4896,6 +5049,7 @@
    "type": "line",
    "title": "Docket activity",
    "sub": "Entries per quarter, by kind",
+   "span": 6,
    "width": 3,
    "dataset": "d1",
    "cfg": {
@@ -4903,10 +5057,24 @@
     "op": "count",
     "bucket": "quarter",
     "series": "kind",
-    "maxSeries": 5
+    "maxSeries": 5,
+    "style": "stack",
+    "curve": false,
+    "marks": [
+     {
+      "x": "2013-10-01",
+      "label": "Arrest"
+     },
+     {
+      "x": "2015-01-13",
+      "label": "Trial opens"
+     }
+    ],
+    "yTitle": "Docket entries"
    },
    "cites": [],
-   "note": "The spike is the run-up to trial (late 2014) and the trial and sentencing (early 2015). Later entries are the appeal, the 2018 motions, the 2019–2022 motion to vacate, forfeiture, and the 2025 pardon."
+   "note": "The spike is the run-up to trial (late 2014) and the trial and sentencing (early 2015). Later entries are the appeal, the 2018 motions, the 2019–2022 motion to vacate, forfeiture, and the 2025 pardon.",
+   "tall": false
   },
   {
    "id": "p11",
@@ -4914,6 +5082,7 @@
    "type": "bar",
    "title": "Docket entries by kind",
    "sub": "All years",
+   "span": 2,
    "width": 1,
    "dataset": "d1",
    "cfg": {
@@ -4922,7 +5091,8 @@
     "sort": "desc"
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p12",
@@ -4930,6 +5100,7 @@
    "type": "table",
    "title": "The docket",
    "sub": "Search every entry",
+   "span": 4,
    "width": 2,
    "dataset": "d1",
    "cfg": {
@@ -4943,19 +5114,25 @@
     "search": true
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": false
   },
   {
    "id": "p13",
    "section": "record",
    "type": "text",
    "title": "How this was built",
+   "sub": "",
+   "span": 6,
    "width": 3,
+   "dataset": "",
    "cfg": {
-    "text": "Every figure on this dashboard comes from the court record in **United States v. Ulbricht** and the related case against two federal agents. Each figure links to the page and passage it rests on. Open **Sources** under any panel to see them.\n\nTwo things were added by the compiler and are not from the sources: the city-level coordinates on the map, and the \"kind\" given to each docket entry."
+    "text": "Every figure on this dashboard comes from the court record in **United States v. Ulbricht** and the related case against two federal agents. Each figure links to the page and passage it rests on. Open **Sources** under any panel to see them.\n\nTwo things were added by the compiler and are not from the sources: the city-level coordinates on the map, and the \"kind\" given to each docket entry.",
+    "look": "plain"
    },
    "cites": [],
-   "note": ""
+   "note": "",
+   "tall": false
   }
  ],
  "disputes": [

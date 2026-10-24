@@ -2,7 +2,7 @@
 
 This file tells an AI assistant how to turn data and documents into a dashboard file that the OSINT Dashboard Builder can open. Give it to your assistant along with the material, or point the assistant at this address, and ask for a dashboard file.
 
-It matches format 1 of the OSINT Dashboard Builder. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
+It matches format 2 of the OSINT Dashboard Builder (version 1.1). The tool still opens format 1 files. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
 
 The point of the dashboard is that a reader can check every number. A figure that cannot be traced to a source and a passage has failed, however good the chart looks.
 
@@ -21,7 +21,7 @@ The point of the dashboard is that a reader can check every number. A figure tha
 ```json
 {
   "app": "OSINT Dashboard Builder",
-  "format": 1,
+  "format": 2,
   "meta": { "title": "", "eyebrow": "", "dek": "", "byline": "", "compiled": "2026-10-22", "license": "" },
   "sources": [ { "id": "s1", "fields": { "type": "archival", "authors": "…", "title": "…", "titleStyle": "plain", "location": "…", "descType": "Trial Transcript", "descDetails": "ECF No. 216", "date": "02 February 2015", "url": "…" } } ],
   "datasets": [
@@ -43,11 +43,13 @@ The point of the dashboard is that a reader can check every number. A figure tha
     }
   ],
   "timelines": [],
+  "maps": [],
+  "style": { "accent": "", "align": "left", "width": "normal", "cards": "card", "headFont": "serif", "stats": true, "gap": "normal" },
   "sections": [ { "id": "overview", "title": "Overview", "desc": "" } ],
   "panels": [
-    { "id": "p1", "section": "overview", "type": "stat", "title": "Recorded sales", "sub": "Period and scope", "width": 1,
+    { "id": "p1", "section": "overview", "type": "stat", "title": "Recorded sales", "sub": "Period and scope", "span": 2,
       "cfg": { "mode": "manual", "value": "$213.9M" }, "cites": [ { "src": "s1", "loc": "p. 84", "quote": "the exact words that give the figure" } ], "note": "" },
-    { "id": "p2", "section": "overview", "type": "bar", "title": "Bitcoin in the case", "sub": "In BTC", "width": 2, "dataset": "d1",
+    { "id": "p2", "section": "overview", "type": "bar", "title": "Bitcoin in the case", "sub": "In BTC", "span": 4, "dataset": "d1",
       "cfg": { "cat": "what", "y": "btc", "op": "none", "sort": "desc" }, "cites": [], "note": "" }
   ],
   "disputes": [ { "title": "", "text": "Which source says what.", "refs": ["p1"] } ],
@@ -68,15 +70,21 @@ The values above are placeholders that show the form.
 
 | `type` | `cfg` fields |
 |---|---|
-| `stat` | `mode`: `manual` (with `value`, the figure as displayed) or `data` (with `op`: `count`, `sum`, `avg`, `median`, `min`, `max`, `distinct`, `latest`, `first`; `col`; optional `filterCol`, `filterVal`; `format`: `compact` or `full`; `prefix`; `suffix`) |
-| `line` | `x` (date column), `bucket` (`day`, `month`, `quarter`, `year`), `op`, `y` (number column, unless counting), optional `series` (text column; up to eight lines) |
-| `bar` | `cat` (category column), `op` (`none` for one bar per row, or an aggregate), `y`, `sort` (`desc`, `asc`, `label`, `data`), optional `top`, `orient` (`h` or `v`) |
-| `table` | `cols` (column keys to show), `pageSize`, `search` (true or false) |
-| `map` | `lat`, `lon`, optional `label`, `color` (text column; the three largest groups get colors), `size` (number column), `region` (`auto` or `world`) |
+| `stat` | `mode`: `manual` (with `value`, the figure as displayed) or `data` (with `op`: `count`, `sum`, `avg`, `median`, `min`, `max`, `distinct`, `latest`, `first`; `col`; optional `filterCol`, `filterVal`; `format`: `compact` or `full`; `decimals`; `prefix`; `suffix`). Optional `delta` (a change line such as `+12% on 2013`, which must also be cited) and `color` |
+| `line` | `x` (date column), `bucket` (`day`, `month`, `quarter`, `year`), `op`, `y` (number column, unless counting), optional `series` (text column; up to eight lines), `style` (`line`, `area`, `stack`, `stack100`), `vals` (`none`, `last`, `all`), `curve`, `dots`, `marks` (dated notes: `[{"x": "2013-10-01", "label": "Arrest"}]`) |
+| `bar` | `cat` (category column), `op` (`none` for one bar per row, or an aggregate), `y`, `sort` (`desc`, `asc`, `label`, `data`), optional `top`, `orient` (`h` or `v`), `split` (a second column; then `mode`: `stack`, `group`, or `stack100`), `colors` (`one`, `cats`, or `hl` with `hl` naming the bar to highlight), `vals` (`all` or `none`), `thick` |
+| `scatter` | `x` (number or date column), `y` (number column), optional `series` (text column for color), `size` (number column), `label` (text column), `trend` (true for a least-squares line), `zero`, `xMin`, `xMax` |
+| `pie` | `cat`, `op`, `y`, optional `top` (default 6; the rest become Other), `donut` (default true), `pct` (default true), `centerLabel` |
+| `table` | `cols` (column keys to show), `pageSize`, `search` (true or false), `sortCol`, `sortDir` |
+| `map` | `from`: `data` (default) or `map`. For `data`: `lat`, `lon`, optional `label`, `labels` (`auto`, `always`, `never`), `color` (text column; the three largest groups get colors), `size` (number column), `region` (`auto` or `world`), `base` (`auto`, `positron`, `dark`, `liberty`, `bright`, `fiord`, or `svg` for the built-in outline), `marker`. For `map`: `map` (the `id` of an entry in `maps`), `base` (`saved` or one of the basemaps), `scale` |
 | `timeline` | `timeline`: the `id` of an entry in `timelines`, which has the same shape as an OSINT Timeline Builder file's `threads` and `events` |
-| `text` | `text`: paragraphs separated by a blank line; `**bold**`, `*italic*`, and `[links](https://…)` |
+| `text` | `text`: Markdown (`## heading`, `- list`, `1. list`, `> quote`, `---`, `**bold**`, `*italic*`, `[link](https://…)`, `![picture](https://…)`); `look` (`plain`, `heading`, `note`, `key`, `warn`, `quote`); optional `img` (an https link to a picture), `imgAlt`, `imgCap`, `imgPos` (`top`, `bottom`, `left`, `right`) |
 
-Every panel has `id`, `section`, `type`, `title`, `sub`, `width` (1, 2, or 3 thirds of a row), and optionally `tall` (span two rows), `dataset`, `cites`, and `note`.
+Line, bar and scatter charts also take `xTitle`, `yTitle`, `yMin`, `yMax`, `h` (`S`, `M`, `L`, `XL`), `color` (`c1` to `c8`), `grid` (false to hide), and `refs` (reference lines: `[{"v": 100, "label": "Target"}]`). A reference line is a claim like any other: it needs a source or must be a figure computed from the data, said so in the panel's `note`.
+
+Every panel has `id`, `section`, `type`, `title`, `sub`, `span` (its width in sixths of a row: 2 is a third, 3 half, 4 two thirds, 6 the full row), and optionally `tall` (span two rows), `dataset`, `cites`, and `note`. Panels fill each row left to right in the order they are listed. A section's `desc` is Markdown and introduces the section.
+
+`maps` holds maps from the OSINT Map Builder: `{"id": "m1", "name": "…", "project": { …the Map Builder file… }}`. Do not write these by hand; the person adds them by opening a Map Builder file. Their sources go in the dashboard's `sources`, and the map's features cite them by ID.
 
 Choose the panel by the data's job: one headline number is a `stat`; change over time is a `line`; a comparison across categories is a `bar`; places are a `map`; records a reader will search are a `table`. Never put two different units on one chart. Make two panels instead.
 

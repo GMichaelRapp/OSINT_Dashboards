@@ -84,5 +84,39 @@ const boot = JSON.parse(html.match(/<script type="application\/json" id="db-data
 eq(boot.mode, 'builder', 'page starts in builder mode');
 ok(DB.normalize(boot.project, T.TEXT_KEYS).project.panels.length > 0, 'page ships with the sample dashboard');
 
+// ---- 8. Version 1.1: layout, chart data, editing rows, maps ----
+const v1 = DB.normalize({ panels: [{ id: 'a', type: 'stat', width: 1 }, { id: 'b', type: 'bar', width: 2 }, { id: 'c', type: 'text', width: 3, cfg: { text: 'x' } }] }, T.TEXT_KEYS).project;
+eq(v1.panels.map((x) => x.span), [2, 4, 6], 'widths in thirds become spans in sixths');
+eq(v1.panels[2].cfg.look, 'plain', 'text panels get a look');
+eq(DB.normalize({ panels: [{ id: 'a', type: 'pie', span: 3 }] }, T.TEXT_KEYS).project.panels[0].width, 2, 'a half-width panel still has a width older versions read');
+eq(v1.style, DB.blankStyle(), 'a file with no style gets the default look');
+eq(DB.normalize({ panels: [], style: { accent: '#abc', cards: 'flat', width: 'huge' } }, T.TEXT_KEYS).project.style.accent, '#AABBCC', 'accent colors are tidied');
+eq(DB.normalize({ panels: [], style: { width: 'huge' } }, T.TEXT_KEYS).project.style.width, 'normal', 'unknown style values fall back');
+const sp = { columns: [{ key: 'y', type: 'text' }, { key: 'r', type: 'text' }, { key: 'v', type: 'number' }], rows: [['2020', 'N', 1], ['2020', 'S', 2], ['2021', 'N', 3], ['2021', 'N', 4]] };
+let st = DB.byCategorySplit(sp, { cat: 'y', split: 'r', op: 'sum', y: 'v', sort: 'data' });
+eq(st.cats.map((c) => [c.label, c.total]), [['2020', 3], ['2021', 7]], 'split bars: totals per category');
+eq(st.series.map((s) => [s.label, s.values]), [['N', [1, 7]], ['S', [2, 0]]], 'split bars: one series per part, zero where missing');
+eq(DB.byCategorySplit(sp, { cat: 'y', split: 'r', op: 'sum', y: 'v', sort: 'desc' }).cats.map((c) => c.label), ['2021', '2020'], 'split bars sort by total');
+const sc = DB.scatterPoints({ columns: [{ key: 'x', type: 'number' }, { key: 'y', type: 'number' }, { key: 'd', type: 'date' }], rows: [[1, 2, '2020-01-01'], [2, 4, '2021'], [3, 6, ''], [null, 1, '']] }, { x: 'x', y: 'y' });
+eq(sc.length, 3, 'scatter drops rows missing a number');
+const tr = DB.trend(sc); ok(Math.abs(tr.b - 2) < 1e-9 && Math.abs(tr.a) < 1e-9 && Math.abs(tr.r2 - 1) < 1e-9, 'trend line through a straight line');
+eq(DB.scatterPoints({ columns: [{ key: 'd', type: 'date' }, { key: 'y', type: 'number' }], rows: [['2020-02', 5]] }, { x: 'd', y: 'y' })[0].x, Date.UTC(2020, 1, 1), 'scatter reads dates on the x axis');
+const ed = { columns: [{ key: 'name', label: 'Name', type: 'text' }, { key: 'n', label: 'Count', type: 'number' }], rows: [] };
+DB.addRow(ed); DB.setCell(ed, 0, 'n', '1,200'); eq(ed.rows[0], ['', 1200], 'typed cells are read like CSV values');
+DB.addColumn(ed, 'When', 'date'); eq(ed.columns.map((c) => c.key), ['name', 'n', 'when'], 'a new column gets a key');
+DB.moveColumn(ed, 'when', -1); eq(ed.columns.map((c) => c.key), ['name', 'when', 'n'], 'columns move');
+eq(ed.rows[0], ['', '', 1200], 'cells move with their column');
+let ap = DB.appendCSV(ed, 'Name\tCount\tExtra\nA\t5\tz\n'); eq([ap.added, ap.unknown, ed.rows[1]], [1, ['Extra'], ['A', '', 5]], 'pasted rows match columns by name');
+DB.removeColumn(ed, 'when'); eq(ed.rows[1], ['A', 5], 'a deleted column takes its cells');
+const mp = DB.normalize({ sources: [{ id: 's1', fields: { type: 'web', title: 'T', authors: 'A', location: 'L' } }], maps: [{ id: 'm1', name: 'M', project: { features: [{ id: 'f1', kind: 'point', label: 'X', cites: [{ src: 's9' }] }] } }], panels: [{ id: 'p1', type: 'map', title: 'Map', cfg: { from: 'map', map: 'm1' } }, { id: 'p2', type: 'map', title: 'Map', cfg: { from: 'map', map: 'm9' } }] }, T.TEXT_KEYS).project;
+const mm = DB.audit(mp, O, T.TYPES, T.TEXT_KEYS).rows.map((x) => x.level + ': ' + x.msg);
+ok(mm.some((m) => /^fix: Panel p1 .*map feature "X" cites s9/.test(m)), 'a Map Builder map\'s citations are checked');
+ok(mm.some((m) => /^fix: Panel p2 .*shows no map/.test(m)), 'flags a map panel with no map');
+const MAPC = new Function(block('map-core') + ';return MAPC;')();
+ok(MAPC.normalize({ features: [{ kind: 'point', coords: [[1, 2]] }] }, T.TEXT_KEYS).project.features.length === 1, 'the Map Builder\'s map model is built in');
+ok(/var MIL_NAMES = \{/.test(block('mil-names')), 'military symbol names are built in for map keys');
+ok(/integrity="|el\.integrity = L\.sri/.test(block('app')), 'map libraries load with integrity checks');
+ok(p.panels.some((x) => x.type === 'map' && x.cfg.base && x.cfg.base !== 'svg'), 'the example\'s map uses a real basemap');
+
 console.log((failed ? 'FAILED ' : 'All passed: ') + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);
