@@ -15,7 +15,7 @@ A dashboard is a grid of panels, grouped into sections that show as tabs or as o
 | Bar chart | Comparisons across categories | Counts, sums or averages by category, or each row as its own bar; optionally split by a second column into stacked, side-by-side, or 100% bars |
 | Scatter plot | How two numbers relate | Two number columns (or a date and a number), colored by a category, sized by a number, with an optional trend line |
 | Pie or donut | Shares of a whole | Counts or sums by category, six slices or fewer by default |
-| Table | Records | Any columns, with search, sorting and pages |
+| Table | Records | Any columns, with search, sorting and pages. Text wraps to fit the panel, can be shortened to a few lines with **more** to read it all, or kept to one line each. In a narrow panel or on a phone, each row becomes a card, its values listed under their column names |
 | Map | Locations | Latitude and longitude columns on a real, zoomable basemap, colored by a category and sized by a number; or a map made in the [OSINT Map Builder](https://github.com/gmichaelrapp/OSINT_Maps), with its symbols, arrows, areas, key and citations |
 | Timeline | Dated events | A timeline file from the OSINT Timeline Builder |
 | Text | Context and method | Markdown: headings, lists, quotes, bold, italics, links and pictures, in six looks: plain, section heading, note, key finding, caution, and pull quote |
@@ -64,7 +64,7 @@ Open `index.html` in any current browser, or use the hosted copy linked in this 
    - **From a link.** The address of a CSV file, such as a Google Sheet published as CSV. It is read once; the dashboard keeps a copy.
    - **Type it in.** Name the columns, then fill in the rows.
 
-   Column types are guessed: text, number, date, latitude, longitude, source, locator, quote, or URL. Check them and change any that are wrong. Every data set has a row editor: change a cell, add or delete rows, paste more rows, and add, move, rename or delete columns.
+   Column types are guessed: text, number, date, latitude, longitude, source, locator, quote, or URL. Check them and change any that are wrong. Every data set has a row editor: change a cell, add or delete rows, paste more rows, and add, move, rename or delete columns. Long text wraps inside its cell so you can read it as you edit; **Wrap long text** turns that off to keep every row one line high. Enter moves down a row.
 2. **Cite the data.** Give the whole data set a citation. Or, better, add a `source_id` column (with `locator` and `quote` if you have them) so each row cites its own source. The IDs match the sources under **Sources**.
 3. **Panels → Add panel.** Pick the data and the columns, then the look. The preview updates as you go.
 4. **Layout.** The dashboard as it will look, section by section. Drag a panel by its handle to move it, or drop it on a section tab to move it there. Drag its right edge, or use − and +, to change its width, from a sixth to the full row. The row button makes it one, two or three rows tall, so smaller panels sit beside it.

@@ -169,12 +169,98 @@ select.theme { font-size: 12.5px; padding: 3px 6px; border: 1px solid var(--line
 /* tables */
 .tbl-wrap { overflow-x: auto; max-width: 100% }
 table.dt { border-collapse: collapse; width: 100%; font-size: 13px }
-table.dt th { text-align: left; font-weight: 600; font-size: 12px; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; cursor: pointer; user-select: none }
+table.dt th { text-align: left; font-weight: 600; font-size: 12px; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; cursor: pointer; user-select: none; vertical-align: bottom }
 table.dt th[aria-sort="ascending"]::after { content: " ▲"; font-size: 9px } table.dt th[aria-sort="descending"]::after { content: " ▼"; font-size: 9px }
 table.dt td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: break-word }
 table.dt td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap }
 table.dt th.n { text-align: right }
 table.dt td.src { font-size: 12px; color: var(--muted); min-width: 110px }
+table.dt td.dte { white-space: nowrap }
+/* the table panel's "text in cells" setting */
+table.dt.w-wrap th, table.dt.w-clamp th { white-space: normal; min-width: 4.5em; line-height: 1.3 }
+table.dt.w-wrap td.t, table.dt.w-clamp td.t { overflow-wrap: anywhere; min-width: 8em }
+table.dt.w-wrap:not(.cardable) td.t, table.dt.w-clamp:not(.cardable) td.t { min-width: 12em }
+table.dt.w-wrap td.src, table.dt.w-clamp td.src { min-width: 6.5em }
+table.dt .cl { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--cl, 3); line-clamp: var(--cl, 3); overflow: hidden }
+table.dt .cl.cut { cursor: pointer; position: relative }
+table.dt .cl.cut::after { content: "more"; position: absolute; right: 0; bottom: 0; padding-left: 26px; background: linear-gradient(90deg, transparent, var(--surface) 22px); color: var(--accent); font-size: 12px }
+table.dt .cl.open { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible }
+table.dt .cl.open::after { content: none }
+table.dt .cl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px }
+.panel.fr-tint table.dt .cl.cut::after { background: linear-gradient(90deg, transparent, var(--accent-soft) 22px) }
+.pv.cards-flat table.dt .cl.cut::after, .panel.fr-flat table.dt .cl.cut::after, .panel.fr-none table.dt .cl.cut::after { background: linear-gradient(90deg, transparent, var(--bg) 22px) }
+table.dt.w-line td.t { white-space: nowrap; max-width: 26em; overflow: hidden; text-overflow: ellipsis }
+table.dt.w-line td.t span { cursor: help }
+/* a shadow on whichever side a too-wide table scrolls */
+.tbl-box { position: relative; min-width: 0 }
+.tbl-box::before, .tbl-box::after { content: ""; position: absolute; top: 0; bottom: 0; width: 18px; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 1 }
+.tbl-box::before { left: 0; background: linear-gradient(90deg, rgba(0,0,0,.16), transparent) }
+.tbl-box::after { right: 0; background: linear-gradient(270deg, rgba(0,0,0,.16), transparent) }
+.tbl-box.ov-l::before, .tbl-box.ov-r::after { opacity: 1 }
+/* narrow panels: each row becomes a card, values under their column names */
+.panel.t-table { container-type: inline-size; container-name: tpanel }
+/* narrow panels: each row becomes a card. More columns switch sooner: 3 at 460px, 4 at 520px, 5 at 600px, 6 at 680px, 7 or more at 760px */
+@container tpanel (max-width: 460px) {
+  table.dt.cardable, table.dt.cardable tbody, table.dt.cardable tr, table.dt.cardable td { display: block; width: auto }
+  table.dt.cardable thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%) }
+  table.dt.cardable tr { border-bottom: 1px solid var(--line); padding: 8px 0 }
+  table.dt.cardable tr:first-child { border-top: 1px solid var(--line) }
+  table.dt.cardable td { border: 0; padding: 2px 0; display: grid; grid-template-columns: minmax(80px, 36%) minmax(0, 1fr); gap: 10px; text-align: left !important; white-space: normal !important; max-width: none !important; min-width: 0 !important; overflow-wrap: anywhere }
+  table.dt.cardable td::before { content: attr(data-label); font-size: 11.5px; font-weight: 600; color: var(--muted); padding-top: 1px; overflow-wrap: normal }
+  table.dt.cardable td.empty { display: none }
+  table.dt.cardable td.src { font-size: 12.5px; min-width: 0 }
+  table.dt.cardable tr.none td { display: block } table.dt.cardable tr.none td::before { content: none }
+  table.dt.cardable .cl.cut::after { background: linear-gradient(90deg, transparent, var(--surface) 22px) }
+}
+@container tpanel (min-width: 461px) and (max-width: 520px) {
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7), table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tbody, table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tr, table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) td { display: block; width: auto }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%) }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tr { border-bottom: 1px solid var(--line); padding: 8px 0 }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tr:first-child { border-top: 1px solid var(--line) }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) td { border: 0; padding: 2px 0; display: grid; grid-template-columns: minmax(80px, 36%) minmax(0, 1fr); gap: 10px; text-align: left !important; white-space: normal !important; max-width: none !important; min-width: 0 !important; overflow-wrap: anywhere }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) td::before { content: attr(data-label); font-size: 11.5px; font-weight: 600; color: var(--muted); padding-top: 1px; overflow-wrap: normal }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) td.empty { display: none }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) td.src { font-size: 12.5px; min-width: 0 }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tr.none td { display: block } table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) tr.none td::before { content: none }
+  table.dt.cardable:is(.nc4,.nc5,.nc6,.nc7) .cl.cut::after { background: linear-gradient(90deg, transparent, var(--surface) 22px) }
+}
+@container tpanel (min-width: 521px) and (max-width: 600px) {
+  table.dt.cardable:is(.nc5,.nc6,.nc7), table.dt.cardable:is(.nc5,.nc6,.nc7) tbody, table.dt.cardable:is(.nc5,.nc6,.nc7) tr, table.dt.cardable:is(.nc5,.nc6,.nc7) td { display: block; width: auto }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%) }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) tr { border-bottom: 1px solid var(--line); padding: 8px 0 }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) tr:first-child { border-top: 1px solid var(--line) }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) td { border: 0; padding: 2px 0; display: grid; grid-template-columns: minmax(80px, 36%) minmax(0, 1fr); gap: 10px; text-align: left !important; white-space: normal !important; max-width: none !important; min-width: 0 !important; overflow-wrap: anywhere }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) td::before { content: attr(data-label); font-size: 11.5px; font-weight: 600; color: var(--muted); padding-top: 1px; overflow-wrap: normal }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) td.empty { display: none }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) td.src { font-size: 12.5px; min-width: 0 }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) tr.none td { display: block } table.dt.cardable:is(.nc5,.nc6,.nc7) tr.none td::before { content: none }
+  table.dt.cardable:is(.nc5,.nc6,.nc7) .cl.cut::after { background: linear-gradient(90deg, transparent, var(--surface) 22px) }
+}
+@container tpanel (min-width: 601px) and (max-width: 680px) {
+  table.dt.cardable:is(.nc6,.nc7), table.dt.cardable:is(.nc6,.nc7) tbody, table.dt.cardable:is(.nc6,.nc7) tr, table.dt.cardable:is(.nc6,.nc7) td { display: block; width: auto }
+  table.dt.cardable:is(.nc6,.nc7) thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%) }
+  table.dt.cardable:is(.nc6,.nc7) tr { border-bottom: 1px solid var(--line); padding: 8px 0 }
+  table.dt.cardable:is(.nc6,.nc7) tr:first-child { border-top: 1px solid var(--line) }
+  table.dt.cardable:is(.nc6,.nc7) td { border: 0; padding: 2px 0; display: grid; grid-template-columns: minmax(80px, 36%) minmax(0, 1fr); gap: 10px; text-align: left !important; white-space: normal !important; max-width: none !important; min-width: 0 !important; overflow-wrap: anywhere }
+  table.dt.cardable:is(.nc6,.nc7) td::before { content: attr(data-label); font-size: 11.5px; font-weight: 600; color: var(--muted); padding-top: 1px; overflow-wrap: normal }
+  table.dt.cardable:is(.nc6,.nc7) td.empty { display: none }
+  table.dt.cardable:is(.nc6,.nc7) td.src { font-size: 12.5px; min-width: 0 }
+  table.dt.cardable:is(.nc6,.nc7) tr.none td { display: block } table.dt.cardable:is(.nc6,.nc7) tr.none td::before { content: none }
+  table.dt.cardable:is(.nc6,.nc7) .cl.cut::after { background: linear-gradient(90deg, transparent, var(--surface) 22px) }
+}
+@container tpanel (min-width: 681px) and (max-width: 760px) {
+  table.dt.cardable.nc7, table.dt.cardable.nc7 tbody, table.dt.cardable.nc7 tr, table.dt.cardable.nc7 td { display: block; width: auto }
+  table.dt.cardable.nc7 thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%) }
+  table.dt.cardable.nc7 tr { border-bottom: 1px solid var(--line); padding: 8px 0 }
+  table.dt.cardable.nc7 tr:first-child { border-top: 1px solid var(--line) }
+  table.dt.cardable.nc7 td { border: 0; padding: 2px 0; display: grid; grid-template-columns: minmax(80px, 36%) minmax(0, 1fr); gap: 10px; text-align: left !important; white-space: normal !important; max-width: none !important; min-width: 0 !important; overflow-wrap: anywhere }
+  table.dt.cardable.nc7 td::before { content: attr(data-label); font-size: 11.5px; font-weight: 600; color: var(--muted); padding-top: 1px; overflow-wrap: normal }
+  table.dt.cardable.nc7 td.empty { display: none }
+  table.dt.cardable.nc7 td.src { font-size: 12.5px; min-width: 0 }
+  table.dt.cardable.nc7 tr.none td { display: block } table.dt.cardable.nc7 tr.none td::before { content: none }
+  table.dt.cardable.nc7 .cl.cut::after { background: linear-gradient(90deg, transparent, var(--surface) 22px) }
+}
+
 .tbl-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px }
 .tbl-bar input { flex: 1 1 160px; min-width: 0; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--sheet) }
 .tbl-bar .pg { font-size: 12px; color: var(--muted); font-family: var(--font-mono); display: flex; gap: 6px; align-items: center }
@@ -358,7 +444,9 @@ legend { font-size: 12.5px; font-weight: 600; padding: 0 4px }
 /* edit: data */
 .addbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center }
 .rowsed table.dt td { padding: 0; border-right: 1px solid var(--line) } .rowsed table.dt th small { display: block; font-weight: 400; font-family: var(--font-mono); font-size: 10.5px; color: var(--faint) }
-.rowsed .cell { width: 100%; min-width: 90px; border: 0; background: transparent; padding: 6px 8px; font-size: 13px } .rowsed .cell.n { text-align: right; font-variant-numeric: tabular-nums }
+.rowsed .cell { width: 100%; min-width: 90px; border: 0; background: transparent; padding: 6px 8px; font-size: 13px; display: block }
+.rowsed textarea.cell { resize: none; min-width: 180px; max-height: 170px; line-height: 1.4; font-family: inherit; color: inherit; overflow-y: auto; field-sizing: content }
+.rowsed td { vertical-align: top } .rowsed .cell.n { text-align: right; font-variant-numeric: tabular-nums }
 .rowsed .cell:focus { outline: 2px solid var(--accent); outline-offset: -2px; background: var(--surface) }
 .rowsed .rn { color: var(--faint); font: 11px var(--font-mono); padding: 6px; text-align: right; width: 1% }
 .rowsed td:last-child { border-right: 0; padding: 2px 4px; width: 1% }
@@ -3201,7 +3289,7 @@ var DB = (function () {
     if (r.fixes.length && !quiet) modal({ title: 'Opened, with a few repairs', body: '<ul>' + r.fixes.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>', actions: [{ label: 'OK', primary: true }] });
     return true;
   }
-  var ui = { mode: 'view', etab: 'panels', pid: null, did: null, sid: null, sec: null, tbl: {}, tlf: {}, open: {}, nums: {}, pw: {}, slide: {}, local: {} };
+  var ui = { gridWrap: lsGet('osint-dashboard-gridwrap') !== '0', mode: 'view', etab: 'panels', pid: null, did: null, sid: null, sec: null, tbl: {}, tlf: {}, open: {}, nums: {}, pw: {}, slide: {}, local: {} };
   if (!PUBLISHED) {
     var saved = null; try { saved = JSON.parse(lsGet(STORE) || 'null'); } catch (e) { saved = null; }
     if (!(saved && saved.project && load(saved.project, true))) load(boot.project || DB.blank(), true);
@@ -3786,17 +3874,22 @@ var DB = (function () {
     var ps = +c.pageSize || 10, pages = Math.max(1, Math.ceil(rows.length / ps)); if (t.page >= pages) t.page = pages - 1;
     var view = rows.slice(t.page * ps, t.page * ps + ps);
     var hasSrc = si >= 0 && cols.indexOf(d.columns[si].key) === -1;
+    var wrap = ['wrap', 'clamp', 'line'].indexOf(c.wrap) >= 0 ? c.wrap : 'wrap', lines = [2, 3, 5].indexOf(+c.lines) >= 0 ? +c.lines : 3, cards = c.narrow !== 'scroll';
+    var lab = function (k) { return ' data-label="' + esc(d.columns[DB.colIndex(d, k)].label) + '"'; };
+    var txt = function (v, k) { var s2 = esc(v); return wrap === 'clamp' ? '<div class="cl" style="--cl:' + lines + '">' + s2 + '</div>' : wrap === 'line' && String(v || '').length > 24 ? '<span title="' + s2 + '">' + s2 + '</span>' : s2; };
     var h = (c.search || d.rows.length > ps ? '<div class="tbl-bar">' + (c.search || d.rows.length > ps ? '<input type="search" data-tq="' + esc(x.id) + '" placeholder="Search ' + d.rows.length + ' rows" aria-label="Search the table" value="' + esc(t.q) + '">' : '') +
       '<span class="pg"><button class="btn small" data-tpg="' + esc(x.id) + '" data-d="-1" aria-label="Previous page"' + (t.page ? '' : ' disabled') + '>‹</button>' + (t.page + 1) + ' / ' + pages + '<button class="btn small" data-tpg="' + esc(x.id) + '" data-d="1" aria-label="Next page"' + (t.page < pages - 1 ? '' : ' disabled') + '>›</button></span></div>' : '');
-    h += '<div class="tbl-wrap"><table class="dt"><thead><tr>' + cols.map(function (k) { var ci = DB.colIndex(d, k), num = ['number', 'lat', 'lon'].indexOf(d.columns[ci].type) >= 0; return '<th class="' + (num ? 'n' : '') + '" data-tsort="' + esc(x.id) + '" data-k="' + esc(k) + '"' + (t.sort === k ? ' aria-sort="' + (t.dir === 'desc' ? 'descending' : 'ascending') + '"' : '') + ' tabindex="0">' + esc(d.columns[ci].label) + '</th>'; }).join('') + (hasSrc ? '<th>Source</th>' : '') + '</tr></thead><tbody>' +
+    h += '<div class="tbl-box"><div class="tbl-wrap" data-tov><table class="dt w-' + wrap + (cards ? ' cardable nc' + Math.min(7, Math.max(3, cols.length + (hasSrc ? 1 : 0))) : '') + '"><thead><tr>' + cols.map(function (k) { var ci = DB.colIndex(d, k), num = ['number', 'lat', 'lon'].indexOf(d.columns[ci].type) >= 0; return '<th class="' + (num ? 'n' : '') + '" data-tsort="' + esc(x.id) + '" data-k="' + esc(k) + '"' + (t.sort === k ? ' aria-sort="' + (t.dir === 'desc' ? 'descending' : 'ascending') + '"' : '') + ' tabindex="0">' + esc(d.columns[ci].label) + '</th>'; }).join('') + (hasSrc ? '<th>Source</th>' : '') + '</tr></thead><tbody>' +
       view.map(function (r) {
-        return '<tr>' + cols.map(function (k) { var ci = DB.colIndex(d, k), col = d.columns[ci], v = r[ci];
-          if (col.type === 'number') return '<td class="n">' + esc(DB.fmt(v, 'full')) + '</td>';
-          if (col.type === 'date') return '<td style="white-space:nowrap">' + esc(DB.showDate(v) || v) + '</td>';
-          if (col.type === 'url' && /^https?:\/\//.test(v)) return '<td><a href="' + esc(v) + '" target="_blank" rel="noopener noreferrer">link</a></td>';
-          if (col.type === 'source') return '<td class="src">' + srcCell(v, li < 0 ? '' : r[li]) + '</td>';
-          return '<td>' + esc(v) + '</td>'; }).join('') + (hasSrc ? '<td class="src">' + srcCell(r[si], li < 0 ? '' : r[li]) + '</td>' : '') + '</tr>';
-      }).join('') + (view.length ? '' : '<tr><td colspan="' + (cols.length + 1) + '" style="color:var(--muted)">No rows match.</td></tr>') + '</tbody></table></div>';
+        return '<tr>' + cols.map(function (k) { var ci = DB.colIndex(d, k), col = d.columns[ci], v = r[ci], L = lab(k);
+          if (v == null || v === '') return '<td class="' + (col.type === 'number' ? 'n ' : '') + 'empty"' + L + '>' + (col.type === 'number' ? '–' : '') + '</td>';
+          if (col.type === 'number') return '<td class="n"' + L + '>' + esc(DB.fmt(v, 'full')) + '</td>';
+          if (col.type === 'lat' || col.type === 'lon') return '<td class="n"' + L + '>' + esc(v) + '</td>';
+          if (col.type === 'date') return '<td class="dte"' + L + '>' + esc(DB.showDate(v) || v) + '</td>';
+          if (col.type === 'url' && /^https?:\/\//.test(v)) return '<td' + L + '><a href="' + esc(v) + '" target="_blank" rel="noopener noreferrer">link</a></td>';
+          if (col.type === 'source') return '<td class="src"' + L + '>' + srcCell(v, li < 0 ? '' : r[li]) + '</td>';
+          return '<td class="t"' + L + '>' + txt(v, k) + '</td>'; }).join('') + (hasSrc ? '<td class="src" data-label="Source">' + srcCell(r[si], li < 0 ? '' : r[li]) + '</td>' : '') + '</tr>';
+      }).join('') + (view.length ? '' : '<tr class="none"><td colspan="' + (cols.length + 1) + '" style="color:var(--muted)">No rows match.</td></tr>') + '</tbody></table></div></div>';
     return h;
   }
   function srcCell(id, loc) { var s = sourceOf(id); if (!s) return id ? '<span style="color:var(--fix)">' + esc(id) + ' (missing)</span>' : ''; var f = s.fields, a = (f.authors || '').split('\n')[0].replace(/^(US|U\.S\.|The) /, ''), lab = f.descType || a || s.id; return '<span tabindex="0" style="text-decoration:underline dotted;text-underline-offset:2px"' + tip({ t: fnPlain(f, loc) }) + '>' + esc(lab.slice(0, 28)) + (loc ? '<br>' + esc(loc.slice(0, 30)) : '') + '</span>'; }
@@ -4198,7 +4291,19 @@ var DB = (function () {
     else { el.removeAttribute('data-accent'); el.style.removeProperty('--acc-l'); el.style.removeProperty('--acc-d'); }
   }
   // charts are drawn at the width they will show at, so text stays the same size in every panel
+  // A table wider than its panel gets a shadow on the side that scrolls, so a reader can tell there is more.
+  function tableCues(root) {
+    (root || document).querySelectorAll('[data-tov]').forEach(function (w) {
+      var box = w.parentNode, f = function () { box.classList.toggle('ov-l', w.scrollLeft > 2); box.classList.toggle('ov-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 2); };
+      if (!w.__cue) { w.__cue = 1; w.addEventListener('scroll', f, { passive: true }); }
+      f();
+      w.querySelectorAll('.cl').forEach(function (cl) { var cut = cl.scrollHeight > cl.clientHeight + 2; if (cut || !cl.classList.contains('open')) cl.classList.toggle('cut', cut); if (cut && !cl.hasAttribute('tabindex')) { cl.setAttribute('tabindex', '0'); cl.setAttribute('role', 'button'); cl.setAttribute('aria-expanded', 'false'); } });
+    });
+  }
+  document.addEventListener('click', function (e) { var cl = e.target.closest && e.target.closest('.cl.cut, .cl.open'); if (!cl || e.target.closest('a')) return; var on = cl.classList.toggle('open'); cl.setAttribute('aria-expanded', on); });
+  document.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('cl')) { e.preventDefault(); e.target.click(); } });
   function fitCharts() {
+    tableCues();
     document.querySelectorAll('.panel[data-cw]').forEach(function (el) {
       var id = el.id.slice(3), x = panelOf(id), b = el.querySelector('.p-body'); if (!x || !b || ['line', 'bar', 'scatter', 'pie', 'map'].indexOf(x.type) < 0) return;
       var w = b.clientWidth; if (!w || Math.abs(w - +el.getAttribute('data-cw')) <= 16) return;
@@ -4207,7 +4312,7 @@ var DB = (function () {
       el.outerHTML = renderPanel(x);
     });
   }
-  var rsT; window.addEventListener('resize', function () { clearTimeout(rsT); rsT = setTimeout(function () { if (ui.mode === 'view') fitCharts(); else panelPreview(); }, 150); });
+  var rsT; window.addEventListener('resize', function () { clearTimeout(rsT); rsT = setTimeout(function () { tableCues(); if (ui.mode === 'view') fitCharts(); else panelPreview(); }, 150); });
   function rerenderPanel(id) {
     var x = panelOf(id), el = $('pn-' + id);
     if (x && el) {
@@ -4347,6 +4452,9 @@ var DB = (function () {
       look = '<div class="fgrid">' + '<div class="checks-col">' + cbox('donut', 'Donut, with the total in the middle', c.donut !== false) + cbox('pct', 'Percent on each slice', c.pct !== false) + '</div>' + field('Words under the total', '<input data-cfg="centerLabel" value="' + esc(c.centerLabel || '') + '" placeholder="Total">') + field('Colors', '<select data-cfg="colors">' + opts([['auto', 'A color for each slice'], ['hl', 'Highlight one slice, the rest gray']], c.colors || 'auto') + '</select>') + field(c.colors === 'hl' ? 'Highlight color' : 'First color', swatches(c.color)) + (c.colors === 'hl' ? field('Slice to highlight', '<input data-cfg="hl" value="' + esc(c.hl || '') + '" placeholder="Its label, exactly">') : '') + heightSel(c) + '</div><div class="fgrid">' + numberRow(c) + '</div>';
     } else if (T2 === 'table') {
       cfg = '<div class="fgrid">' + dsSel + field('Rows per page', '<input data-cfg="pageSize" type="number" min="3" value="' + esc(c.pageSize || 10) + '">') + field('Sort by', '<select data-cfg="sortCol">' + opts(colOpts(d), c.sortCol, 'As in the data') + '</select>') + field('Direction', '<select data-cfg="sortDir">' + opts([['asc', 'Ascending'], ['desc', 'Descending']], c.sortDir || 'asc') + '</select>') + '<div class="checks-col">' + cbox('search', 'Search box', c.search) + '</div></div>' +
+        '<div class="fgrid">' + field('Text in cells', '<select data-cfg="wrap">' + opts([['wrap', 'Wrap to fit the panel'], ['clamp', 'Wrap, but shorten long text (press to read it all)'], ['line', 'One line each, cut off with …']], c.wrap || 'wrap') + '</select>', c.wrap === 'line' ? 'The full text shows when a reader points at a cell.' : 'Headers wrap too, and long links and file names break to fit.') +
+        (c.wrap === 'clamp' ? field('Shorten to', '<select data-cfg="lines">' + opts([['2', 'Two lines'], ['3', 'Three lines'], ['5', 'Five lines']], String(c.lines || 3)) + '</select>') : '') +
+        field('In a narrow panel or on a phone', '<select data-cfg="narrow">' + opts([['cards', 'Show each row as a card'], ['scroll', 'Keep the table; scroll sideways']], c.narrow || 'cards') + '</select>', 'Cards stack each row\'s values under their column names, so nothing is cut off.') + '</div>' +
         (d ? '<fieldset><legend>Columns to show</legend><div class="quals"><div class="grp">' + d.columns.map(function (k) { var on = Array.isArray(c.cols) && c.cols.length ? c.cols.indexOf(k.key) >= 0 : k.type !== 'quote' && k.type !== 'locator'; return '<label class="check"><input type="checkbox" data-tcol="' + esc(k.key) + '"' + (on ? ' checked' : '') + '> ' + esc(k.label) + '</label>'; }).join('') + '</div><p class="hint">A source column, if the data has one, is always shown as the last column.</p></div></fieldset>' : '');
     } else if (T2 === 'map') {
       var from = DB.mapFrom(x);
@@ -4426,7 +4534,7 @@ var DB = (function () {
   function panelPreview() {
     var pv = $('ppreview'), x = panelOf(ui.pid); if (!pv || !x) return;
     var keep = ui.pw[x.id]; ui.pw[x.id] = Math.max(240, pv.clientWidth - 34);
-    pv.innerHTML = renderPanel(x, true).replace(/class="panel s\d+/, 'class="panel'); ui.pw[x.id] = keep;
+    pv.innerHTML = renderPanel(x, true).replace(/class="panel s\d+/, 'class="panel'); ui.pw[x.id] = keep; tableCues(pv);
     clearTimeout(panelPreview.t); panelPreview.t = setTimeout(mountMaps, 250);
   }
   function refreshPanelList() { var l = $('plist'); if (l) { var sc = l.scrollTop; l.innerHTML = panelList(); l.scrollTop = sc; } }
@@ -4497,7 +4605,7 @@ var DB = (function () {
         x.cfg[t.dataset.cfg] = t.value; touch();
         if (t.dataset.cfg === 'look' && t.value === 'heading') { x.span = 12; x.width = 3; }
         if (x.type === 'media') { x.cfg = DB.mediaCfg(x.cfg); if (['kind', 'mode', 'ratio'].indexOf(t.dataset.cfg) >= 0) return panelForm(); return panelPreview(); }
-        if (['mode', 'from', 'split', 'colors', 'orient', 'base', 'look', 'series'].indexOf(t.dataset.cfg) >= 0) { cfgDefaults(x); return panelForm(); }
+        if (['mode', 'from', 'split', 'colors', 'orient', 'base', 'look', 'series', 'wrap'].indexOf(t.dataset.cfg) >= 0) { cfgDefaults(x); return panelForm(); }
         return panelPreview();
       }
       if (t.dataset.cfgb) { x.cfg[t.dataset.cfgb] = t.checked; touch(); return panelPreview(); }
@@ -4664,12 +4772,14 @@ var DB = (function () {
   }
   function cellHTML(d, r, i, v) {
     var c = d.columns[i], t = c.type, val = v == null ? '' : String(v);
+    if (ui.gridWrap !== false && ['text', 'quote', 'locator', 'url'].indexOf(t) >= 0) return '<td><textarea class="cell" rows="1" data-cell="' + r + ',' + i + '" aria-label="' + esc(c.label) + ', row ' + (r + 1) + '">' + esc(val) + '</textarea></td>';
     return '<td><input class="cell' + (t === 'number' || t === 'lat' || t === 'lon' ? ' n' : '') + '" data-cell="' + r + ',' + i + '" value="' + esc(val) + '" aria-label="' + esc(c.label) + ', row ' + (r + 1) + '"' + (t === 'date' ? ' placeholder="YYYY-MM-DD"' : '') + '></td>';
   }
   function rowsEditor(d) {
     var pages = Math.max(1, Math.ceil(d.rows.length / ROWS_PER_PAGE)), pg = Math.min(ui.dpage || 0, pages - 1); ui.dpage = pg;
     var from = pg * ROWS_PER_PAGE, view = d.rows.slice(from, from + ROWS_PER_PAGE);
-    return '<div class="tbl-bar"><button class="btn small" id="rowAdd">Add a row</button><button class="btn small" id="rowPaste">Add rows by pasting…</button><button class="btn small" id="colAdd">Add a column…</button><span class="pg"><button class="btn small" data-dpg="-1" aria-label="Previous page"' + (pg ? '' : ' disabled') + '>‹</button>Rows ' + (d.rows.length ? from + 1 : 0) + '–' + (from + view.length) + ' of ' + d.rows.length.toLocaleString('en-US') + '<button class="btn small" data-dpg="1" aria-label="Next page"' + (pg < pages - 1 ? '' : ' disabled') + '>›</button></span></div>' +
+    requestAnimationFrame(function () { sizeCells(); });
+    return '<div class="tbl-bar"><button class="btn small" id="rowAdd">Add a row</button><button class="btn small" id="rowPaste">Add rows by pasting…</button><button class="btn small" id="colAdd">Add a column…</button><button class="btn small toggle" id="gridWrap" aria-pressed="' + (ui.gridWrap !== false) + '" title="Show long text on several lines, or keep every row one line high">Wrap long text</button><span class="pg"><button class="btn small" data-dpg="-1" aria-label="Previous page"' + (pg ? '' : ' disabled') + '>‹</button>Rows ' + (d.rows.length ? from + 1 : 0) + '–' + (from + view.length) + ' of ' + d.rows.length.toLocaleString('en-US') + '<button class="btn small" data-dpg="1" aria-label="Next page"' + (pg < pages - 1 ? '' : ' disabled') + '>›</button></span></div>' +
       '<div class="tbl-wrap rowsed"><table class="dt"><thead><tr><th class="rn">#</th>' + d.columns.map(function (c) { return '<th>' + esc(c.label) + '<small>' + esc(c.type) + '</small></th>'; }).join('') + '<th></th></tr></thead><tbody>' +
       view.map(function (r, k) { var ri = from + k; return '<tr><td class="rn">' + (ri + 1) + '</td>' + r.map(function (v, i) { return cellHTML(d, ri, i, v); }).join('') + '<td><button class="btn small danger" data-rowdel="' + ri + '" aria-label="Delete row ' + (ri + 1) + '">×</button></td></tr>'; }).join('') +
       (view.length ? '' : '<tr><td colspan="' + (d.columns.length + 2) + '" class="hint">No rows. Add one, or paste some.</td></tr>') + '</tbody></table></div><p class="hint">Changes save as you type. Numbers lose commas and currency signs; dates become YYYY-MM-DD.</p>';
@@ -4699,6 +4809,10 @@ var DB = (function () {
       '<fieldset><legend>Rows</legend><div id="rowsed">' + rowsEditor(d) + '</div></fieldset>' +
       '<div class="actions"><div class="row"><button class="btn" id="replCSV">Replace rows from a CSV</button><button class="btn" id="dlCSV">Download as CSV</button></div><button class="btn danger" id="delData">Delete data</button></div></div>';
   }
+  // text cells in the row editor grow to show what they hold, up to a few lines; past that they scroll
+  function sizeCells(el) { (el ? [el] : document.querySelectorAll('.rowsed textarea.cell')).forEach(function (ta) { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight + 2, 170) + 'px'; }); }
+  document.addEventListener('input', function (e) { if (e.target.matches && e.target.matches('.rowsed textarea.cell')) sizeCells(e.target); });
+  document.addEventListener('click', function (e) { if (e.target.id !== 'gridWrap') return; ui.gridWrap = ui.gridWrap === false; lsSet('osint-dashboard-gridwrap', ui.gridWrap ? '1' : '0'); refreshRows(); });
   function refreshRows() { var d = dataOf(ui.did), el = $('rowsed'); if (d && el) el.innerHTML = rowsEditor(d); }
   function addDataset(ds, msg) {
     ds.id = DB.nextId('d', P.datasets.map(function (d) { return d.id; })); P.datasets.push(ds); ui.did = ds.id; ui.dpage = 0; touch();

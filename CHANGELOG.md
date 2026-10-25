@@ -2,6 +2,13 @@
 
 Changes to the OSINT Dashboard Builder, newest first.
 
+## 1.2.1 — 25 October 2026
+
+- **Text in tables wraps.** Headers wrap as well as cells, and long links and file names break to fit, so a table stays inside its panel. Two other choices per table: shorten long text to two, three or five lines, with **more** to read it all, or keep each cell to one line, cut off with an ellipsis, with the full text shown on hover.
+- **Tables in narrow panels show each row as a card,** its values listed under their column names. Tables with more columns switch sooner. A table can keep its columns and scroll sideways instead.
+- A table that scrolls sideways shows a shadow on the side with more to see.
+- **The row editor wraps long text** inside its cells, up to about seven lines before the cell scrolls. **Wrap long text** turns it off.
+
 ## 1.2 — 24 October 2026
 
 - **Media panels.** A picture; a gallery shown as a grid, a slideshow or a sideways strip; a before-and-after slider for two pictures of one place; video from YouTube, Vimeo, the Internet Archive or a video file; a sound file; or an embedded page (Datawrapper, Flourish, Spotify, SoundCloud, Google Maps, published Google Sheets, Docs and Slides, or any https page).
