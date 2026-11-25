@@ -4,6 +4,25 @@ A tool for turning spreadsheet data into a sourced dashboard and publishing it a
 
 It is one web page. There is nothing to install, no account, and no server. It is a sibling of the [OSINT Timeline Builder](https://github.com/gmichaelrapp/OSINT_Timelines): both use the same source fields and footnote formatter, and a timeline from one is a panel in the other.
 
+**Open it:** [zerohistory.net/tools/dashboards](https://zerohistory.net/tools/dashboards/), or the copy on [GitHub Pages](https://gmichaelrapp.github.io/OSINT_Dashboards/). Published by [Zero History](https://zerohistory.net/), a publisher of free, open-source research and writing tools.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
+  <img src="docs/screenshot.png" width="1440" height="900" alt="The OSINT Dashboard Builder">
+</picture>
+
+## Quick start
+
+1. **Look at the example.** The page opens on *Silk Road, by the Numbers*. **View** is what your readers see; **Edit** shows how each panel is built.
+2. **Start your own and bring in data.** **File → New dashboard**, then add a data set from a CSV file, a link, a pasted table, or by typing it in. Column types are guessed and can be changed.
+3. **Cite it.** Add each source once with the Citation Generator’s fields. Cite a whole data set, or row by row with `source_id`, `locator` and `quote` columns.
+4. **Add panels.** Figures, line and bar charts, scatter plots, tables, maps, timelines, text and media. Arrange them under **Layout** by dragging and resizing.
+5. **Check and publish.** The **Check** tab lists what to fix. **File → Export publishable page (.html)** gives one file for GitHub Pages, Netlify or any web host.
+
+Your work is kept in this browser between visits; **Save dashboard (.json)** keeps a copy that survives a cleared browser.
+
+In the app, press the version number beside the name for this quick start, what’s new in each version, and where the tool comes from. It opens by itself the first time you visit, and once after each update.
+
 ## What it makes
 
 A dashboard is a grid of panels, grouped into sections that show as tabs or as one long page. Ten kinds of panel:
@@ -56,7 +75,7 @@ The Silk Road example in `examples/silk-road-dashboard.json` shows most of it. I
 
 ## Using it
 
-Open `index.html` in any current browser, or use the hosted copy linked in this repository's About box. It opens on the sample dashboard.
+Open `index.html` in any current browser, or use the hosted copy linked at the top of this page. It opens on the sample dashboard.
 
 1. **Data.** Add data four ways:
    - **CSV file…** Any CSV from Excel or Google Sheets works, and tab- and semicolon-separated files do too.
@@ -141,6 +160,10 @@ A dashboard with no maps, or whose maps use the **Plain outline** basemap, loads
 Media loads from wherever it lives. A picture linked from the web loads from that site as the page opens. Videos from YouTube, Vimeo and the Internet Archive, and embedded pages, load nothing until the reader presses play (unless an embed is set to load as the page opens). Embedded pages run in a sandboxed frame.
 
 **File → Open the Silk Road example** reads `examples/silk-road-dashboard.json` from the same site, and **Data → From a link** reads the address you give it.
+
+## The About box
+
+The version button and the box it opens (quick start, what’s new, about) are shared with Zero History’s other tools. In `index.html`, `<style id="zh-about-css">` and `<script id="zh-about">` hold the shared code, refreshed from [`tools/about/`](https://github.com/gmichaelrapp/zerohistory/tree/main/tools/about) in the zerohistory repository; `<script id="zh-about-cfg">` holds this tool’s own words. When you release, raise the version there, add the release to its `news` (keep the last three), and add it to `CHANGELOG.md`. The box never appears in published pages.
 
 ## Tests
 

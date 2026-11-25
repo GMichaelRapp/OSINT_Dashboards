@@ -2,6 +2,12 @@
 
 Changes to the OSINT Dashboard Builder, newest first.
 
+## 1.2.2 — 25 November 2026
+
+- **About this tool.** The version number beside the name opens a box with a quick start, what’s new in the last three versions, and where the tool comes from. It opens by itself on a first visit and once after each update, never in a published page.
+- Published by [Zero History](https://zerohistory.net/), and also served at [zerohistory.net/tools/dashboards](https://zerohistory.net/tools/dashboards/). The GitHub Pages address keeps working.
+- The README opens with a quick start and a screenshot.
+
 ## 1.2.1 — 25 October 2026
 
 - **Text in tables wraps.** Headers wrap as well as cells, and long links and file names break to fit, so a table stays inside its panel. Two other choices per table: shorten long text to two, three or five lines, with **more** to read it all, or keep each cell to one line, cut off with an ellipsis, with the full text shown on hover.
